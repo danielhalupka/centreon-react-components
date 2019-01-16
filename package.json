@@ -1,6 +1,6 @@
 {
   "name": "@centreon/react-components",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "react components used by centreon web frontend",
   "main": "lib",
   "scripts": {
