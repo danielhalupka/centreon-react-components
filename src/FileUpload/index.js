@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Button from "../Button/ButtonRegular";
 import Popup from "../Popup";
 import FileUploadItem from "./FileUploadItem";
-import FileUploadProgress from "./FileUploadProgress";
 import "./file-upload.scss";
 import Files from "react-files";
 
@@ -32,22 +31,33 @@ class FileUpload extends Component {
   render() {
     const { files } = this.state;
     const {
+      uploadingProgress,
+      uploadStatus,
       onClose,
       uploading,
       onApply,
-      uploadingProgress,
       finished
     } = this.props;
+    let isSuccessfull = true;
+    if (uploadStatus) {
+      if (!uploadStatus.status) {
+        isSuccessfull = false;
+      }
+    }
     return (
       <React.Fragment>
         <Popup popupType="small">
-          <div className="popup-header blue-background-decorator">
+          <div
+            className={`popup-header ${
+              isSuccessfull ? "blue" : "red"
+            }-background-decorator`}
+          >
             <div className="container__row">
               <div className="container__col-xs-6 center-vertical">
                 <div className="file file-upload">
                   <span className="file-upload-title">
                     <span className="file-upload-icon" />
-                    File Upload
+                    {isSuccessfull ? "File Upload" : "No valid file uploaded."}
                   </span>
                 </div>
               </div>
@@ -59,7 +69,7 @@ class FileUpload extends Component {
                 maxFiles={5}
                 maxFileSize={1048576}
                 minFileSize={0}
-                clickable
+                clickable={!uploading}
               >
                 <div className="container__col-xs-6 text-right">
                   <Button buttonType="bordered" color="white" label="BROWSE" />
@@ -68,52 +78,80 @@ class FileUpload extends Component {
             </div>
             <span className="icon-close icon-close-middle" onClick={onClose} />
           </div>
-          {files.length > 0 ? (
+          {files.length > 0 && isSuccessfull ? (
             <div className="popup-body">
-              <div className="file file-upload">
+              <div className="file file-upload file-upload-body-container">
                 <div className="file-upload-items">
-                  {files.map((file, idx) => (
-                    <FileUploadItem
-                      icon="file"
-                      iconStatus="warning"
-                      title={file.name}
-                      titleStatus="warning"
-                      info={file.sizeReadable}
-                      onDeleteFile={() => {
-                        this.onRemoveFile(idx);
-                      }}
-                      uploading={uploading}
-                    />
-                  ))}
-                  {uploading ? (
-                    <FileUploadProgress
-                      title="Progress"
-                      titleStatus="percentage"
-                      progressBar="percentage"
-                      uploadedPercentage={uploadingProgress}
-                    />
+                  {!uploadStatus ? (
+                    files.map((file, idx) => (
+                      <FileUploadItem
+                        icon={file.extension === "zip" ? "zip" : "file"}
+                        iconStatus={uploading ? "percentage" : "warning"}
+                        title={file.name}
+                        titleStatus={uploading ? "percentage" : "warning"}
+                        infoStatus={uploading ? "percentage" : "warning"}
+                        progressBar={uploading ? "percentage" : ""}
+                        progressPercentage={
+                          uploadingProgress[idx] ? uploadingProgress[idx] : 0
+                        }
+                        info={file.sizeReadable}
+                        onDeleteFile={() => {
+                          this.onRemoveFile(idx);
+                        }}
+                        uploading={uploading}
+                      />
+                    ))
+                  ) : isSuccessfull ? (
+                    <React.Fragment>
+                      {uploadStatus.result.successed.map(({ license }) => (
+                        <FileUploadItem
+                          icon={"file"}
+                          iconStatus={"success"}
+                          title={license}
+                          titleStatus={"success"}
+                          infoStatus={"success"}
+                          progressBar={"success"}
+                          progressPercentage={100}
+                          uploading={true}
+                        />
+                      ))}
+                      {uploadStatus.result.errors.map(
+                        ({ license, message }) => (
+                          <FileUploadItem
+                            icon={"file"}
+                            iconStatus={"error"}
+                            title={license}
+                            titleStatus={"error"}
+                            infoStatus={"error"}
+                            progressBar={"error"}
+                            progressPercentage={100}
+                            message={message}
+                            uploading={true}
+                          />
+                        )
+                      )}
+                    </React.Fragment>
                   ) : null}
                 </div>
-                {uploading && finished ? (
+                {!finished ? (
+                  <Button
+                    label={"Apply"}
+                    buttonType={uploading ? "bordered" : "regular"}
+                    color={uploading ? "gray" : "blue"}
+                    onClick={() => {
+                      if (!uploading) {
+                        onApply(files);
+                      }
+                    }}
+                  />
+                ) : (
                   <Button
                     label={"Ok"}
                     buttonType="regular"
-                    customClass="mr-2 float-right"
                     color="green"
                     onClick={onClose}
                   />
-                ) : null}
-                {!uploading ? (
-                  <Button
-                    label={"Apply"}
-                    buttonType="regular"
-                    customClass="mr-2 float-right"
-                    color="green"
-                    onClick={() => {
-                      onApply(files);
-                    }}
-                  />
-                ) : null}
+                )}
               </div>
             </div>
           ) : null}

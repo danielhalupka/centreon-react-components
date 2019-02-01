@@ -11,7 +11,9 @@ class FileUploadItem extends Component {
       infoStatus,
       infoStatusLabel,
       progressBar,
+      progressPercentage,
       uploading,
+      message,
       onDeleteFile
     } = this.props;
     return (
@@ -35,11 +37,18 @@ class FileUploadItem extends Component {
               onClick={onDeleteFile}
             />
           ) : null}
-          {progressBar ? (
-            <div className="progress">
-              <span className={`progress-bar ${progressBar}`} />
-            </div>
-          ) : null}
+          <div className="progress">
+            <span className={`progress-bar ${progressBar}`} style={
+              {
+                width: `${progressPercentage}%`
+              }
+            } />
+          </div>
+          {
+            message ? (
+              <span class="file-upload-message">{message}</span>
+            ) : null
+          }      
         </div>
       </React.Fragment>
     );
