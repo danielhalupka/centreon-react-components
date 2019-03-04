@@ -1,0 +1,75 @@
+@import '../../global-sass-files/variables';
+// Select option
+.select {
+  &-option {
+    width: 300px;
+    font-family: $primary-font-regular;
+    &.small {
+      width: 100px;
+      margin: 0 auto;
+    }
+    &.medium {
+      width: 250px;
+      margin: 0 auto;
+    }
+    &.large {
+      width: 100%;
+      margin: 0 auto;
+    }
+    .css-1492t68 {
+      font-size: 11px;
+      line-height: 12px;
+      color: #242f3a;
+      font-family: $primary-font-light;
+      text-transform: none;
+    }
+    .css-vj8t7z {
+      position: relative;
+      min-height: 30px !important;
+    }
+    .css-d8oujb {
+      display: none;
+    }
+    .css-2o5izw {
+      border-color: hsl(0,0%,80%);
+      box-shadow: none;
+      min-height: 30px;
+      &:hover {
+        border-color: hsl(0,0%,80%);
+      }
+    }
+    .css-15k3avv {
+      border-top: none;
+      border-radius: 0;
+      margin-top: 0;
+      text-align: left;
+      text-transform: none;
+    }
+    .css-1ep9fjw, .css-1uq0kb5 {
+      padding: 4px;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 86%;
+      background-color: $lime-centreon-primary;
+      left: 10px;
+      bottom: 1px;
+    }
+    .css-11unzgr * {
+      font-size: 11px;
+      line-height: 12px;
+      color: #242f3a;
+      font-family: $primary-font-light;
+      padding: 7px 12px;
+    }
+    .css-1hwfws3 {
+      font-size: 11px;
+      line-height: 12px;
+    }
+    .css-12jo7m5 {
+      text-transform: none;
+    }
+  }
+}

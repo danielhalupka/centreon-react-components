@@ -7,7 +7,7 @@
   .tooltiptext {
     visibility: hidden;
     min-width: 120px;
-    background-color: #555;
+    background-color: #232f39;
     color: #fff;
     padding: 8px 15px;
     box-sizing: border-box;
@@ -24,14 +24,14 @@
       left: 0;
       border-width: 9px;
       border-style: solid;
-      border-color: #555 transparent transparent transparent;
+      border-color: #232f39 transparent transparent transparent;
     }
   }
   &:hover {
     .tooltiptext {
       visibility: visible;
       opacity: 1;
-      font-size: 12px;
+      font-size: 10px;
       color: $white-color;
       font-family: $primary-font-light;
     }
