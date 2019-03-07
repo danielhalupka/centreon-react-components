@@ -1,0 +1,15 @@
+@import '../../global-sass-files/variables';
+
+// Textarea
+.form {
+  &-group {
+    &.textarea {
+      .form-control {
+        resize: none;
+      }
+      &.small {
+        width: 300px;
+      }
+    }
+  }
+}

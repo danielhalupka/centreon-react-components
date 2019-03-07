@@ -16,5 +16,35 @@
       padding: 4px 10px;
       box-sizing: border-box;
     }
+    &.has-danger {
+      .form-control {
+        border: 1px solid $content-red-color;
+        color: $content-red-color;
+        &:hover, &:focus {
+          border: 1px solid $content-red-color;
+          outline: none;
+        }
+      }
+      .form-error {
+        background-color: $content-red-color;
+        padding: 1px 10px;
+        box-sizing: border-box;
+        color: $white-color;
+        font-family: $primary-font-regular;
+        font-size: 10px;
+      }
+    }
+    &.smallest {
+      width: 100px;
+    }
+    &.small {
+      width: 200px;
+    }
+    &.middle {
+      width: 300px;
+    }
+    &.big {
+      width: 100%;
+    }
   }
 }

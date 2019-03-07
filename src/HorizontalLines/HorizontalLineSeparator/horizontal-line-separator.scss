@@ -2,6 +2,8 @@
 // Horizontal line separator
 .hr-separator {
   display: block;
+  width: 100%;
   height: 1px;
   background-color: $lime-centreon-primary;
+  margin: 5px 0;
 }

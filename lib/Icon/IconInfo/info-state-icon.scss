@@ -38,4 +38,14 @@
     vertical-align: middle;
     margin-left: 3px;
   }
+  &.white {
+    &:after {
+      color: $white-color;
+    }
+  }
+  &.gray {
+    &:after {
+      color: #cdcdcd;
+    }
+  }
 }

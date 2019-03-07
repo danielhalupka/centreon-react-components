@@ -29,6 +29,7 @@ export { default as InfoTooltip } from "./Info/InfoTooltip";
 export { default as InfoLoading } from "./Info/InfoLoading";
 export { default as InputField } from "./InputField";
 export { default as InputFieldSelect } from "./InputField/InputFieldSelect";
+export { default as InputFieldTextarea } from "./InputField/InputFieldTextarea";
 export { default as LoaderContent } from "./LoaderContent";
 export { default as MessageError} from './Message/MessageError';
 export { default as MessageInfo} from './Message/MessageInfo';

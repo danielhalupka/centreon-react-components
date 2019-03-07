@@ -21,7 +21,7 @@ class InputFieldSelect extends Component {
     const { selectedOption } = this.state;
     return (
       <Select
-        className={`select-option ${customClass}`}
+        className={`select-option ${customClass ? customClass : ''}`}
         value={selectedOption}
         onChange={this.handleChange}
         options={options}

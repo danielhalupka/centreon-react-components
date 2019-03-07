@@ -2,6 +2,9 @@
 // Pagination
 .pagination {
   display: inline-block;
+  padding-left: 45px;
+  padding-right: 45px;
+  position: relative;
   a {
     color: #232f39;
     display: inline-block;
@@ -15,9 +18,15 @@
       font-family: $primary-font-medium;
     }
     &:first-child {
+      position: absolute;
+      left: 0;
       & + .icon-action {
         transform: rotate(180deg);
       }
+    }
+    &:last-child {
+      position: absolute;
+      right: 0;
     }
   }
   .icon-action {
