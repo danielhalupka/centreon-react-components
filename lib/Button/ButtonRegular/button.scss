@@ -130,4 +130,12 @@
       left: 4px;
     }
   }
+  &.icon {
+    height: 27px;
+    padding: 9px 25px;
+    .icon-action {
+      left: 0;
+      right: 0;
+    }
+  }
 }
