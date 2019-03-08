@@ -143,5 +143,26 @@
         }
       }
     }
+    &-arrow-left {
+      &:after {
+        content: "\e924";
+        color: #dcdcdc;
+      }
+      &.white {
+        &:after {
+          color: $white-color;
+        }
+      }
+      &.gray {
+        &:after {
+          color: #cdcdcd;
+        }
+      }
+      &.red {
+        &:after {
+          color: $content-red-color;
+        }
+      }
+    }
   }
 }

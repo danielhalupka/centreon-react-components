@@ -522,7 +522,7 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
                 <div className="container__col-md-6 m-0 center-vertical">
                   <InputField 
                     type="text"
-                    inputSize="smallest" 
+                    inputSize="smallest m-0" 
                   />
                   <IconInfo iconText="*60 seconds" />
                 </div>

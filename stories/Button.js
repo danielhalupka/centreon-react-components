@@ -123,7 +123,7 @@ storiesOf("Button", module).add("Button - icon", () => (
   <Button
     buttonType="validate"
     color="green normal icon"
-    iconActionType="update"
+    iconActionType="arrow-left"
     iconColor="white"
   />
 ));
