@@ -41,7 +41,7 @@ export { default as Popup } from "./Popup";
 export { default as ProgressBar } from "./ProgressBar/ProgressBarSteps";
 export { default as ProgressBarItem } from "./ProgressBar/ProgressBarSteps/ProgressBarItem";
 export { default as RadioButton } from "./RadioButton";
-export { default as Scroll } from "./Scroll";
+export { default as ScrollBar } from "./ScrollBar";
 export { default as SearchLive } from "./Search/SearchLive";
 export { default as SearchWithArrow} from "./Search/SearchWithArrow";
 export { default as SearchLiveSelect } from "./Search/SearchLiveSelect";

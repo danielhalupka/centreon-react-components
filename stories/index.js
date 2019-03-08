@@ -18,7 +18,7 @@ import "./Pagination";
 import "./Popup";
 import "./ProgressBar";
 import "./RadioButton";
-import "./Scroll";
+import "./ScrollBar";
 import "./Search";
 import "./Slider";
 import "./Submenu";
