@@ -434,8 +434,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
                 <div className="container__col-md-6 center-vertical m-0">
                   <IconInfo iconColor="gray" iconName="question" iconText="Icon" />
                 </div>
-                <div className="container__col-md-5">
-                  <InputFieldSelect customClass="medium" />
+                <div className="container__col-md-6">
+                  <InputFieldSelect customClass="large" />
                 </div>
               </div>
               <br />
@@ -458,8 +458,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
                 <div className="container__col-md-6 center-vertical m-0">
                   <IconInfo iconColor="gray" iconName="question" iconText="Display on remote server" />
                 </div>
-                <div className="container__col-md-4">
-                  <InputFieldSelect customClass="medium" />
+                <div className="container__col-md-6">
+                  <InputFieldSelect customClass="large" />
                 </div>
               </div>
             </div>
