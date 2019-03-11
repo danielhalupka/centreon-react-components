@@ -3,7 +3,7 @@ import './custom-button.scss';
 
 const CustomButton = ({color, label}) => { 
   return (
-    <button className={`custom custom-button-${color}`}>
+    <button className={`custom-button custom-button-${color}`}>
       {label}
     </button>
   )
