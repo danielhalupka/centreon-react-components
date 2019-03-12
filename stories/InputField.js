@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { InputField, InputFieldSelect, InputFieldTextarea } from "../src";
+import { InputField, InputFieldSelect, InputFieldTextarea, InputFieldMultiSelect } from "../src";
 
 storiesOf("Input Field", module).add(
   
@@ -47,5 +47,13 @@ storiesOf("Input Field", module).add(
   "Input Field - textarea",
   () => 
   <InputFieldTextarea textareaType="small" label="Textarea field label" />,
+  { notes: "A very simple component" }
+);
+
+storiesOf("Input Field", module).add(
+  
+  "Input Field - multiselect custom",
+  () => 
+  <InputFieldMultiSelect />,
   { notes: "A very simple component" }
 );

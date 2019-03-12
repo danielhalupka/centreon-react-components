@@ -1,7 +1,7 @@
 // Scrollbar
 .scrollbar {
   &-container {
-    height: 350px;
+    max-height: 350px;
     .ps__rail-y {
       left: auto !important;
       width: 8px;

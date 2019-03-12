@@ -13,7 +13,7 @@ class SearchLive extends React.Component {
 
     return (
       <div className="search-live custom">
-        <label>{label}</label>
+        {label && <label>{label}</label>}
         <input type="text" value={value} onChange={this.onChange.bind(this)} />
         <ButtonActionInput
           buttonColor="green"
