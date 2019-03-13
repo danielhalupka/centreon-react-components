@@ -50,6 +50,9 @@
     }
     .custom-control {
       min-height: 0;
+      &-label {
+        margin-bottom: 0;
+      }
     }
   }
 }
