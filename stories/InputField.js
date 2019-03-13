@@ -57,3 +57,11 @@ storiesOf("Input Field", module).add(
   <InputFieldMultiSelect size="medium"  />,
   { notes: "A very simple component" }
 );
+
+storiesOf("Input Field", module).add(
+  
+  "Input Field - multiselect custom error",
+  () => 
+  <InputFieldMultiSelect error="The field is mandatory" size="medium"  />,
+  { notes: "A very simple component" }
+);

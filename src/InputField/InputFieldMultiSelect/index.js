@@ -6,11 +6,11 @@ import './input-multi-select.scss';
 
 class InputFieldMultiSelect extends Component {
   render() {
-    const {size, active} = this.props;
+    const {size, active, error} = this.props;
     return (
       <div className={`multi-select ${size ? size : ''} ${active
         ? active
-        : ''}`}>
+        : ''}`  + (error ? ' has-danger' : '')}>
         <div className="multi-select-wrap">
           <input className="multi-select-input" type="text" placeholder="Search" />
           <IconToggleSubmenu iconType="arrow" />
@@ -23,6 +23,11 @@ class InputFieldMultiSelect extends Component {
             <Checkbox label="Test 4" name="test4" id='test4' iconColor="green"/>
           </div>
         </ScrollBar>
+        {error ? (
+          <div class="form-error">
+            {error}
+          </div>
+        ) : null}
       </div>
     );
   }
