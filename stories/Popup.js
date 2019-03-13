@@ -16,7 +16,8 @@ import {
   ProgressBar,
   ProgressBarItem,
   RadioButton,
-  InputField
+  InputField,
+  MessageStatus
 } from "../src";
 
 storiesOf("Popup", module).add(
@@ -39,7 +40,7 @@ storiesOf("Popup", module).add(
 );
 
 storiesOf("Popup", module).add(
-  "Popup - small with header and footer colored",
+  "Popup - small with header and footer colored (with message status)",
   () => (
     <Popup popupType="small scroll host">
       <div className="popup-header blue">
@@ -47,8 +48,21 @@ storiesOf("Popup", module).add(
       </div>
       <div className="popup-body">
         <LoaderContent />
+        <br />
+        <br />
+        <MessageStatus
+          messageStatus="ok"
+          messageText="Insertion 4/4 hosts"
+          messageInfo="[OK]"
+        />
+        <br />
+        <MessageStatus
+          messageStatus="failed"
+          messageText="Generation of configuration"
+          messageInfo="[FAILED]"
+        />
       </div>
-      <div className="popup-footer">
+      <div className="popup-footer m-0">
         <MessageError
           messageError="red"
           text="Generation of configuration has failed, please try again."
@@ -73,7 +87,7 @@ storiesOf("Popup", module).add(
           Aenean at magna arcu. Curabitur fringilla eu quam et aliquet. Nam sed libero semper, pellentesque justo sit amet, tempus sapien. Donec viverra nisi at sapien semper hendrerit. Nunc sed fermentum dolor, at varius leo. Donec ullamcorper dui at tincidunt facilisis. Praesent a pretium nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </ScrollBar>
-      <div className="popup-footer">
+      <div className="popup-footer m-0">
         <MessageError
           messageError="red"
           text="Generation of configuration has failed, please try again."

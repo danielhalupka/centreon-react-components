@@ -54,7 +54,7 @@
       }
       &.host {
         .popup-body {
-          padding: 50px 25px;
+          padding: 50px 25px 10px 25px;
         }
       }
     }
@@ -63,6 +63,13 @@
         max-width: 300px;
         width: 100%;
         @include centerAbsolute();
+      }
+    }
+    .popup-footer {
+      &.m-0 {
+        .message-error {
+          margin-top: 0;
+        }
       }
     }
   }
