@@ -20,6 +20,11 @@
           color: #cdcdcd;
         }
       }
+      &.orange {
+        &:after {
+          color: $content-orange-color;
+        }
+      }
     }
     &-add {
       &:after {
@@ -36,6 +41,11 @@
           color: #cdcdcd;
         }
       }
+      &.orange {
+        &:after {
+          color: $content-orange-color;
+        }
+      }
     }
     &-delete {
       &:after {
@@ -50,6 +60,11 @@
       &.gray {
         &:after {
           color: #cdcdcd;
+        }
+      }
+      &.orange {
+        &:after {
+          color: $content-orange-color;
         }
       }
     }
@@ -100,6 +115,11 @@
           color: $green-centreon-primary;
         }
       }
+      &.orange {
+        &:after {
+          color: $content-orange-color;
+        }
+      }
     }
     &-warning {
       &:after {
@@ -119,6 +139,11 @@
       &.red {
         &:after {
           color: $content-red-color;
+        }
+      }
+      &.orange {
+        &:after {
+          color: $content-orange-color;
         }
       }
     }
@@ -142,6 +167,11 @@
           color: $content-red-color;
         }
       }
+      &.orange {
+        &:after {
+          color: $content-orange-color;
+        }
+      }
     }
     &-arrow-left {
       &:after {
@@ -161,6 +191,11 @@
       &.red {
         &:after {
           color: $content-red-color;
+        }
+      }
+      &.orange {
+        &:after {
+          color: $content-orange-color;
         }
       }
     }

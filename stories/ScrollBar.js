@@ -17,7 +17,7 @@ storiesOf("Scroll", module).add(
           Aenean at magna arcu. Curabitur fringilla eu quam et aliquet. Nam sed libero semper, pellentesque justo sit amet, tempus sapien. Donec viverra nisi at sapien semper hendrerit. Nunc sed fermentum dolor, at varius leo. Donec ullamcorper dui at tincidunt facilisis. Praesent a pretium nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </ScrollBar>
-      <div className="popup-footer">
+      <div className="popup-footer m-0">
         <MessageError
           messageError="red"
           text="Generation of configuration has failed, please try again."

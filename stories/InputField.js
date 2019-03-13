@@ -54,6 +54,6 @@ storiesOf("Input Field", module).add(
   
   "Input Field - multiselect custom",
   () => 
-  <InputFieldMultiSelect />,
+  <InputFieldMultiSelect size="medium"  />,
   { notes: "A very simple component" }
 );
