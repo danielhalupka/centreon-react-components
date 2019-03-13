@@ -62,6 +62,36 @@ storiesOf("Popup", module).add(
           messageInfo="[FAILED]"
         />
       </div>
+      <div className="popup-footer m-0"></div>
+      <IconClose iconType="middle" />
+    </Popup>
+  ),
+  { notes: "A very simple component" }
+);
+
+storiesOf("Popup", module).add(
+  "Popup - small with header and footer colored (with message status error)",
+  () => (
+    <Popup popupType="small scroll host">
+      <div className="popup-header blue">
+        <h3 className="popup-header-title">Popup Header</h3>
+      </div>
+      <div className="popup-body">
+        <LoaderContent />
+        <br />
+        <br />
+        <MessageStatus
+          messageStatus="ok"
+          messageText="Insertion 4/4 hosts"
+          messageInfo="[OK]"
+        />
+        <br />
+        <MessageStatus
+          messageStatus="failed"
+          messageText="Generation of configuration"
+          messageInfo="[FAILED]"
+        />
+      </div>
       <div className="popup-footer m-0">
         <MessageError
           messageError="red"
