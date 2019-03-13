@@ -1,7 +1,7 @@
 import React from "react";
-import "./switcher.scss";
+import "./switcher-mode.scss";
 
-class Switcher extends React.Component {
+class SwitcherMode extends React.Component {
   state = {
     value: true,
     toggled: false
@@ -46,29 +46,26 @@ class Switcher extends React.Component {
   };
 
   render() {
-    const { switcherTitle, switcherStatus, customClass } = this.props;
+    const { customClass } = this.props;
     const { value, toggled } = this.state;
     return (
-      <div className={`switcher ${customClass ? customClass : ''}`}>
-        <span className="switcher-title">
-          {switcherTitle ? switcherTitle : " "}
-        </span>
-        <span className="switcher-status">{switcherStatus}</span>
+      <div className={`switcher-mode ${customClass ? customClass : ''}`}>
         <label
-          className={"switch" + (toggled ? " switch-active" : " switch-hide")}
+          className={"switch" + (toggled ? " switch-mode-active" : " switch-mode-hide")}
         >
           <input
             type="checkbox"
             checked={!value}
             onClick={this.onChange.bind(this)}
           />
-          <span className="switch-slider switch-round" />
-          <span className="switch-status switch-status-show">on</span>
-          <span className="switch-status switch-status-hide">off</span>
+          <span className="switch-slider switch-round">
+            <span className="switch-status switch-status-show">keywords mode</span>
+            <span className="switch-status switch-status-hide">value</span>
+          </span>
         </label>
       </div>
     );
   }
 }
 
-export default Switcher;
+export default SwitcherMode;

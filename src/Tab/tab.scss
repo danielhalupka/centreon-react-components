@@ -24,6 +24,9 @@
       color: $white-color;
       text-transform: uppercase;
       width: 20%;
+      &.has-error {
+        border-bottom: 4px solid $content-red-color;
+      }
     }
     &-active {
       border-bottom: 4px solid $green-centreon-darken;
@@ -40,10 +43,14 @@
       content: '';
       position: absolute;
       height: 1px;
-      width: 86%;
+      width: 92%;
       background-color: $lime-centreon-primary;
-      left: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: 1px;
     }
+  }
+  .tooltip {
+    margin-top: 0;
   }
 }

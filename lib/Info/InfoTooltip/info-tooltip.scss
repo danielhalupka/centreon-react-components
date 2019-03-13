@@ -2,7 +2,7 @@
 // Tooltip
 .tooltip {
   position: relative;
-  display: inline-block;
+  display: flex;
   margin-top: 50px;
   .tooltiptext {
     visibility: hidden;
@@ -17,6 +17,7 @@
     left: -2px;
     opacity: 0;
     transition: opacity 0.3s;
+    max-width: 220px;
     &:after {
       content: "";
       position: absolute;

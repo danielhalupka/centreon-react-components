@@ -4,8 +4,14 @@
   &-option {
     width: 300px;
     font-family: $primary-font-regular;
+    margin-top: 5px;
+    position: relative;
+    &.smallest {
+      width: 60px;
+    }
     &.small {
       width: 100px;
+      margin: 0 auto;
     }
     &.medium {
       width: 200px;

@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Switcher, SwitcherInputField } from "../src";
+import { Switcher, SwitcherInputField, SwitcherMode } from "../src";
 
 storiesOf("Switcher", module).add("Switcher - regular", () => <Switcher />, {
   notes: "A very simple component"
@@ -21,5 +21,11 @@ storiesOf("Switcher", module).add(
 storiesOf("Switcher", module).add(
   "Switcher - input field",
   () => <SwitcherInputField />,
+  { notes: "A very simple component" }
+);
+
+storiesOf("Switcher", module).add(
+  "Switcher - mode",
+  () => <SwitcherMode />,
   { notes: "A very simple component" }
 );

@@ -18,7 +18,12 @@ import {
   InputFieldSelect,
   RadioButton,
   HorizontalLineSeparator,
-  Checkbox
+  Checkbox,
+  InfoTooltip,
+  InputFieldMultiSelect,
+  CustomButton,
+  SearchLive,
+  ListSortable
 } from "../src";
 
 // Extensions Page
@@ -414,25 +419,32 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
           <Subtitle label="Information" subtitleType="bam" />
           <div className="container__row">
             <div className="container__col-md-4">
+              <InfoTooltip 
+                iconColor="gray" 
+                tooltipText="This is the an example of tooltip" 
+                iconText="Name" 
+              />
               <InputField 
-                type="text" 
-                label="Name" 
                 error="The field is mandatory" 
                 inputSize="middle" 
-                iconName="question"
-                iconColor="gray"
+              />
+              <InfoTooltip 
+                iconColor="gray" 
+                tooltipText="This is the an example of tooltip" 
+                iconText="Description" 
               />
               <InputFieldTextarea 
                 textareaType="middle" 
-                label="Description" 
-                iconName="question"
-                iconColor="gray"
               />
             </div>
             <div className="container__col-md-4">
               <div className="container__row">
                 <div className="container__col-md-6 center-vertical m-0">
-                  <IconInfo iconColor="gray" iconName="question" iconText="Icon" />
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="Icon" 
+                  />
                 </div>
                 <div className="container__col-md-6">
                   <InputFieldSelect customClass="large" />
@@ -441,7 +453,11 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               <br />
               <div className="container__row">
                 <div className="container__col-md-7 m-0">
-                  <IconInfo iconColor="gray" iconName="question" iconText="Automatically inherit KPI downtime" />
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="Automatically inherit KPI downtime" 
+                  />
                 </div>
                 <div className="container__col-md-5">
                   <div className="container__row">
@@ -456,7 +472,11 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               </div>
               <div className="container__row">
                 <div className="container__col-md-6 center-vertical m-0">
-                  <IconInfo iconColor="gray" iconName="question" iconText="Display on remote server" />
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="Display on remote server" 
+                  />
                 </div>
                 <div className="container__col-md-6">
                   <InputFieldSelect customClass="large" />
@@ -477,9 +497,12 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
           <div className="container__row">
             <div className="container__col-md-4">
               <div>
-                <IconInfo iconColor="gray" iconName="question" iconText="Link to Business View(s)" />
+                <InfoTooltip 
+                  iconColor="gray" 
+                  tooltipText="This is the an example of tooltip" 
+                  iconText="Link to Business View(s)" 
+                />
               </div>
-              <br />
               <InputFieldSelect customClass="big" />
             </div>
           </div>
@@ -493,22 +516,26 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
             <div className="container__col-md-1 center-vertical">
               <Subtitle label="Notification" subtitleType="bam" />
             </div>
-            <div className="container__col-md-2">
-              <SwitcherInputField />
-            </div>
           </div>
           <div className="container__row">
             <div className="container__col-md-4">
               <div>
-                <IconInfo iconColor="gray" iconName="question" iconText="Link to Business View(s)" />
+                <InfoTooltip 
+                  iconColor="gray" 
+                  tooltipText="This is the an example of tooltip" 
+                  iconText="Contact groups authorized to receive notifications from this Business Activity" 
+                />
               </div>
-              <br />
               <InputFieldSelect />
             </div>
             <div className="container__col-md-4">
               <div className="container__row">
                 <div className="container__col-md-6 center-vertical m-0">
-                  <IconInfo iconColor="gray" iconName="question" iconText="Notification time period" />
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="Notification time period" 
+                  />
                 </div>
                 <div className="container__col-md-6 m-0">
                   <InputFieldSelect customClass="large" />
@@ -517,7 +544,11 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               <br />
               <div className="container__row">
                 <div className="container__col-md-6 center-vertical m-0">
-                  <IconInfo iconColor="gray" iconName="question" iconText="Notification interval" />
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="Notification interval" 
+                  />
                 </div>
                 <div className="container__col-md-6 m-0 center-vertical">
                   <InputField 
@@ -531,7 +562,11 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
             <div className="container__col-md-4">
               <div className="container__row mb-1">
                 <div className="container__col-md-8">
-                  <IconInfo iconColor="gray" iconName="question" iconText="Notification option" />
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="Notification option" 
+                  />
                 </div>
               </div>
               <div className="container__row">
@@ -550,7 +585,11 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               </div>
               <div className="container__row">
                 <div className="container__col-md-5 m-0">
-                  <IconInfo iconColor="gray" iconName="question" iconText="Enable notification" />
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="Enable notification" 
+                  />
                 </div>
                 <div className="container__col-md-5">
                   <div className="container__row">
@@ -574,16 +613,337 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
           </div>
         </div>
         <div label="Indicators">
-          Lorem Ipsum dolor sit amet Indicators
+          <div className="container__row">
+            <div className="container__col-md-2 center-vertical m-0">
+              <Subtitle label="Select status calculation method" subtitleType="bam" />
+            </div>
+            <div className="container__col-md-2 m-0">
+              <InputFieldSelect customClass="large" />
+            </div>
+            <div className="container__col-md-1 m-0">
+              <CustomButton label="Warning" color="orange" />
+            </div>
+            <div className="container__col-md-1 p-0 m-0 center-both">
+              <IconInfo iconText="Treshold" />
+            </div>
+            <div className="container__col-md-1 p-0 m-0 center-vertical">
+              <InputField 
+                type="text"
+                inputSize="smallest m-0" 
+              />
+            </div>
+            <div className="container__col-md-1 m-0">
+              <CustomButton label="Critical" color="red" />
+            </div>
+            <div className="container__col-md-1 p-0 m-0 center-both">
+              <IconInfo iconText="Treshold" />
+            </div>
+            <div className="container__col-md-1 p-0 m-0 center-vertical">
+              <InputField 
+                type="text"
+                inputSize="smallest m-0" 
+              />
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-12 m-0">
+              <Subtitle label="Linked Resources" subtitleType="bam" />
+            </div>
+          </div>
+          <div className="container__row mb-2">
+            <div className="container__col-md-3 center-vertical m-0">
+              <IconInfo iconText="Type of objects you want to calculate the result on" />
+            </div>
+            <div className="container__col-md-2 m-0">
+              <InputFieldSelect customClass="large" />
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-12 m-0">
+              <SearchLive />
+            </div>
+          </div>
+          <div className="container__row mt-1">
+            <div className="container__col-md-12 m-0">
+              <ListSortable />
+            </div>
+          </div>
         </div>
         <div label="Reporting">
-          Lorem Ipsum dolor sit amet Reporting
+          <div className="container__row mt-2">
+            <Subtitle label="Reporting" subtitleType="bam" />
+          </div>
+          <div className="container__row">
+            <InfoTooltip 
+              iconColor="gray" 
+              tooltipText="This is the an example of tooltip" 
+              iconText="Extra reporting time periods used in Centreon BI reports" 
+            />
+          </div>
+          <div className="container__row mt-1 mb-2">
+            <InputFieldMultiSelect size="medium" />
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA warning percentage treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="(0-100%)" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA control percentage treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="(0-100%)" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA warning duration treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="minutes" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA warning percentage treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="minutes" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            <Button
+              label="SAVE"
+              buttonType="validate"
+              color="green normal"
+            />
+          </div>
         </div>
         <div label="Escalation">
-          Lorem Ipsum dolor sit amet Escalation
+          <div className="container__row mt-2">
+            <Subtitle label="Escalations" subtitleType="bam" />
+          </div>
+          <div className="container__row">
+            <InfoTooltip 
+              iconColor="gray" 
+              tooltipText="This is the an example of tooltip" 
+              iconText="Select escalation that applied to this Business Activity" 
+            />
+          </div>
+          <div className="container__row mt-1 mb-2">
+            <InputFieldMultiSelect size="medium" />
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA warning percentage treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="(0-100%)" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA control percentage treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="(0-100%)" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA warning duration treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="minutes" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-5 p-0">
+              <div className="container__row">
+                <div className="container__col-md-5 center-vertical m-0">
+                  <InfoTooltip 
+                    iconColor="gray" 
+                    tooltipText="This is the an example of tooltip" 
+                    iconText="SLA warning percentage treshold" 
+                  />
+                </div>
+                <div className="container__col-md-7 m-0 center-vertical">
+                  <InputField 
+                    type="text"
+                    inputSize="smallest m-0" 
+                  />
+                  <IconInfo iconText="minutes" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            <Button
+              label="SAVE"
+              buttonType="validate"
+              color="green normal"
+            />
+          </div>
         </div>
         <div label="Event Handler">
-          Lorem Ipsum dolor sit amet Event Handler
+          <div className="container__row mt-2">
+            <Subtitle label="Event handler configuration" subtitleType="bam" />
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-2 p-0 m-0">
+              <InfoTooltip 
+                iconColor="gray" 
+                tooltipText="This is the an example of tooltip" 
+                iconText="Enable event handler" 
+              />
+            </div>
+            <div className="container__col-md-2 m-0">
+              <div className="container__row">
+                <div className="container__col-md-4 m-0">
+                  <RadioButton name="test" iconColor="green" checked={true} label="YES" />
+                </div>
+                <div className="container__col-md-4 m-0">
+                  <RadioButton name="test" iconColor="green" label="NO" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container__row">
+            <div className="container__col-md-2 center-vertical m-0 p-0">
+              <InfoTooltip 
+                iconColor="gray" 
+                tooltipText="This is the an example of tooltip" 
+                iconText="Event handler command" 
+              />
+            </div>
+            <div className="container__col-md-2 m-0">
+              <InputFieldMultiSelect />
+            </div>
+          </div>
+          <div className="container__row mt-1">
+            <div className="container__col-md-2 center-vertical m-0 p-0">
+              <InfoTooltip 
+                iconColor="gray" 
+                tooltipText="This is the an example of tooltip" 
+                iconText="Args" 
+              />
+            </div>
+            <div className="container__col-md-2 m-0">
+              <InputField 
+                type="text" 
+                inputSize="big m-0" 
+              />
+            </div>
+            <div className="container__col-md-1 m-0 center-both">
+              <Button
+                buttonType="validate"
+                color="green normal icon"
+                iconActionType="arrow-left"
+                iconColor="white"
+              />
+            </div>
+            <div className="container__col-md-2 m-0">
+              <InputField 
+                type="text" 
+                inputSize="big m-0" 
+              />
+            </div>
+          </div>
+          <div className="text-right">
+            <Button
+              label="SAVE"
+              buttonType="validate"
+              color="green normal"
+            />
+          </div>
         </div>
       </Tab>
     </div>

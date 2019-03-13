@@ -6,6 +6,7 @@
     &.textarea {
       .form-control {
         resize: none;
+        outline: none;
       }
       &.small {
         width: 300px;

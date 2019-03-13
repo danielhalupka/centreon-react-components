@@ -53,6 +53,7 @@ export { default as SubmenuItem } from "./Submenu/SubmenuHeader/SubmenuItem";
 export { default as Subtitle } from "./Subtitle";
 export { default as Switcher } from "./Switcher";
 export { default as SwitcherInputField } from "./Switcher/SwitcherInputField";
+export { default as SwitcherMode } from "./Switcher/SwitcherMode";
 export { default as Tab } from "./Tab";
 export { default as Table } from "./Table";
 export { default as TableDynamic } from "./Table/TableDynamic";

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Checkbox from '../../Checkbox';
+import InputFieldSelect from '../../InputField/InputFieldSelect';
+import SwitcherInputField from '../../Switcher/SwitcherInputField';
 import './list-sortable.scss';
+import { SwitcherMode } from '../..';
 
 class ListSortable extends Component {
   render() {
@@ -9,39 +12,73 @@ class ListSortable extends Component {
         <thead>
           <tr>
             <th scope="col">INDICATORS</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">TYPE</th>
+            <th scope="col">DEFINE IMPACT</th>
+            <th scope="col">WARNING</th>
+            <th scope="col">CRITICAL</th>
+            <th scope="col">UNKOWN</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
-              <Checkbox label="ALL HOSTS" name="all-hosts" iconColor="green" />
+              <Checkbox label="Lorem Ipsum dolor sit amet" name="all-hosts" iconColor="green" />
             </td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
+            <td>
+              Type 1
+            </td>
+            <td>
+              <SwitcherMode />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
           </tr>
           <tr>
             <td>
-              <Checkbox label="ALL HOSTS" name="all-hosts" iconColor="green" />
+              <Checkbox label="Lorem Ipsum dolor sit amet" name="all-hosts" iconColor="green" />
             </td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>Thornton</td>
+            <td>
+              Type 2
+            </td>
+            <td>
+              <SwitcherMode />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
           </tr>
           <tr>
             <td>
-              <Checkbox label="ALL HOSTS" name="all-hosts" iconColor="green" />
+              <Checkbox label="Lorem Ipsum dolor sit amet" name="all-hosts" iconColor="green" />
             </td>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>the Bird</td>
+            <td>
+              Type 3
+            </td>
+            <td>
+              <SwitcherMode />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
+            <td>
+              <InputFieldSelect customClass="small" />
+            </td>
           </tr>
         </tbody>
       </table>

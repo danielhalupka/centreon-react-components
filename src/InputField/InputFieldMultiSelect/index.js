@@ -6,9 +6,9 @@ import './input-multi-select.scss';
 
 class InputFieldMultiSelect extends Component {
   render() {
-    const {active} = this.props;
+    const {size, active} = this.props;
     return (
-      <div className={`multi-select ${active
+      <div className={`multi-select ${size ? size : ''} ${active
         ? active
         : ''}`}>
         <div className="multi-select-wrap">

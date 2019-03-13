@@ -4,7 +4,7 @@ import "./info-state-icon.scss";
 const IconInfo = ({ iconName, iconText, iconColor }) => {
   return (
     <React.Fragment>
-      <span className={`info info-${iconName} ${iconColor ? iconColor : ''}`} />
+      {iconName && <span className={`info info-${iconName} ${iconColor ? iconColor : ''}`} />}
       {iconText && <span className="info-text">{iconText}</span>}
     </React.Fragment>
   )

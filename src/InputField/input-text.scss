@@ -18,19 +18,21 @@
     }
     &.has-danger {
       .form-control {
-        border: 1px solid $content-red-color;
-        color: $content-red-color;
+        border: 1px solid #ad353b;
+        color: #ad353b;
         &:hover, &:focus {
-          border: 1px solid $content-red-color;
-          outline: none;
+          border: 1px solid #ad353b;
+          outline: #ad353b;
+        }
+        &:focus {
+          box-shadow: 0 0 0 .4px #ad353b;
         }
       }
       .form-error {
-        background-color: $content-red-color;
-        padding: 1px 10px;
+        padding: 1px 0;
         box-sizing: border-box;
-        color: $white-color;
-        font-family: $primary-font-regular;
+        color: $content-red-color;
+        font-family: $primary-font-bold;
         font-size: 10px;
       }
     }
