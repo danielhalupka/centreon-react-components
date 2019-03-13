@@ -29,7 +29,7 @@ class TableDynamic extends Component {
               <Checkbox
                 label="Host 1 lorem ipsum dolor sit amet"
                 name="host1"
-                iconColor="blue"
+                iconColor="light-blue"
               />
             </td>
             <td>
@@ -41,7 +41,7 @@ class TableDynamic extends Component {
               <Checkbox
                 label="Host 1 lorem ipsum dolor sit amet"
                 name="host1"
-                iconColor="blue"
+                iconColor="light-blue"
               />
             </td>
             <td>
@@ -53,7 +53,7 @@ class TableDynamic extends Component {
               <Checkbox
                 label="Host 1 lorem ipsum dolor sit amet"
                 name="host1"
-                iconColor="blue"
+                iconColor="light-blue"
               />
             </td>
             <td>
@@ -65,7 +65,7 @@ class TableDynamic extends Component {
               <Checkbox
                 label="Host 1 lorem ipsum dolor sit amet"
                 name="host1"
-                iconColor="blue"
+                iconColor="light-blue"
               />
             </td>
             <td>
