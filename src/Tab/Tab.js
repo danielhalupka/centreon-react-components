@@ -21,7 +21,6 @@ class Tab extends Component {
     if (activeTab === label) {
       className += ' tab-list-active';
     }
-
     return (
       <li 
         className={className}
@@ -32,6 +31,5 @@ class Tab extends Component {
     );
   }
 }
-
 
 export default Tab;

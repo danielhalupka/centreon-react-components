@@ -10,12 +10,10 @@ const RadioField = ({ checked, error, label, info, iconColor, ...rest }) => (
       checked={checked}
       info
     />
-
     <label htmlFor={rest.id} className="custom-control-label">
       {label}
       {info}
     </label>
-
     {error ? (
       <div className="invalid-feedback">
         <i className="fas fa-exclamation-triangle" />

@@ -45,7 +45,6 @@ export { default as RadioButton } from "./RadioButton";
 export { default as ScrollBar } from "./ScrollBar";
 export { default as SearchLive } from "./Search/SearchLive";
 export { default as SearchWithArrow} from "./Search/SearchWithArrow";
-export { default as SearchLiveSelect } from "./Search/SearchLiveSelect";
 export { default as Slider } from "./Slider/SliderContent";
 export { default as SubmenuHeader } from "./Submenu/SubmenuHeader";
 export { default as SubmenuItems } from "./Submenu/SubmenuHeader/SubmenuItems";

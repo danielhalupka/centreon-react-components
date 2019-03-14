@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Tab from './Tab';
 
 class Tabs extends Component {
@@ -26,13 +25,11 @@ class Tabs extends Component {
         activeTab,
       }
     } = this;
-
     return (
       <div className="tab">
         <ol className="tab-list">
           {children.map((child) => {
             const { label } = child.props;
-
             return (
               <Tab
                 activeTab={activeTab}

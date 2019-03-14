@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Checkbox from '../../Checkbox';
 import InputFieldSelect from '../../InputField/InputFieldSelect';
-import SwitcherInputField from '../../Switcher/SwitcherInputField';
 import './list-sortable.scss';
 import { SwitcherMode } from '../..';
 
