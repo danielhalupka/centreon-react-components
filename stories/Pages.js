@@ -11,6 +11,7 @@ import {
   Title,
   Subtitle,
   ButtonAction,
+  Tabs,
   Tab,
   SwitcherInputField,
   InputField,
@@ -406,8 +407,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
     <Title titleColor="bam" label="BAM Corelations Capabilities" />
     <br />
     <div className="container container-gray">
-      <Tab>
-        <div label="Configuration">
+      <Tabs>
+        <Tab label="Configuration">
           <div className="container__row">
             <div className="container__col-md-2 center-vertical">
               <Subtitle label="Enable business activity" subtitleType="bam" />
@@ -611,8 +612,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               color="green normal"
             />
           </div>
-        </div>
-        <div label="Indicators">
+        </Tab>
+        <Tab label="Indicators">
           <div className="container__row">
             <div className="container__col-md-2 center-vertical m-0">
               <Subtitle label="Select status calculation method" subtitleType="bam" />
@@ -668,8 +669,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               <ListSortable />
             </div>
           </div>
-        </div>
-        <div label="Reporting">
+        </Tab>
+        <Tab label="Reporting">
           <div className="container__row mt-2">
             <Subtitle label="Reporting" subtitleType="bam" />
           </div>
@@ -770,8 +771,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               color="green normal"
             />
           </div>
-        </div>
-        <div label="Escalation">
+        </Tab>
+        <Tab label="Escalation">
           <div className="container__row mt-2">
             <Subtitle label="Escalations" subtitleType="bam" />
           </div>
@@ -872,8 +873,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               color="green normal"
             />
           </div>
-        </div>
-        <div label="Event Handler">
+        </Tab>
+        <Tab label="Event Handler">
           <div className="container__row mt-2">
             <Subtitle label="Event handler configuration" subtitleType="bam" />
           </div>
@@ -944,8 +945,8 @@ storiesOf("Pages", module).add("Corelations Capabilities page", () => (
               color="green normal"
             />
           </div>
-        </div>
-      </Tab>
+        </Tab>
+      </Tabs>
     </div>
   </React.Fragment>
 ), {notes: "A very simple component"});

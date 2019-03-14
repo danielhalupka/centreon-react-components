@@ -37,6 +37,13 @@
     padding: 20px;
     font-size: 12px;
     font-family: $primary-font-light;
+    & > .has-danger {
+      color: #e00b3d;
+      font-family: "Roboto Bold";
+      font-size: 10px;
+      text-align: center;
+      margin: 5px 0 20px 0;
+    }
   }
   .select-option {
     &:after {
