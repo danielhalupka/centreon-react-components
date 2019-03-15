@@ -16,10 +16,10 @@ class Tab extends Component {
         error
       },
     } = this;
-    let className = `tab-list-item ` + (error ? 'has-error' : '');
+    let className = `tab-list-item ` + (error ? 'has-error ' : '');
 
     if (activeTab === label) {
-      className += ' tab-list-active';
+      className += 'tab-list-active';
     }
     return (
       <li 

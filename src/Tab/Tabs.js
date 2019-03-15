@@ -43,7 +43,7 @@ class Tabs extends Component {
           })}
         </ol>
         <div className="tab-content">
-          {error && <div className="has-danger">{error}</div>}
+          {error && <div className="has-error">{error}</div>}
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;
             return child.props.children;
