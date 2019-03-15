@@ -7,12 +7,15 @@
       "@babel/preset-env",
       {
         "targets": {
-          "esmodules": false
+          "esmodules": true
         }
       }
     ],
   ],
   "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-shorthand-properties"
+    /*
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-arrow-functions",
     "@babel/plugin-transform-destructuring",
@@ -22,5 +25,6 @@
     "@babel/plugin-transform-classes",
     "@babel/plugin-transform-shorthand-properties",
     "@babel/plugin-transform-regenerator"
+    */
   ]
 }

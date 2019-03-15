@@ -2,8 +2,10 @@
   "name": "@centreon/react-components",
   "version": "18.10.0",
   "description": "react components used by centreon web frontend",
-  "main": "lib",
+  "module": "lib",
+  "mainddsqd": "dist/index.js",
   "scripts": {
+    "build": "rollup --config rollup.config.js",
     "prepublishOnly": "npm run bundle",
     "bundle": "babel ./src --out-dir ./lib --copy-files",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./dynamic/compiled-components/components"
@@ -32,7 +34,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "classnames": "latest",
+    "classnames": "^2.2.6",
     "cli-color": "^1.4.0",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1",
@@ -41,7 +43,8 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-files": "^2.4.8",
-    "replace-in-files": "^1.1.4"
+    "replace-in-files": "^1.1.4",
+    "rollup-plugin-img": "^1.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -53,13 +56,24 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@modular-css/rollup": "^22.2.0",
     "@storybook/addon-actions": "^4.0.9",
     "@storybook/addon-notes": "^4.0.8",
     "@storybook/react": "^4.0.9",
     "@svgr/cli": "^2.1.0",
+    "autoprefixer": "^9.4.10",
     "docz": "^0.5.2",
     "docz-core": "^0.5.2",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.11.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.1.2",
+    "postcss-url": "^8.0.0",
+    "rollup": "^1.6.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-sass": "^1.1.0",
     "uikit": "^3.0.0-rc.11"
   }
 }

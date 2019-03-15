@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import styles from './card.scss';
+import classNames from 'classnames';
 
 class CardItem extends Component {
   render() {
@@ -12,12 +14,12 @@ class CardItem extends Component {
     } = this.props;
     return (
       <div
-        className={`card-item card-item-bordered-${itemBorderColor} ${customClass}`}
+        className={classNames(styles['card-item'], styles[`card-item-bordered-${itemBorderColor}`], customClass)}
         style={style}
       >
         {children}
         <span
-          className={`card-item-footer card-item-footer-${itemFooterColor}`}
+          className={classNames(styles['card-item-footer'], styles[`card-item-footer-${itemFooterColor}`])}
         >
           {itemFooterLabel}
         </span>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./loader-content.scss";
-import "loaders.css/loaders.min.css";
+//import "loaders.css/loaders.min.css";
 
 class Loader extends Component {
   render() {
