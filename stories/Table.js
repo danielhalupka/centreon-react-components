@@ -6,7 +6,7 @@ storiesOf("Table", module).add("Table - custom", () => <Table />, {notes: "A ver
 storiesOf("Table", module).add("Table Dynamic - custom", () => <React.Fragment>
   <Title titleColor="host" label="Resource discovry wizard" />
   <TableDynamic/>
-  <div className="text-right">
+  <div className="text-right mt-1">
     <Button
       label="SAVE"
       buttonType="validate"
