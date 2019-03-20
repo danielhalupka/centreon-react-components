@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import IconAction from "../Icon/IconAction";
 import TableCounter from "./TableCounter";
+import ScrollBar from '../ScrollBar';
 import "./table.scss";
 import Pagination from "../Pagination";
 
@@ -32,40 +33,42 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {data.map((row, rowIndex) => (
-              <tr key={"tableRow" + rowIndex}>
-                {fields.map(({ type, key, values }, index) => {
-                  let subComponent = (
-                    <td key={"tableRow" + rowIndex + "Cell" + index} />
-                  );
-                  switch (type) {
-                    case "icon":
-                      let actionIconValue = values[row[key]];
-                      subComponent = (
-                        <td key={"tableRow" + rowIndex + "Cell" + index}>
-                          {
-                            <IconAction
-                              iconActionType={actionIconValue.icon}
-                              iconColor={actionIconValue.color}
-                            />
-                          }
-                        </td>
-                      );
-                      break;
-                    case "string":
-                      subComponent = (
-                        <td key={"tableRow" + rowIndex + "Cell" + index}>
-                          {row[key]}
-                        </td>
-                      );
-                      break;
-                    default:
-                  }
-                  return subComponent;
-                })}
-                {pagination ? <td key={"tablePagination" + rowIndex} /> : null}
-              </tr>
-            ))}
+            <ScrollBar scrollType="big">
+              {data.map((row, rowIndex) => (
+                <tr key={"tableRow" + rowIndex}>
+                  {fields.map(({ type, key, values }, index) => {
+                    let subComponent = (
+                      <td key={"tableRow" + rowIndex + "Cell" + index} />
+                    );
+                    switch (type) {
+                      case "icon":
+                        let actionIconValue = values[row[key]];
+                        subComponent = (
+                          <td key={"tableRow" + rowIndex + "Cell" + index}>
+                            {
+                              <IconAction
+                                iconActionType={actionIconValue.icon}
+                                iconColor={actionIconValue.color}
+                              />
+                            }
+                          </td>
+                        );
+                        break;
+                      case "string":
+                        subComponent = (
+                          <td key={"tableRow" + rowIndex + "Cell" + index}>
+                            {row[key]}
+                          </td>
+                        );
+                        break;
+                      default:
+                    }
+                    return subComponent;
+                  })}
+                  {pagination ? <td key={"tablePagination" + rowIndex} /> : null}
+                </tr>
+              ))}
+            </ScrollBar>
           </tbody>
         </table>
         <div class="text-center">
