@@ -7,6 +7,7 @@ const RadioButton = ({ checked, error, label, info, iconColor, ...rest }) => (
       className="form-check-input"
       type="radio"
       aria-checked={checked}
+      checked={checked}
       info
       {...rest}
     />
@@ -18,7 +19,7 @@ const RadioButton = ({ checked, error, label, info, iconColor, ...rest }) => (
     {error ? (
       <div className="invalid-feedback">
         <i className="fas fa-exclamation-triangle" />
-        <div className="field__msg  field__msg--error">{error}</div>{" "}
+        <div className="field__msg  field__msg--error">{error}</div>
       </div>
     ) : null}
   </div>
