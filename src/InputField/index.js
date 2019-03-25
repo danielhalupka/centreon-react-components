@@ -9,13 +9,14 @@ const InputField = ({
   topRightLabel,
   name,
   inputSize,
-  error,
   iconName,
   iconColor,
+  input,
+  meta,
   ...rest
 }) => {
   return (
-    <div className={`form-group ${inputSize}` + (error ? ' has-danger' : '')}>
+    <div className={`form-group ${inputSize}` + (meta && meta.touched && meta.error ? ' has-danger' : '')}>
       <label htmlFor={rest.id}>
         <span>{iconName ? <IconInfo iconName={iconName} iconColor={iconColor}/> : null } {label}</span>
         <span className="label-option required">
@@ -27,12 +28,14 @@ const InputField = ({
         type={type}
         placeholder={placeholder}
         className="form-control"
+        {...input}
+        {...rest}
       />
-      {error ? (
+      {meta && meta.touched && meta.error &&
         <div class="form-error">
-          {error}
+          {meta.error}
         </div>
-      ) : null}
+      }
     </div>
   );
 };

@@ -1,5 +1,4 @@
-@import '../../global-sass-files/variables';
-
+@import '../global-sass-files/variables';
 // Progress bar steps
 .progress-bar {
   padding-bottom: 39px;
@@ -14,6 +13,10 @@
     display: flex;
     margin-bottom: 0;
     justify-content: space-between;
+    a {
+      text-decoration: none;
+      z-index: 2;
+    }
     &:after {
       background-color: #cdcdcd;
       content: '';

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import './progress-bar-steps.scss';
+import '../progressbar.scss';
 
 class ProgressBarSteps extends Component {
   render() {
     const { children } = this.props;
+
     return (
       <div className="progress-bar">
         <div className="progress-bar-wrapper">
