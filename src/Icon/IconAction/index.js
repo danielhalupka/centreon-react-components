@@ -1,8 +1,9 @@
 import React from "react";
-import "./action-icons.scss";
+import classnames from 'classnames';
+import styles from './action-icons.scss';
 
-const IconAction = ({ iconActionType, iconColor, ...rest }) => (
-  <span className={`icon-action icon-action-${iconActionType} ${iconColor ? iconColor : ''}`} {...rest}/>
+const IconAction = ({ className, iconActionType, iconColor, ...rest }) => (
+  <span className={classnames(styles["icon-action"], {[styles[`icon-action-${iconActionType}`]]: true}, styles[iconColor ? iconColor : ''], className)} {...rest}/>
 );
 
 export default IconAction;

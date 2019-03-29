@@ -131,13 +131,11 @@
       left: 4px;
     }
   }
-  &.icon {
+  &-icon {
     height: 27px;
     padding: 9px 20px;
     border-radius: 2px;
-    .icon-action {
-      left: 0;
-      right: 0;
-    }
+    left: 0;
+    right: 0;
   }
 }
