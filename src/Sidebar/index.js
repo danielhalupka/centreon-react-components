@@ -4,7 +4,6 @@ import styles from './sidebar.scss';
 import Logo from '../Logo';
 import LogoMini from '../Logo/LogoMini';
 import Navigation from '../Navigation';
-import mock from './navigationMock';
 
 class Sidebar extends Component {
   

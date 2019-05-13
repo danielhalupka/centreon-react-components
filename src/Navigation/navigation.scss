@@ -111,29 +111,69 @@
       }
     }
     &.active {
-      &.color-2B9E93 {
+      &-2B9E93 {
         .menu-item-link {
           background-color: $turquoise-centreon-primary;
         }
+        .menu-item-name {
+          color: $white-color;
+        }
+        .iconmoon {
+          &:before {
+            color: $white-color;
+          }
+        }
       }
-      &.color-85B446 {
+      &-85B446 {
         .menu-item-link {
           background-color: $lime-centreon-primary;
         }
+        .menu-item-name {
+          color: $white-color;
+        }
+        .iconmoon {
+          &:before {
+            color: $white-color;
+          }
+        }
       }
-      &.color-E4932C {
+      &-E4932C {
         .menu-item-link {
           background-color: $orange-centreon-primary;
         }
+        .menu-item-name {
+          color: $white-color;
+        }
+        .iconmoon {
+          &:before {
+            color: $white-color;
+          }
+        }
       }
-      &.color-17387B {
+      &-17387B {
         .menu-item-link {
           background-color: $darkblue-centreon-primary;
         }
+        .menu-item-name {
+          color: $white-color;
+        }
+        .iconmoon {
+          &:before {
+            color: $white-color;
+          }
+        }
       }
-      &.color-319ED5 {
+      &-319ED5 {
         .menu-item-link {
           background-color: $lightblue-centreon-primary;
+        }
+        .menu-item-name {
+          color: $white-color;
+        }
+        .iconmoon {
+          &:before {
+            color: $white-color;
+          }
         }
       }
     }
@@ -218,23 +258,6 @@
           display: block;
           letter-spacing: -0.4px;
           cursor: pointer;
-          &.active {
-            &.color-2B9E93 {
-              background-color: $turquoise-centreon-primary;
-            }
-            &.color-85B446 {
-              background-color: $lime-centreon-primary;
-            }
-            &.color-E4932C {
-              background-color: $orange-centreon-primary;
-            }
-            &.color-17387B {
-              background-color: $darkblue-centreon-primary;
-            }
-            &.color-319ED5 {
-              background-color: $lightblue-centreon-primary;
-            }
-          }
           &:hover {
             color: $white-color;
             background-image: none !important;
@@ -267,6 +290,43 @@
         &:hover {
           .collapsed-level-items {
             display: block !important;
+          }
+        }
+        &.active {
+          &-2B9E93 {
+            > .collapsed-item-level-link {
+              background-color: $turquoise-centreon-primary;
+              background-image: none;
+              color: $white-color;
+            }
+          }
+          &-85B446 {
+            > .collapsed-item-level-link {
+              background-color: $lime-centreon-primary;
+              background-image: none;
+              color: $white-color;
+            }
+          }
+          &-E4932C {
+            > .collapsed-item-level-link {
+              background-color: $orange-centreon-primary;
+              background-image: none;
+              color: $white-color;
+            }
+          }
+          &-17387B {
+            > .collapsed-item-level-link {
+              background-color: $darkblue-centreon-primary;
+              background-image: none;
+              color: $white-color;
+            }
+          }
+          &-319ED5 {
+            > .collapsed-item-level-link {
+              background-color: $lightblue-centreon-primary;
+              background-image: none;
+              color: $white-color;
+            }
           }
         }
       }
@@ -313,12 +373,45 @@
             letter-spacing: -.4px;
             cursor: pointer;
           }
+          &.active {
+            &-2B9E93 {
+              .collapsed-item-level-link {
+                background-color: $turquoise-centreon-primary;
+                color: $white-color;
+              }
+            }
+            &-85B446 {
+              .collapsed-item-level-link {
+                background-color: $lime-centreon-primary;
+                color: $white-color;
+              }
+            }
+            &-E4932C {
+              .collapsed-item-level-link {
+                background-color: $orange-centreon-primary;
+                color: $white-color;
+              }
+            }
+            &-17387B {
+              .collapsed-item-level-link {
+                background-color: $darkblue-centreon-primary;
+                color: $white-color;
+              }
+            }
+            &-319ED5 {
+              .collapsed-item-level-link {
+                background-color: $lightblue-centreon-primary;
+                color: $white-color;
+              }
+            }
+          }
         }
         &-title {
           background-color: $white-color;
           display: block;
           position: relative;
           margin: 0;
+          text-align: center;
           &:before {
             content: " ";
             height: 1px;
