@@ -113,7 +113,7 @@
     &.active {
       &-2B9E93 {
         .menu-item-link {
-          background-color: $turquoise-centreon-primary !important;
+          background-color: $turquoise-centreon-primary;
         }
         .menu-item-name {
           color: $white-color;
@@ -126,7 +126,7 @@
       }
       &-85B446 {
         .menu-item-link {
-          background-color: $lime-centreon-primary !important;
+          background-color: $lime-centreon-primary;
         }
         .menu-item-name {
           color: $white-color;
@@ -139,7 +139,7 @@
       }
       &-E4932C {
         .menu-item-link {
-          background-color: $orange-centreon-primary !important;
+          background-color: $orange-centreon-primary;
         }
         .menu-item-name {
           color: $white-color;
@@ -152,7 +152,7 @@
       }
       &-17387B {
         .menu-item-link {
-          background-color: $darkblue-centreon-primary !important;
+          background-color: $darkblue-centreon-primary;
         }
         .menu-item-name {
           color: $white-color;
@@ -165,7 +165,7 @@
       }
       &-319ED5 {
         .menu-item-link {
-          background-color: $lightblue-centreon-primary !important;
+          background-color: $lightblue-centreon-primary;
         }
         .menu-item-name {
           color: $white-color;
@@ -467,6 +467,73 @@
           &-items, &-level-items {
             position: static !important;
             box-shadow: none !important;
+          }
+        }
+        &.active {
+          &-2B9E93 {
+            .menu-item-link {
+              background-color: $turquoise-centreon-primary !important;
+            }
+            .menu-item-name {
+              color: $white-color;
+            }
+            .iconmoon {
+              &:before {
+                color: $white-color;
+              }
+            }
+          }
+          &-85B446 {
+            .menu-item-link {
+              background-color: $lime-centreon-primary !important;
+            }
+            .menu-item-name {
+              color: $white-color;
+            }
+            .iconmoon {
+              &:before {
+                color: $white-color;
+              }
+            }
+          }
+          &-E4932C {
+            .menu-item-link {
+              background-color: $orange-centreon-primary !important;
+            }
+            .menu-item-name {
+              color: $white-color;
+            }
+            .iconmoon {
+              &:before {
+                color: $white-color;
+              }
+            }
+          }
+          &-17387B {
+            .menu-item-link {
+              background-color: $darkblue-centreon-primary !important;
+            }
+            .menu-item-name {
+              color: $white-color;
+            }
+            .iconmoon {
+              &:before {
+                color: $white-color;
+              }
+            }
+          }
+          &-319ED5 {
+            .menu-item-link {
+              background-color: $lightblue-centreon-primary !important;
+            }
+            .menu-item-name {
+              color: $white-color;
+            }
+            .iconmoon {
+              &:before {
+                color: $white-color;
+              }
+            }
           }
         }
       }
