@@ -16,6 +16,7 @@ import "./Message";
 import "./MixedComponents";
 import "./Navigation";
 import "./Pages";
+import "./PageHdModifers";
 import "./Pagination";
 import "./Popup";
 import "./ProgressBar";
