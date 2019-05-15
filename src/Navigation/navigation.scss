@@ -471,6 +471,21 @@
         }
       }
     }
+    .collapsed-item {
+      &.active {
+        > .collapsed-item-level-link {
+          color: #242f3b !important;
+          background-color: #f6f6f6 !important;
+          background-image: url("../../img/icons/aside-menu-arrows.png") !important;
+          background-repeat: no-repeat;
+          background-position: 12px 9px;
+          &:hover {
+            background-image: none !important;
+            color: $white-color !important;
+          }
+        }
+      }
+    }
     .collapsed-level-items {
       &.full {
         max-height: 350px;
