@@ -284,7 +284,7 @@
           background-position: 12px 9px;
           background-color: $grey-classic;
           &.img-none {
-            background-image: none;
+            background-image: none !important;
           }
         }
         &:hover {
