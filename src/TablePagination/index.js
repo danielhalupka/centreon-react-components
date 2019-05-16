@@ -14,7 +14,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableHead from './TableHead';
 import TablePagination from './TablePagination';
-import TablePaginationActions from './TablePaginationActions';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -599,7 +598,6 @@ class HDJobsPage extends Component {
               page={pagination.page}
               onChangePage={this.handleChangePage}
               onChangeRowsPerPage={this.handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
             />
           </Paper>
           {openModal &&

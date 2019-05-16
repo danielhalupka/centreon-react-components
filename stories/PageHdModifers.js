@@ -1,11 +1,11 @@
 import React from "react";
 import classnames from 'classnames';
-import styles from '../src/global-sass-files/_grid.scss';
+import { withStyles } from '@material-ui/core/styles/withStyles';
 import JssProvider from 'react-jss/lib/JssProvider';
-import { createGenerateClassName, withStyles } from '@material-ui/core/styles';
+import { createGenerateClassName } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
-
-import {storiesOf} from "@storybook/react";
+import {storiesOf, addDecorator} from "@storybook/react";
 
 import { MaterialTabs, MaterialTable, MaterialProgressBar, MaterialButton } from "../src";
 
@@ -81,7 +81,7 @@ const generateClassName = createGenerateClassName({
   productionPrefix: 'jobList',
 });
 
-const style = theme => ({
+const styles = theme => ({
   divWrapper: {
     height: 'calc(100vh - 82px)',
     display: 'flex',
@@ -245,46 +245,46 @@ storiesOf("PageHdModifers", module).add("Host Discovery Modifiers", () => (
   <React.Fragment>
     <JssProvider generateClassName={generateClassName}>
 
-        <div className={style.divWrapper}>
+        <div className={styles.divWrapper}>
           <Grid container spacing={24}>
             <Grid item xs={8}>
-              <div className={style.topButtons}>
-                <Button  variant="contained" size="small" classes={{root: style.topButton}}>
+              <div className={styles.topButtons}>
+                <Button onClick={console.log(styles)} variant="contained" size="small" styles={{root: styles.topButton}}>
                   Add
                 </Button>
-                <Paper className={style.actions}>
+                <Paper className={styles.actions}>
                   <IconButton
-                    classes={{ root: style.buttonRefreshRoot }}
+                    styles={{ root: styles.buttonRefreshRoot }}
                     aria-label="Refresh Page"
                   >
-                    <RefreshIcon classes={{ root: style.refreshRoot }} />
+                    <RefreshIcon styles={{ root: styles.refreshRoot }} />
                   </IconButton>
                 </Paper>
-                <Paper className={style.legend}>
-                  <div className={style.legendContent}>
-                    <AccessTimeIcon className={classnames(style.legendIcon, style.accessTimeIcon)}/>
-                    <Typography variant="caption" className={style.legendText}>
+                <Paper className={styles.legend}>
+                  <div className={styles.legendContent}>
+                    <AccessTimeIcon className={classnames(styles.legendIcon, styles.accessTimeIcon)}/>
+                    <Typography variant="caption" className={styles.legendText}>
                       running
                     </Typography>
                   </div>
-                  <div className={style.legendContent}>
-                    <ReportProblemIcon className={classnames(style.legendIcon, style.reportProblemIcon)}/>
-                    <Typography variant="caption" className={style.legendText}>
+                  <div className={styles.legendContent}>
+                    <ReportProblemIcon className={classnames(styles.legendIcon, styles.reportProblemIcon)}/>
+                    <Typography variant="caption" className={styles.legendText}>
                       failed
                     </Typography>
                   </div>
-                  <div className={style.legendContent}>
-                    <DoneIcon className={classnames(style.legendIcon, style.doneIcon)}/>
-                    <Typography variant="caption" className={style.legendText}>
+                  <div className={styles.legendContent}>
+                    <DoneIcon className={classnames(styles.legendIcon, styles.doneIcon)}/>
+                    <Typography variant="caption" className={styles.legendText}>
                       finished
                     </Typography>
                   </div>
                 </Paper>
               </div>
-              <Paper className={style.root}>
-                <div className={style.tableContentWrapper}>
+              <Paper className={styles.root}>
+                <div className={styles.tableContentWrapper}>
                   <Table
-                    className={style.tableRow}
+                    className={styles.tableRow}
                     aria-labelledby="tableTitle"
                     padding="dense"
                   >
@@ -297,7 +297,7 @@ storiesOf("PageHdModifers", module).add("Host Discovery Modifiers", () => (
                       {jobs.map(job => {
                         return (
                           <TableRow
-                            className={style.row}
+                            className={styles.row}
                             style={{
                               cursor: (job.status == status.finished) ? 'pointer' : 'inherit',
                             }}
@@ -305,19 +305,19 @@ storiesOf("PageHdModifers", module).add("Host Discovery Modifiers", () => (
                             tabIndex={-1}
                             key={job.id}
                           >
-                            <TableCell classes={{root: style.cellIcon}}>
+                            <TableCell styles={{root: styles.cellIcon}}>
                               {job.status == "running" &&
-                                <AccessTimeIcon classes={{root: style.icon}}/>
+                                <AccessTimeIcon styles={{root: styles.icon}}/>
                               }
                               {job.status == "finished" &&
-                                <DoneIcon classes={{root: style.icon}}/>
+                                <DoneIcon styles={{root: styles.icon}}/>
                               }
                               {job.status == "failed" &&
                                 <Tooltip
-                                  classes={{ tooltip: style.errorTooltip }}
+                                  styles={{ tooltip: styles.errorTooltip }}
                                   title={job.message ? job.message : 'Unknown error : please check autodiscovery log file.'}
                                 >
-                                  <ReportProblemIcon classes={{ root: style.icon }}/>
+                                  <ReportProblemIcon styles={{ root: styles.icon }}/>
                                 </Tooltip>
                               }
                             </TableCell>
@@ -347,12 +347,11 @@ storiesOf("PageHdModifers", module).add("Host Discovery Modifiers", () => (
                   // colSpan={3}
                   // count={pagination.count}
                   // rowsPerPage={pagination.rowsPerPage}
-                  // ActionsComponent={TablePaginationActions}
                 />
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper className={style.paper}>
+              <Paper className={styles.paper}>
               custom discovery modifiers</Paper>
             </Grid>
           </Grid>
