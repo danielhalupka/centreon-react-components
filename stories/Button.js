@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Button, ButtonAction, ButtonActionInput } from "../src";
+import { Button, ButtonAction, ButtonActionInput, ContainedButtonPrimary , ButtonAdd} from "../src";
 
 storiesOf("Button", module).add(
   "Button - regular",
@@ -179,3 +179,25 @@ storiesOf("Button", module).add("Button - action input", () => (
     buttonIconType="arrow-right"
   />
 ));
+
+
+storiesOf("Button", module).add(
+  "Button - MUI primary",
+  () => (
+    <React.Fragment>
+      <ContainedButtonPrimary label="Save"></ContainedButtonPrimary>
+      <ContainedButtonPrimary disabled label="Save"></ContainedButtonPrimary>
+    </React.Fragment>
+  ),
+  { notes: "A very simple component" }
+);
+
+storiesOf("Button", module).add(
+  "Button - ADD",
+  () => (
+    <React.Fragment>
+      <ButtonAdd label="Save"></ButtonAdd>
+    </React.Fragment>
+  ),
+  { notes: "A very simple component" }
+);
