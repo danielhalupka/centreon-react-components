@@ -1,6 +1,8 @@
+export { default as ButtonAdd } from "./Add/ButtonAdd";
 export { default as Button } from "./Button/ButtonRegular";
 export { default as ButtonAction } from "./Button/ButtonAction";
 export { default as ButtonActionInput } from "./Button/ButtonActionInput";
+export { default as ContainedButtonPrimary } from "./Button/ButtonContained";
 export { default as Card } from "./Card";
 export { default as CardItem } from "./Card/CardItem";
 export { default as Checkbox } from "./Checkbox";
@@ -11,6 +13,7 @@ export { default as CustomRow } from "./Custom/CustomRow";
 export { default as CustomStyles } from "./Custom/CustomStyles";
 export { default as Description } from "./Description";
 export { default as FileUpload } from "./FileUpload";
+export { default as FormDynamic } from "./FormDynamic";
 export {
   default as HorizontalLine
 } from "./HorizontalLines/HorizontalLineRegular";
@@ -21,6 +24,7 @@ export {
   default as HorizontalLineSeparator
 } from "./HorizontalLines/HorizontalLineSeparator";
 export { default as Header } from "./Header";
+export { default as HeaderContent } from "./HeaderContent";
 export { default as IconAction } from "./Icon/IconAction";
 export { default as IconClose } from "./Icon/IconClose";
 export { default as IconContent } from "./Icon/IconContent";
