@@ -51,7 +51,7 @@ class FormDynamic extends React.Component {
   state = {
     labelWidth: 4,
     name: "name",
-    activeForm: true,
+    activeForm: false,
     activePreviewButton: false,
     activeSaveButton: false,
     fields: [
@@ -98,6 +98,7 @@ class FormDynamic extends React.Component {
   };
 
   componentDidMount() {
+    console.log('did moount');
     this.setState({
       // labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
     });
@@ -108,13 +109,13 @@ class FormDynamic extends React.Component {
     console.log('name: ' + [key] + [event.target.name] +  'value: ' + event.target.value + 'this key value:' +  this[key].event.target.value)
   };
 
-  activeForm = (e)  => {
-    this.setState({
+  activeForm = ()  => {
+    console.log('active form');
+    this.setState(state => ({
       activeForm: true,
-     });
-     console.log('active form');
-     console.log( e + ' ' + this.state.activeForm + 'test')
+     }));
   };
+
   activeSaveButton = ()  => {
     this.setState({
       activeSaveButton: true,

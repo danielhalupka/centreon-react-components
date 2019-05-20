@@ -26,7 +26,6 @@ const HeaderContent = ({ label, classes }) => (
           <Typography variant="caption" className={classes.whiteTitleText}>
             {label}
           </Typography>
-       
     </div>
 );
 

@@ -22,14 +22,6 @@ storiesOf("Input Field", module).add(
 
 storiesOf("Input Field", module).add(
   
-  "Input Field - without title",
-  () => 
-  <InputField type="text" name="test" inputSize="small" />,
-  { notes: "A very simple component" }
-);
-
-storiesOf("Input Field", module).add(
-  
   "Input Field error - without title",
   () => 
   <InputField type="text" name="test" error="The field is mandatory" inputSize="small" />,
