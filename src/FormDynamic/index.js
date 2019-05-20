@@ -111,9 +111,9 @@ class FormDynamic extends React.Component {
 
   activeForm = ()  => {
     console.log('active form');
-    this.setState(state => ({
+    this.setState({
       activeForm: true,
-     }));
+     });
   };
 
   activeSaveButton = ()  => {
@@ -129,7 +129,7 @@ class FormDynamic extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, ...rest } = this.props;
     const { fields, activeForm, activeSaveButton,activePreviewButton } = this.state;
 
     return (
@@ -137,7 +137,7 @@ class FormDynamic extends React.Component {
         <ButtonAdd onClick={this.activeForm}/>
         {activeForm ?
           <form className={classes.root} autoComplete="on">
-          <FormControl variant="outlined" className={classes.formControl}>
+          <FormControl variant="outlined" className={classes.formControl}  {...rest}>
             <Typography variant="caption" >
               <h3>Veuillez selectionner les paramètres: </h3>
             </Typography>

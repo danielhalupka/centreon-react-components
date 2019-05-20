@@ -1,5 +1,8 @@
-import React from "react";
+
+import React, { Component } from "react";
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Input from '@material-ui/core/Input';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,6 +16,8 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import DoneIcon from '@material-ui/icons/Done';
 import ReportProblemIcon from '@material-ui/icons/ReportProblemOutlined';
+
+import IconModify from '../Icon/IconModify';
 
 
 // Host Discovery Modifiers
@@ -88,49 +93,83 @@ const styles = theme => ({
   },
 });
 
-const CustomTableBody = ({ classes }) => (
-  <TableBody>
-  {jobs.map(job => {
+
+
+class CustomTableBody extends React.Component {
+  state = {
+    modal: false,
+  };
+
+  componentDidMount() {
+    console.log('did moount');
+    this.setState({
+      // labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+    });
+  }
+
+  showModal = ()  => {
+    console.log('active modal');
+    this.setState({
+      modal: true,
+     });
+  };
+
+  render() {
+    const { classes, ...rest } = this.props;
+    const { modal } = this.state;
+
     return (
-      <TableRow
-        className={classes.row}
-        style={{
-          cursor: (job.status == status.finished) ? 'pointer' : 'inherit',
-        }}
-        hover
-        tabIndex={-1}
-        key={job.id}
-      >
-        <TableCell styles={{root: classes.cellIcon}}>
-          {job.status == "running" &&
-            <AccessTimeIcon styles={{root: classes.icon}}/>
-          }
-          {job.status == "finished" &&
-            <DoneIcon styles={{root: classes.icon}}/>
-          }
-          {job.status == "failed" &&
-            <ReportProblemIcon styles={{ root: classes.icon }}/>
-          }
-        </TableCell>
-        <TableCell>
-          {job.alias}
-        </TableCell>
-        <TableCell>
-          {job.connection_name}
-        </TableCell>
-        <TableCell>
-          {job.generate_date}
-        </TableCell>
-        <TableCell align="right">
-          {job.duration}
-        </TableCell>
-        <TableCell align="right">
-          {job.items_discovered}
-        </TableCell>
-      </TableRow>
+      <React.Fragment>
+         <TableBody  {...rest} >
+          {jobs.map(job => {
+            return (
+              <TableRow
+                className={classes.row}
+                style={{
+                  cursor: (job.status == status.finished) ? 'pointer' : 'inherit',
+                }}
+                hover
+                tabIndex={-1}
+                key={job.id}
+              >
+                <TableCell styles={{root: classes.cellIcon}}>
+                  {job.status == "running" &&
+                    <AccessTimeIcon styles={{root: classes.icon}}/>
+                  }
+                  {job.status == "finished" &&
+                    <DoneIcon styles={{root: classes.icon}}/>
+                  }
+                  {job.status == "failed" &&
+                    <ReportProblemIcon styles={{ root: classes.icon }}/>
+                  }
+                  <IconModify onClick={this.showModal}/>
+                </TableCell>
+                <TableCell>
+                  {job.alias}
+                </TableCell>
+                <TableCell>
+                  {job.connection_name}
+                </TableCell>
+                <TableCell>
+                  {job.generate_date}
+                </TableCell>
+                <TableCell align="right">
+                  {job.duration}
+                </TableCell>
+                <TableCell align="right">
+                  {job.items_discovered}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </React.Fragment>
     );
-  })}
-</TableBody>
-);
+  }
+}
+
+CustomTableBody.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(CustomTableBody);
