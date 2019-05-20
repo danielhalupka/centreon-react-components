@@ -262,6 +262,22 @@
       &.border-319ED5 {
         border-left: 5px solid $lightblue-centreon-primary;
       }
+      &.towards-up {
+        top: 0;
+      }
+      &.towards-down {
+        top: auto;
+        bottom: 0;
+      }
+      &.full {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        overflow-y: scroll;
+        left: 208px;
+        height: 100vh;
+        width: 150px;
+      }
     }
     .collapsed {
       &-item {
