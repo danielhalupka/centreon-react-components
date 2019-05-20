@@ -12,11 +12,23 @@ import classnames from 'classnames';
 
 
 import Table from '@material-ui/core/Table';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
 
 import Paper from '@material-ui/core/Paper';
 import CustomTableHead from '../TablePagination/TableHead';
 import CustomTableBody from '../TablePagination/TableBody';
 import CustomTablePagination from '../TablePagination/TablePagination';
+import IconModify from '../Icon/IconModify';
+
+
+import IconButton from '@material-ui/core/IconButton';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import DoneIcon from '@material-ui/icons/Done';
+import ReportProblemIcon from '@material-ui/icons/ReportProblemOutlined';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -26,11 +38,44 @@ import {
   FormDynamic
 } from "../";
 
-const styles = theme => ({
-    p: {
 
-    }
-  });
+const styles = theme => ({
+  tableRow: {
+    height: '36px'
+  },
+  tr: {
+    backgroundColor: '#ffffff',
+    color: theme.palette.common.white,
+    zIndex: 1,
+    position: 'sticky',
+    top: 0,
+  },
+  checkboxColumn: {
+    width: '60px'
+  },
+  checkboxRoot: {
+    padding: '0px 12px',
+  },
+  sortLabel: {
+    color: theme.palette.common.white,
+    '&:focus': {
+      color: theme.palette.common.white,
+    },
+    '&:hover': {
+      color: theme.palette.common.white,
+      '& $icon': {
+        opacity: 1,
+        color: theme.palette.common.white,
+      },
+    },
+  },
+  inputSearch: {
+    backgroundColor: theme.palette.common.white,
+    marginLeft: '30px',
+  },
+});
+
+
 
 
 const jobs = [
@@ -72,51 +117,103 @@ const jobs = [
 
 
 class PageHdModifiers extends React.Component {
+  state = {
+    modal: false
+  }
+
+  showModal = ()  => {
+    this.setState({
+      modal: true,
+     });
+     console.log('modal active !');
+  };
+
 
   render() {
-    // const { classes } = this.props;
-    // const { fields, activeForm, activeSaveButton,activePreviewButton } = this.state;
+    const { classes, ...rest } = this.props;
+    const { showModal, modal } = this.state;
 
 
     return (
         <React.Fragment>
-            <JssProvider generateClassName={generateClassName}>
-                <Grid container spacing={24}>
-                    <Grid item xs={8}>
-                    <Paper>
-                        <div>
-                        <Table
-                            aria-labelledby="tableTitle"
-                            padding="dense"
-                        >
-                            <CustomTableHead
-                            columns={6}
-                            numSelected={0}
-                            rowCount={jobs.length}
-                            />
-                            <CustomTableBody
-                            columns={6}
-                            numSelected={0}
-                            rowCount={jobs.length}
-                            />
-                        </Table>
-                        </div>
-                        <CustomTablePagination
+            <Grid container spacing={24}>
+                <Grid item xs>
+                <Paper>
+                    <div>
+                    <Table
+                        aria-labelledby="tableTitle"
+                        padding="dense"
+                    >
+                        <CustomTableHead
+                        columns={6}
+                        numSelected={0}
+                        rowCount={jobs.length}
                         />
-                    </Paper>
-                    </Grid>
-                    <Grid item xs={4}>
-                    <Paper>
-                    <HeaderContent label="Modifiers edition"/>
-                    <FormDynamic/>
-                    </Paper>
-                    </Grid>
+                        <TableBody  {...rest} >
+                          {jobs.map(job => {
+                            return (
+                              <TableRow
+                                className={classes.row}
+                                style={{
+                                  cursor: (job.status == status.finished) ? 'pointer' : 'inherit',
+                                }}
+                                hoverxs={4}
+                                tabIndex={-1}
+                                key={job.id}
+                              >
+                                <TableCell styles={{root: classes.cellIcon}}>
+                                  {job.status == "running" &&
+                                    <AccessTimeIcon styles={{root: classes.icon}}/>
+                                  }
+                                  {job.status == "finished" &&
+                                    <DoneIcon styles={{root: classes.icon}}/>
+                                  }
+                                  {job.status == "failed" &&
+                                    <ReportProblemIcon styles={{ root: classes.icon }}/>
+                                  }
+                                  <IconModify onClick={this.showModal}/>
+                                </TableCell>
+                                <TableCell>
+                                  {job.alias}
+                                </TableCell>
+                                <TableCell>
+                                  {job.connection_name}
+                                </TableCell>
+                                <TableCell>
+                                  {job.generate_date}
+                                </TableCell>
+                                <TableCell align="right">
+                                  {job.duration}
+                                </TableCell>
+                                <TableCell align="right">
+                                  {job.items_discovered}
+                                </TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                    </Table>
+                    </div>
+                    <CustomTablePagination
+                    />
+                </Paper>
                 </Grid>
-            </JssProvider>
+
+                {modal ? 
+                  <Grid item classes={{root: classes.checkboxColumn, head: classes.head}}>
+                    <Paper>
+                        <HeaderContent label="Modifiers edition"/>
+                        <FormDynamic/>
+                    </Paper>
+                  </Grid>
+                : null
+                }
+            </Grid>
         </React.Fragment>
     );
   }
 }
+
 
 PageHdModifiers.propTypes = {
   classes: PropTypes.object.isRequired,

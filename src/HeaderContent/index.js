@@ -10,6 +10,8 @@ const styles = theme => ({
     backgroundColor: '#009fdf',
     color: theme.palette.common.white,
     padding: '30px',
+    minWidth: '350px',
+    boxSizing: 'border-box',
   },
   whiteTitleText: {
     color: theme.palette.common.white,

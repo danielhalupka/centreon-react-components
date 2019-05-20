@@ -32,6 +32,7 @@ export { default as IconCustomDot } from "./Icon/IconCustomDot";
 export { default as IconHeader } from "./Icon/IconHeader";
 export { default as IconInfo } from "./Icon/IconInfo";
 export { default as IconLegend } from "./Icon/IconLegend";
+export { default as IconModify } from "./Icon/IconModify";
 export { default as IconNumber } from "./Icon/IconNumber";
 export { default as IconRound } from "./Icon/IconRound";
 export { default as IconToggleSubmenu } from "./Icon/IconToggleSubmenu";

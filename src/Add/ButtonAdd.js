@@ -18,9 +18,9 @@ const styles = theme => ({
 });
 
 function ButtonAdd(props) {
-  const { classes } = props;
+  const { classes, ...rest } = props;
   return (
-        <Fab size="small" color="secondary" aria-label="Add" className={classes.margin}>
+        <Fab size="small" color="secondary" aria-label="Add" className={classes.margin}  {...rest}>
           <AddIcon />
         </Fab>
   );
