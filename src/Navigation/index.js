@@ -29,15 +29,6 @@ class Navigation extends Component {
     return { url, urlOptions };
   };
 
-  handleDirectClick = (levelOneKey, levelOneProps) => {
-    clearTimeout(this.clickTimeout);
-    this.doubleClicked = true;
-    const urlOptions =
-      levelOneKey.slice(1) +
-      (levelOneProps.options !== null ? levelOneProps.options : "");
-    this.goToPage("/main.php?p=" + urlOptions, levelOneKey);
-  };
-
   activateSecondLevel = secondLevelPage => {
     const { activeSecondLevel } = this.state;
 
@@ -47,10 +38,22 @@ class Navigation extends Component {
     });
   };
 
+  getActiveTopLevelIndex = (pageId) => {
+    const { navigationData } = this.props;
+    let index = -1;
+    for(let i = 0; i < navigationData.length;i++){
+      if(!isNaN(pageId) && String(pageId).charAt(0) == navigationData[i].page){
+        index = i;
+      }
+    }
+    return index;
+  }
+
   render() {
-    const { customStyle, navigationData } = this.props;
+    const { customStyle, navigationData, sidebarActive, handleDirectClick, onNavigate } = this.props;
     const { activeSecondLevel } = this.state;
     const pageId = this.getPageId();
+    const activeIndex = this.getActiveTopLevelIndex(pageId);
 
     return (
       <ul
@@ -61,7 +64,7 @@ class Navigation extends Component {
           styles[customStyle ? customStyle : ""]
         )}
       >
-        {navigationData.map(firstLevel => (
+        {navigationData.map((firstLevel, firstLevelIndex) => (
           <li
             className={classnames(styles["menu-item"], {
               [styles[`color-${firstLevel.color}`]]: true,
@@ -83,7 +86,7 @@ class Navigation extends Component {
             <span
               className={classnames(styles["menu-item-link"])}
               onDoubleClick={() => {
-                this.handleDirectClick(firstLevel.page, firstLevel);
+                handleDirectClick(firstLevel.page, firstLevel);
               }}
             >
               <span
@@ -101,7 +104,10 @@ class Navigation extends Component {
                 styles["collapse"],
                 styles["collapsed-items"],
                 styles["list-unstyled"],
-                { [styles[`border-${firstLevel.color}`]]: true }
+                { 
+                  [styles[`border-${firstLevel.color}`]]: true,
+                  [styles[activeIndex !== -1 && firstLevelIndex > activeIndex && sidebarActive && navigationData[activeIndex].children.length >=5  ? 'towards-down' : 'towards-up']]: true,
+                }
               )}
             >
               {firstLevel.children.map(secondLevel => {
@@ -119,12 +125,14 @@ class Navigation extends Component {
                       ]]: true
                     })}
                     onClick={() => {
-                      if (
-                        !isNaN(pageId) &&
-                        String(pageId).charAt(0) == firstLevel.page
-                      ) {
-                        this.activateSecondLevel(secondLevel.page);
-                      }
+                      if(secondLevel.groups.length < 1){
+                        onNavigate(secondLevel.page,secondLevelUrl)
+                      }else if (
+                          !isNaN(pageId) &&
+                          String(pageId).charAt(0) == firstLevel.page
+                        ) {
+                          this.activateSecondLevel(secondLevel.page);
+                        }
                     }}
                     key={`secondLevel-${secondLevel.page}`}
                   >
@@ -202,7 +210,9 @@ class Navigation extends Component {
                                       key={`thirdLevel-${thirdLevel.page}`}
                                     >
                                       <a
-                                        href="#"
+                                        onClick={() => {
+                                            onNavigate(thirdLevel.page,thirdLevelUrl)
+                                        }}
                                         className={classnames(
                                           styles["collapsed-item-level-link"],
                                           {
