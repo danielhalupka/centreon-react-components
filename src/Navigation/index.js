@@ -64,7 +64,6 @@ class Navigation extends Component {
         pageId = reactRoutes[pathname] || pathname;
       }
     }
-    
 
     const activeIndex = this.getActiveTopLevelIndex(pageId);
 
