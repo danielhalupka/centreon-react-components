@@ -6,6 +6,7 @@ import "./Description";
 import "./FormDynamic";
 import "./FileUpload";
 import "../src/FormDynamic/index";
+import "../src/FormMui/index"
 import "./Header";
 import "../src/HeaderContent/index";
 import "./HorizontalLines";

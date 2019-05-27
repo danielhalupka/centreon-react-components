@@ -2,7 +2,9 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import classnames from 'classnames';
 import styles from '../src/InputField/InputFieldSelect/input-field-select.scss';
-import { InputField, InputFieldSelect, InputFieldTextarea, InputFieldMultiSelect, InputFieldSelectCustom } from "../src";
+import { InputField, InputFieldSelect, InputFieldTextarea, InputFieldMultiSelect, InputFieldSelectCustom , NativeSelects} from "../src";
+
+
 
 storiesOf("Input Field", module).add(
   
@@ -91,3 +93,10 @@ storiesOf("Input Field", module).add(
   <InputFieldSelectCustom error="The field is mandatory" size="medium"  />,
   { notes: "A very simple component" }
 );
+
+
+storiesOf("Form MUI", module).add("Form MUI", () =>
+    <NativeSelects/>
+  , {
+  notes: "A very simple component"
+});

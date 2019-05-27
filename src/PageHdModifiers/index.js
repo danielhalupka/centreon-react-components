@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
+import Typography from '@material-ui/core/Typography';
 
 // import { MaterialTabs, MaterialTable, MaterialProgressBar, MaterialButton } from "../";
 
@@ -35,7 +36,8 @@ import Grid from '@material-ui/core/Grid';
 
 import {
   HeaderContent,
-  FormDynamic
+  FormDynamic,
+  ButtonAdd
 } from "../";
 
 
@@ -133,13 +135,13 @@ class PageHdModifiers extends React.Component {
     const { classes, ...rest } = this.props;
     const { showModal, modal } = this.state;
 
-
     return (
         <React.Fragment>
             <Grid container spacing={24}>
                 <Grid item xs>
                 <Paper>
                     <div>
+
                     <Table
                         aria-labelledby="tableTitle"
                         padding="dense"
@@ -171,7 +173,6 @@ class PageHdModifiers extends React.Component {
                                   {job.status == "failed" &&
                                     <ReportProblemIcon styles={{ root: classes.icon }}/>
                                   }
-                                  <IconModify onClick={this.showModal}/>
                                 </TableCell>
                                 <TableCell>
                                   {job.alias}
@@ -197,9 +198,13 @@ class PageHdModifiers extends React.Component {
                     <CustomTablePagination
                     />
                 </Paper>
+
+                <Typography variant="caption" >
+                    <IconModify /> Add modifier to discovered hosts<ButtonAdd onClick={this.showModal}/>
+                </Typography>
                 </Grid>
 
-                {modal ? 
+                {modal ?
                   <Grid item classes={{root: classes.checkboxColumn, head: classes.head}}>
                     <Paper>
                         <HeaderContent label="Modifiers edition"/>

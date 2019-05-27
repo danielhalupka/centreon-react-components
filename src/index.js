@@ -51,6 +51,7 @@ export { default as MessageError} from './Message/MessageError';
 export { default as MessageInfo} from './Message/MessageInfo';
 export { default as MessageStatus } from "./Message/MessageStatus";
 export { default as Navigation } from "./Navigation";
+export { default as NativeSelects } from "./FormMui";
 export { default as PageHdModifiers } from "./PageHdModifiers";
 export { default as Pagination } from "./Pagination";
 export { default as Popup } from "./Popup";
