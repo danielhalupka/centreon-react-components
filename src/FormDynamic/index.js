@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
+import TextField from '@material-ui/core/TextField'
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
@@ -25,10 +26,25 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     minWidth: "calc(100% - 15px)"
   },
+  formModifier: {
+    maxWidth: '350px',
+    padding: '10px',
+
+  },
   inputForm: {
     height: "2.5rem",
     "&:focus": {
       backgroundColor: "transparent"
+    }
+  },
+  inputCustom: {
+    '& input': {
+      padding: '9px',
+    }
+  },
+  listCustom: {
+    '& li': {
+      listStyle: 'none',
     }
   },
   selectEmpty: {
@@ -47,9 +63,29 @@ const styles = theme => ({
   input: {
     display: "none"
   },
-  marginAround: {
-    margin: "5px"
-  }
+  styledChip: {
+    margin : '5px',
+    backgroundColor:  '#009fdf',
+    color: '#fff',
+    '&:hover':{
+      backgroundColor: '#007AB8',
+      color: '#fff',
+    },
+    '&:focus':{
+      backgroundColor: '#007AB8',
+      color: '#fff',
+    },
+  },
+  chipAvatarBlue: {
+    backgroundColor: '#007AB8',
+    color: '#fff',
+    fontWeight: '600',
+   
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
 });
 
 class FormDynamic extends Component {
@@ -64,31 +100,27 @@ class FormDynamic extends Component {
     fieldsInclusion: [
       {
         id: 1,
-        title: "Inclusion",
-        placeholder: 'Select "Inclusion" in the list of operations',
-        input_type: "dropdown",
-        values: ["Inclusion 1", "Inclusion 2", "Inclusion 3", "Inclusion 4"],
-        forId: "id1",
+        title: 'Inclusion',
+        placeholder: 'Select source property',
+        input_type: 'dropdown',
+        values: [
+          "Source 1",
+          "Source 2",
+          "Source 3",
+          "Source 4"
+        ],
+        forId: 'id1',
         required: true
       },
       {
         id: 2,
-        title: "Inclusion",
-        placeholder: "Select source property",
-        input_type: "dropdown",
-        values: ["Source 1", "Source 2", "Source 3", "Source 4"],
-        forId: "id2",
+        title: 'Inclusion',
+        placeholder: 'Define regex pattern',
+        input_type: 'text',
+        value: 'Regex pattern',
+        forId: 'id2',
         required: true
       },
-      {
-        id: 3,
-        title: "Inclusion",
-        placeholder: "Define regex pattern",
-        input_type: "dropdown",
-        values: ["Regex 1", "Regex 2", "Regex 3", "Regex 4"],
-        forId: "id3",
-        required: true
-      }
     ],
     fieldsExclusion: [
       {
@@ -207,35 +239,35 @@ class FormDynamic extends Component {
         <div>
           <Chip
             color="primary"
-            avatar={<Avatar>+</Avatar>}
-            className={classes.marginAround}
+            avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
+            className={classes.styledChip}
             label={this.state.fieldsInclusion[0].title}
             onClick={this.activeForm}
           />
           <Chip
             color="primary"
-            avatar={<Avatar>+</Avatar>}
-            className={classes.marginAround}
+            avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
+            className={classes.styledChip}
             label={this.state.fieldsExclusion[0].title}
           />
           <Chip
             color="primary"
-            avatar={<Avatar>+</Avatar>}
-            className={classes.marginAround}
+            avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
+            className={classes.styledChip}
             label={this.state.fieldsLowercase[0].title}
           />
         </div>
         <div>
           <Chip
             color="primary"
-            avatar={<Avatar>+</Avatar>}
-            className={classes.marginAround}
+            avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
+            className={classes.styledChip}
             label={this.state.fieldsUppercase[0].title}
           />
           <Chip
             color="primary"
-            avatar={<Avatar>+</Avatar>}
-            className={classes.marginAround}
+            avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
+            className={classes.styledChip}
             label={this.state.fieldsCapitalize[0].title}
           />
         </div>
@@ -243,6 +275,7 @@ class FormDynamic extends Component {
         {tempActiveList ? (
           <>
             <SortableComponent
+              className={classes.listCustom}
               items={modifiersList}
               onSort={this.onSortModifier}
               onDelete={this.onDeleteModifier}
@@ -250,7 +283,7 @@ class FormDynamic extends Component {
           </>
         ) : null}
 
-        <form className={classes.root} autoComplete="on">
+        <form className={classes.formModifier} autoComplete="on">
           {activeForm && (
             <FormControl variant="outlined" className={classes.formControl}>
               <Typography variant="caption">
@@ -260,38 +293,63 @@ class FormDynamic extends Component {
               </Typography>
 
               {fieldsInclusion.map(form => {
+                switch (form.input_type) {
+                case 'dropdown':
+
                 return (
-                  <div key={form.id}>
-                    <InputLabel
-                      className={classes.selectLabel}
-                      ref={ref => {
-                        this.InputLabelRef = ref;
-                      }}
-                      htmlFor={form.forid}
-                      value={form.placeholder}
-                    >
-                      {form.placeholder}
-                    </InputLabel>
-                    <Select
-                      native
-                      className={`${classes.formControl} ${classes.inputForm}`}
-                      onChange={this.handleChange("value")}
-                      name={form.name}
-                      input={
-                        <OutlinedInput
-                          name="value"
-                          labelWidth={this.state.labelWidth}
-                          id={form.forid}
-                        />
-                      }
-                    >
-                      <option value="" />
-                      <option value={form.values[0]}>{form.values[0]}</option>
-                      <option value={form.values[1]}>{form.values[1]}</option>
-                      <option value={form.values[2]}>{form.values[2]}</option>
-                    </Select>
+                  <div  key={form.id}>
+                      <InputLabel className={classes.selectLabel}
+                        ref={ref => {
+                          this.InputLabelRef = ref;
+                        }}
+                          htmlFor={form.forid}
+            
+                        value={form.placeholder}
+                      >
+                        {form.placeholder}
+                      </InputLabel>
+                      <Select
+                        native
+                        className={`${classes.formControl} ${classes.inputForm}`}
+                        onChange={this.handleChange('value')}
+                        name={form.name}
+                        input={
+                          <OutlinedInput
+                            name="value"
+                            labelWidth={this.state.labelWidth}
+                            id={form.forid}
+                          />
+                        }
+                      >
+                        <option value="" />
+                        <option value={form.values[0]}>{form.values[0]}</option>
+                        <option value={form.values[1]}>{form.values[1]}</option>
+                        <option value={form.values[2]}>{form.values[2]}</option>
+                      </Select>
+                      </div>
+                      )
+                  break;
+                case 'text':
+                return (
+                  <div  key={form.id}>
+                      <TextField
+                        className={classes.inputCustom}
+                        id="outlined-email-input"
+                        label={form.value}
+                        type="text"
+                        name="text"
+                        autoComplete="text"
+                        margin="normal"
+                        variant="outlined"
+                      />
                   </div>
-                );
+                  )
+                  break;
+                default:
+                return <p>No modifiers</p>
+              }
+              
+              
               })}
             </FormControl>
           )}

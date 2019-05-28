@@ -28,11 +28,9 @@ const styles = theme => ({
   },
   indexTop: {
     zIndex: "999",
-    backgroundColor: "red"
   },
   indexLower: {
     zIndex: "999",
-    backgroundColor: "grey"
   },
   maxWidth: {
     maxWidth: "calc(100%-30px)",
