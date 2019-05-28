@@ -115,12 +115,12 @@ class CustomTableBody extends React.Component {
   };
 
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes } = this.props;
     const { modal } = this.state;
 
     return (
       <React.Fragment>
-         <TableBody  {...rest} >
+         <TableBody>
           {jobs.map(job => {
             return (
               <TableRow

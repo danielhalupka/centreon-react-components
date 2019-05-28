@@ -88,11 +88,11 @@ class NativeSelects extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { fields, ...rest } = this.state;
+    const { fields} = this.state;
 
     return (
       <div className={classes.root}>
-        <FormControl variant="outlined" className={classes.formControl}  {...rest}>
+        <FormControl variant="outlined" className={classes.formControl}>
         {fields.map(form => {
             return (
                 <div  key={form.id}>
@@ -101,7 +101,6 @@ class NativeSelects extends React.Component {
                         this.InputLabelRef = ref;
                         }}
                         htmlFor={form.forid}
-                        {...rest}
                     >
                         {form.placeholder}
                     </InputLabel>
@@ -110,13 +109,11 @@ class NativeSelects extends React.Component {
                         value={this.state.age}
                         onChange={this.handleChange('age')}
                         name={form.name}
-                        {...rest}
                         input={
                         <OutlinedInput
                             name="age"
                             labelWidth={this.state.labelWidth}
                             id={form.forid}
-                            {...rest}
                         />
                         }
                     >
