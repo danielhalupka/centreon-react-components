@@ -50,13 +50,13 @@ const styles = theme => ({
     };
 
     render() {
-      const { classes, ...rest } = this.props;
+      const { classes } = this.props;
       const { dense } = this.state;
 
       return (
         <div className={classes.root}>
             <div className={classes.demo}>
-            <List dragover dense={dense}  {...rest} >
+            <List dragover dense={dense} >
                 <InteractiveListItem/>
             </List>
             </div>

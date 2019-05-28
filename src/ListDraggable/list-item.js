@@ -33,21 +33,20 @@ const styles = theme => ({
     
 
     render() {
-      const { classes, ...rest } = this.props;
+      const { classes } = this.props;
       const { secondary } = this.state;
 
       return (
-        <ListItem  {...rest}>
+        <ListItem>
             <ListItemText
                 primary="initial"
                 secondary={secondary ? 'Secondary text' : null}
-                {...rest}
             />
-            <ListItemSecondaryAction {...rest}>
+            <ListItemSecondaryAction>
                 <IconButton >
-                    <IconMove {...rest}/>
+                    <IconMove/>
                 </IconButton>
-                <IconButton aria-label="Delete" onClick={this.props.deleteCurrentElem} {...rest}>
+                <IconButton aria-label="Delete" onClick={this.props.deleteCurrentElem}>
                     <DeleteIcon />
                 </IconButton>
             </ListItemSecondaryAction>
