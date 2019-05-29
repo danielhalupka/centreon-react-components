@@ -23,7 +23,7 @@ const styles = theme => ({
     flexWrap: "wrap"
   },
   formControl: {
-    margin: theme.spacing.unit,
+    margin: '8px 0',
     minWidth: "calc(100% - 15px)"
   },
   formModifier: {
@@ -80,12 +80,21 @@ const styles = theme => ({
     backgroundColor: '#007AB8',
     color: '#fff',
     fontWeight: '600',
-   
   },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
+  btnCentreonBlue: {
+    backgroundColor:  '#009fdf',
+    marginRight: '10px',
+    '&:hover': {
+      backgroundColor: '#007AB8',
+    },
+    '&:focus': {
+      backgroundColor: '#007AB8',
+    }
+  }
 });
 
 class FormDynamic extends Component {
@@ -171,18 +180,22 @@ class FormDynamic extends Component {
   };
 
   handleChange = name => event => {
+    let source = event.target.value;
+    console.log(source);
     this.setState({
-      [name]: event.target.value,
+      [name]: source,
       activeSaveButton: true
     });
+    return source
   };
 
   activeForm = () => {
+    let name = event.target.value;
     let text = this.state.fieldsInclusion[0].title;
     let number = Math.floor(Math.random() * 10);
     this.setState({
       activeForm: true,
-      title: number + text
+      title: number + text + ' - ' + name
     });
   };
   activeSaveButton = () => {
@@ -238,20 +251,17 @@ class FormDynamic extends Component {
       <React.Fragment>
         <div>
           <Chip
-            color="primary"
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
             label={this.state.fieldsInclusion[0].title}
             onClick={this.activeForm}
           />
           <Chip
-            color="primary"
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
             label={this.state.fieldsExclusion[0].title}
           />
           <Chip
-            color="primary"
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
             label={this.state.fieldsLowercase[0].title}
@@ -259,13 +269,11 @@ class FormDynamic extends Component {
         </div>
         <div>
           <Chip
-            color="primary"
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
             label={this.state.fieldsUppercase[0].title}
           />
           <Chip
-            color="primary"
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
             label={this.state.fieldsCapitalize[0].title}
@@ -303,8 +311,7 @@ class FormDynamic extends Component {
                           this.InputLabelRef = ref;
                         }}
                           htmlFor={form.forid}
-            
-                        value={form.placeholder}
+                          value={form.placeholder}
                       >
                         {form.placeholder}
                       </InputLabel>
@@ -348,32 +355,39 @@ class FormDynamic extends Component {
                 default:
                 return <p>No modifiers</p>
               }
-              
-              
               })}
+              <ContainedButtonPrimary
+                className={classes.btnCentreonBlue}
+                variant="contained"
+                label="Add this modifier"
+                onClick={this.outputList}
+              />
             </FormControl>
           )}
-          <div>
+          {!activeForm && <div>
             {activePreviewButton ? (
-              <ContainedButtonPrimary label="Preview" />
-            ) : null}
-            {activeSaveButton ? (
               <ContainedButtonPrimary
+                className={classes.btnCentreonBlue}
+                label="Preview"
+              />
+            ) : null}
+            {modifiersList.length > 0  || activeSaveButton ? (
+              <ContainedButtonPrimary
+                className={classes.btnCentreonBlue}
                 variant="contained"
-                color="primary"
-                label="Save"
-                onClick={this.outputList}
+                label="Save Modifiers"
               />
             ) : (
               <ContainedButtonPrimary
+                className={classes.btnCentreonBlue}
                 variant="contained"
                 color="secondary"
                 disabled
                 className={classes.button}
-                label="Save"
+                label="Save Modifiers"
               />
             )}
-          </div>
+          </div>}
         </form>
       </React.Fragment>
     );
