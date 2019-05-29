@@ -23,6 +23,13 @@ import Grid from "@material-ui/core/Grid";
 import { HeaderContent, FormDynamic, ButtonAdd } from "../";
 
 const styles = theme => ({
+  '@global': {
+    body: {
+      li :{
+        listStyleType: 'none'
+      },
+    },
+  },
   tableRow: {
     height: "36px"
   },
@@ -145,10 +152,10 @@ class PageHdModifiers extends Component {
               <CustomTablePagination />
             </Paper>
 
-            <Typography variant="caption">
+          { !modalActive && <Typography variant="caption">
               <IconModify /> Add modifier to discovered hosts
               <ButtonAdd onClick={this.showModal.bind(this)} />
-            </Typography>
+            </Typography>}
           </Grid>
 
           {modalActive ? (
