@@ -23,13 +23,12 @@ const styles = theme => ({
     flexWrap: "wrap"
   },
   formControl: {
-    margin: '8px 0',
+    margin: '0px',
     minWidth: "calc(100% - 15px)"
   },
   formModifier: {
     maxWidth: '350px',
     padding: '10px',
-
   },
   inputForm: {
     height: "2.5rem",
@@ -42,11 +41,6 @@ const styles = theme => ({
       padding: '9px',
     }
   },
-  listCustom: {
-    '& li': {
-      listStyle: 'none',
-    }
-  },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
   },
@@ -54,11 +48,11 @@ const styles = theme => ({
     position: "relative",
     left: "3px",
     top: "17px",
-    marginTop: "10px",
+    marginTop: "0px",
     display: "block"
   },
   button: {
-    margin: theme.spacing.unit
+    margin: '8px 0'
   },
   input: {
     display: "none"
@@ -86,6 +80,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   btnCentreonBlue: {
+    marginTop: '10px',
     backgroundColor:  '#009fdf',
     marginRight: '10px',
     '&:hover': {
@@ -96,11 +91,11 @@ const styles = theme => ({
     }
   }
 });
-
 class FormDynamic extends Component {
   state = {
     labelWidth: 4,
     name: "name",
+    currentEdit: null,
     activeForm: false,
     activePreviewButton: false,
     activeSaveButton: false,
@@ -190,14 +185,16 @@ class FormDynamic extends Component {
   };
 
   activeForm = () => {
-    let name = event.target.value;
     let text = this.state.fieldsInclusion[0].title;
+    let { name }= this.state;
     let number = Math.floor(Math.random() * 10);
     this.setState({
       activeForm: true,
+     name,
       title: number + text + ' - ' + name
     });
   };
+
   activeSaveButton = () => {
     this.setState({
       activeSaveButton: true
@@ -205,17 +202,19 @@ class FormDynamic extends Component {
   };
 
   outputList = () => {
+    let { name }= this.state;
     let text = this.state.fieldsInclusion[0].title;
-
+    let number = Math.floor(Math.random() * 10);
     let modifiersArr = this.state.modifiersList;
     modifiersArr.push(this.state.title.toString());
     this.setState({
+      name,
       tempActiveList: true,
       activePreviewButton: true,
       activeForm: false,
       activeSaveButton: false,
       modifiersList: modifiersArr,
-      title: text
+      title: number + text + ' - ' + name
     });
     console.log(modifiersArr);
   };
@@ -236,15 +235,31 @@ class FormDynamic extends Component {
     });
   };
 
+  onEditModifier = (index) => {
+    // let { currentEdit } = this.state;
+    this.setState({
+      currentEdit: index,
+    });
+  };
+  onCloseEditingForm = () => {
+    // console.log('reset state')
+    // let { currentEdit } = this.state;
+    this.setState({
+      currentEdit: null,
+    });
+  }
+
+
   render() {
-    const { classes } = this.props;
+    const { classes  } = this.props;
     const {
       fieldsInclusion,
       activeForm,
       activeSaveButton,
       activePreviewButton,
       tempActiveList,
-      modifiersList
+      modifiersList,
+      currentEdit
     } = this.state;
 
     return (
@@ -281,29 +296,30 @@ class FormDynamic extends Component {
         </div>
 
         {tempActiveList ? (
-          <>
             <SortableComponent
-              className={classes.listCustom}
               items={modifiersList}
               onSort={this.onSortModifier}
               onDelete={this.onDeleteModifier}
+              editModifier={this.onEditModifier}
+              closeEditingForm={this.onCloseEditingForm}
+              activeIndex={currentEdit}
             />
-          </>
         ) : null}
-
         <form className={classes.formModifier} autoComplete="on">
+
           {activeForm && (
             <FormControl variant="outlined" className={classes.formControl}>
               <Typography variant="caption">
-                <h3>{`Veuillez selectionner les paramètres de votre : ${
-                  this.state.title
-                } `}</h3>
+                <h3>
+                  {`Veuillez selectionner les paramètres de votre : ${
+                    this.state.title
+                  } `}
+                </h3>
               </Typography>
 
               {fieldsInclusion.map(form => {
                 switch (form.input_type) {
                 case 'dropdown':
-
                 return (
                   <div  key={form.id}>
                       <InputLabel className={classes.selectLabel}
@@ -364,30 +380,32 @@ class FormDynamic extends Component {
               />
             </FormControl>
           )}
-          {!activeForm && <div>
-            {activePreviewButton ? (
-              <ContainedButtonPrimary
-                className={classes.btnCentreonBlue}
-                label="Preview"
-              />
-            ) : null}
-            {modifiersList.length > 0  || activeSaveButton ? (
-              <ContainedButtonPrimary
-                className={classes.btnCentreonBlue}
-                variant="contained"
-                label="Save Modifiers"
-              />
-            ) : (
-              <ContainedButtonPrimary
-                className={classes.btnCentreonBlue}
-                variant="contained"
-                color="secondary"
-                disabled
-                className={classes.button}
-                label="Save Modifiers"
-              />
-            )}
-          </div>}
+          {!activeForm &&
+            <div>
+              {activePreviewButton ? (
+                <ContainedButtonPrimary
+                  className={classes.btnCentreonBlue}
+                  label="Preview"
+                />
+              ) : null}
+              {modifiersList.length > 0  || activeSaveButton ? (
+                <ContainedButtonPrimary
+                  className={classes.btnCentreonBlue}
+                  variant="contained"
+                  label="Save Modifiers"
+                />
+              ) : (
+                <ContainedButtonPrimary
+                  className={classes.btnCentreonBlue}
+                  variant="contained"
+                  color="secondary"
+                  disabled
+                  className={classes.button}
+                  label="Save Modifiers"
+                />
+              )}
+            </div>
+          }
         </form>
       </React.Fragment>
     );
