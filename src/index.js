@@ -119,11 +119,8 @@ export { default as CloudOffOutlinedIcon } from '@material-ui/icons/CloudOffOutl
 export { default as CloudUploadOutlinedIcon } from '@material-ui/icons/CloudUploadOutlined';
 
 
-
-/** @license Material-UI v3.0.2
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+/**
+ * Material-UI v3.0.2 icon exports :
  */
 // export { default as AccessAlarm } from '@material-ui/icons/AccessAlarm';
 // export { default as AccessAlarmOutlined } from '@material-ui/icons/AccessAlarmOutlined';
