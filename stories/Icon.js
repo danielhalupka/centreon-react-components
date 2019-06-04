@@ -10,11 +10,37 @@ import {
   IconNumber,
   IconRound,
   IconToggleSubmenu,
-  IconLegend
+  IconLegend,
+  DeleteIcon,
+  IconMove,
+  IconEdit,
+  CloseEdit,
+  AccessTimeIcon,
+  DoneIcon,
+  ReportProblemIcon
 } from "../src";
 
 storiesOf("Icon", module).add(
-  "Icon - action",
+  "Icons - MUI",
+() => {
+  return (
+  <React.Fragment>
+    <IconModify/>
+    <IconMove/>
+    <CloseEdit />
+    <IconEdit />
+    <DeleteIcon />
+    <AccessTimeIcon/>
+    <DoneIcon/>
+    <ReportProblemIcon/>
+    <p>All icons in : https://material.io/tools/icons/?style=baseline</p>
+  </React.Fragment>)},
+  { notes: "All icons in : https://material.io/tools/icons/?style=baseline" }
+);
+
+
+storiesOf("Icon", module).add(
+  "Icon linear - action",
 () => {
   return (
   <React.Fragment>
@@ -28,25 +54,19 @@ storiesOf("Icon", module).add(
 );
 
 storiesOf("Icon", module).add(
-  "Icon - close small",
+  "Icon linear - close small",
   () => <IconClose iconType="small" />,
   { notes: "A very simple component" }
 );
 
 storiesOf("Icon", module).add(
-  "Icon modify",
-  () => <IconModify/>,
-  { notes: "A very simple component" }
-);
-
-storiesOf("Icon", module).add(
-  "Icon - close middle",
+  "Icon linear - close middle",
   () => <IconClose iconType="middle" />,
   { notes: "A very simple component" }
 );
 
 storiesOf("Icon", module).add(
-  "Icon - close big",
+  "Icon linear - close big",
   () => <IconClose iconType="big" />,
   { notes: "A very simple component" }
 );
