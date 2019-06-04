@@ -17,7 +17,17 @@ import {
   CloseEdit,
   AccessTimeIcon,
   DoneIcon,
-  ReportProblemIcon
+  ReportProblemIcon,
+  SearchIcon,
+  PlayCircleOutlineIcon,
+  StopOutlinedIcon,
+  UpdateOutlinedIcon,
+  KeyboardArrowRightIcon,
+  KeyboardArrowLeftIcon,
+  DescriptionOutlinedIcon,
+  UnarchiveOutlinedIcon,
+  CloudOffOutlinedIcon,
+  CloudUploadOutlinedIcon
 } from "../src";
 
 storiesOf("Icon", module).add(
@@ -33,6 +43,16 @@ storiesOf("Icon", module).add(
     <AccessTimeIcon/>
     <DoneIcon/>
     <ReportProblemIcon/>
+    <SearchIcon/>
+    <PlayCircleOutlineIcon/>
+    <StopOutlinedIcon/>
+    <UpdateOutlinedIcon/>
+    <KeyboardArrowRightIcon/>
+    <KeyboardArrowLeftIcon/>
+    <DescriptionOutlinedIcon/>
+    <UnarchiveOutlinedIcon/>
+    <CloudOffOutlinedIcon/>
+    <CloudUploadOutlinedIcon/>
     <p>All icons in : https://material.io/tools/icons/?style=baseline</p>
   </React.Fragment>)},
   { notes: "All icons in : https://material.io/tools/icons/?style=baseline" }
