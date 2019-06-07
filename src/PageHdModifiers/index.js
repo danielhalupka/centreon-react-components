@@ -435,6 +435,12 @@ class PageHdModifiers extends Component {
     });
   };
 
+  onDeleteModifiers = () => {
+    this.setState({
+      modifiersList: [],
+    });
+  };
+
   render() {
     const { classes, jobs, hideModal, ...rest } = this.props;
     const { 
@@ -628,19 +634,25 @@ class PageHdModifiers extends Component {
                   />
                 </div>
 
-                {tempActiveList ? (
-                    <SortableComponent
-                      items={modifiersList}
-                      value={listTitle}
-                      onSort={this.onSortModifier}
-                      onDelete={this.onDeleteModifier}
-                      editModifier={this.onEditModifier}
-                      closeEditingForm={this.onCloseEditingForm}
-                      activeIndex={currentEdit}
-                    />
-                ) : null}
                 <form className={classes.formModifier} autoComplete="on">
-
+                {modifiersList.length > 0  || activeSaveButton ? (
+                    <div>
+                        <ContainedButtonPrimary
+                            className={classes.btnCentreonBlue}
+                            variant="contained"
+                            label="Cancel"
+                            onClick={this.onHideModal}
+                            {...rest}
+                          />
+                        <ContainedButtonPrimary
+                          className={classes.btnCentreonBlue}
+                          variant="contained"
+                          color="secondary"
+                          label="Delete all modifiers"
+                          onClick={this.onDeleteModifiers}
+                        />
+                        </div>
+                        ) : null}
                   {activeForm && (
                   <React.Fragment>
                     <FormTemplateFields  data={activeForm} onChange={this.handleChange('value')} modifier={title}/>
@@ -653,7 +665,20 @@ class PageHdModifiers extends Component {
                   </React.Fragment>
 
                   )}
+
+                  {tempActiveList ? (
+                    <SortableComponent
+                      items={modifiersList}
+                      value={listTitle}
+                      onSort={this.onSortModifier}
+                      onDelete={this.onDeleteModifier}
+                      editModifier={this.onEditModifier}
+                      closeEditingForm={this.onCloseEditingForm}
+                      activeIndex={currentEdit}
+                    />
+                ) : null}
                   {!activeForm &&
+                    <>
                     <div>
                       {activePreviewButton ? (
                         <ContainedButtonPrimary
@@ -670,16 +695,27 @@ class PageHdModifiers extends Component {
                           {...rest}
                         />
                       ) : (
-                        <ContainedButtonPrimary
-                          className={classes.btnCentreonBlue}
-                          variant="contained"
-                          color="secondary"
-                          disabled
-                          className={classes.button}
-                          label="Save Modifiers"
-                        />
+                        <>
+                          <ContainedButtonPrimary
+                            className={classes.btnCentreonBlue}
+                            variant="contained"
+                            label="Cancel"
+                            onClick={this.onHideModal}
+                            {...rest}
+                          />
+                          <ContainedButtonPrimary
+                            className={classes.btnCentreonBlue}
+                            variant="contained"
+                            color="secondary"
+                            disabled
+                            className={classes.button}
+                            label="Save Modifiers"
+                          />
+                        </>
                       )}
                     </div>
+                   
+                    </>
                   }
                 </form>
 
