@@ -160,6 +160,43 @@ const styles = theme => ({
     '&:focus': {
       backgroundColor: '#007AB8',
     }
+  },
+  btnCentreonRed: {
+    marginTop: '10px',
+    backgroundColor:  '#FD0A27',
+    marginRight: '10px',
+    '&:hover': {
+      backgroundColor: '#c40118',
+    },
+    '&:focus': {
+      backgroundColor: '#c40118',
+    }
+  },
+  btnCentreonGreen: {
+    marginTop: '10px',
+    backgroundColor:  '#83B83B',
+    marginRight: '10px',
+    '&:hover': {
+      backgroundColor: '#587C1F',
+    },
+    '&:focus': {
+      backgroundColor: '#587C1F',
+    }
+  },
+  btnCentreonGrey: {
+    marginTop: '10px',
+    backgroundColor:  '#CCCCCC',
+    marginRight: '10px',
+    '&:hover': {
+      backgroundColor: '#6B6E73',
+    },
+    '&:focus': {
+      backgroundColor: '#6B6E73',
+    }
+  },
+  marginLeft: {
+    marginLeft: "10px",
+    marginTop : "0px",
   }
 });
 class PageHdModifiers extends Component {
@@ -177,6 +214,7 @@ class PageHdModifiers extends Component {
     activePreviewButton: false,
     activeSaveButton: false,
     listTitle: null,
+    confirm: false,
     modifiersList: [],
     association: [
       {
@@ -387,6 +425,7 @@ class PageHdModifiers extends Component {
       activeForm: null,
       activeSaveButton: false,
       modifiersList: modifiersArr,
+      confirm: false,
       title: number + text + ' - ' + name
     });
     console.log(modifiersArr);
@@ -432,9 +471,19 @@ class PageHdModifiers extends Component {
       modalActive: false,
       modifiersExist: true,
       modifiersList: modifiersArr,
+      confirm: false,
     });
   };
-
+  confirmDelete = () => {
+    this.setState({
+      confirm: true,
+    });
+  };
+  dontDelete = () => {
+    this.setState({
+      confirm: false,
+    });
+  };
   onDeleteModifiers = () => {
     this.setState({
       modifiersList: [],
@@ -460,6 +509,7 @@ class PageHdModifiers extends Component {
       modifiersList,
       currentEdit,
       title,
+      confirm,
       listTitle} = this.state;
     return (
       <React.Fragment>
@@ -488,7 +538,7 @@ class PageHdModifiers extends Component {
                         <TableCell classes={{ head: classes.head, root: classes.smallRow }} >
                         { !modalActive && <span>
                           <IconModify className={classes.whiteIcon} /> {modifiersExist ? `Modify or add new` : `Add`} modifiers to discovered jobs
-                          <ButtonAdd onClick={this.showModal} />
+                          <ButtonAdd className={`${classes.btnCentreonGreen} ${classes.marginLeft} `} onClick={this.showModal} />
                         </span>}
                         </TableCell>
                     </TableRow>
@@ -638,19 +688,39 @@ class PageHdModifiers extends Component {
                 {modifiersList.length > 0  || activeSaveButton ? (
                     <div>
                         <ContainedButtonPrimary
-                            className={classes.btnCentreonBlue}
+                            className={classes.btnCentreonGrey}
                             variant="contained"
                             label="Cancel"
                             onClick={this.onHideModal}
                             {...rest}
                           />
-                        <ContainedButtonPrimary
-                          className={classes.btnCentreonBlue}
-                          variant="contained"
-                          color="secondary"
-                          label="Delete all modifiers"
-                          onClick={this.onDeleteModifiers}
-                        />
+
+                          {confirm ? (
+                            <>
+                              <ContainedButtonPrimary
+                                className={classes.btnCentreonGrey}
+                                variant="contained"
+                                color="secondary"
+                                label="Don't delete"
+                                onClick={this.dontDelete}
+                              />
+                              <ContainedButtonPrimary
+                                className={classes.btnCentreonRed}
+                                variant="contained"
+                                color="secondary"
+                                label="Confirm delete"
+                                onClick={this.onDeleteModifiers}
+                              />
+                            </>
+                          ) : (
+                            <ContainedButtonPrimary
+                                className={classes.btnCentreonBlue}
+                                variant="contained"
+                                color="secondary"
+                                label="Delete all modifiers"
+                                onClick={this.confirmDelete}
+                              />
+                          )}
                         </div>
                         ) : null}
                   {activeForm && (
@@ -688,7 +758,7 @@ class PageHdModifiers extends Component {
                       ) : null}
                       {modifiersList.length > 0  || activeSaveButton ? (
                         <ContainedButtonPrimary
-                          className={classes.btnCentreonBlue}
+                          className={classes.btnCentreonGreen}
                           variant="contained"
                           label="Save Modifiers"
                           onClick={this.onHideModal}
@@ -697,14 +767,14 @@ class PageHdModifiers extends Component {
                       ) : (
                         <>
                           <ContainedButtonPrimary
-                            className={classes.btnCentreonBlue}
+                            className={classes.btnCentreonGrey}
                             variant="contained"
                             label="Cancel"
                             onClick={this.onHideModal}
                             {...rest}
                           />
                           <ContainedButtonPrimary
-                            className={classes.btnCentreonBlue}
+                            className={classes.btnCentreonGreen}
                             variant="contained"
                             color="secondary"
                             disabled
