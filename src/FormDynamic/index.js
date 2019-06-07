@@ -1,19 +1,13 @@
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import TextField from '@material-ui/core/TextField'
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 
 import { arrayMove } from "react-sortable-hoc";
 import SortableComponent from "../SortableList";
-
+import FormTemplateFields from "../FormTemplate";
 import ContainedButtonPrimary from "../Button/ButtonContained";
 
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import { Chip } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 
@@ -94,13 +88,99 @@ const styles = theme => ({
 class FormDynamic extends Component {
   state = {
     labelWidth: 4,
-    name: "name",
+    targ: null,
+    source: null,
+    otherSource: null,
+    regex: null,
     currentEdit: null,
-    activeForm: false,
+    activeForm: null,
     activePreviewButton: false,
     activeSaveButton: false,
-    title: "",
+    listTitle: null,
     modifiersList: [],
+    association: [
+      {
+        id: 1,
+        title: 'Association',
+        placeholder: 'Select target property',
+        input_type: 'dropdown',
+        values: [
+          "Target 1",
+          "Target 2",
+          "Target 3",
+          "Target 4"
+        ],
+        forId: 'id1',
+        required: true
+      },
+      {
+        id: 2,
+        title: 'Association',
+        placeholder: 'Select source property',
+        input_type: 'dropdown',
+        values: [
+          "Source 1",
+          "Source 2",
+          "Source 3",
+          "Source 4"
+        ],
+        forId: 'id2',
+        required: true
+      },
+      {
+        id: 3,
+        title: 'Association',
+        placeholder: 'Select others source property',
+        input_type: 'dropdown',
+        values: [
+          "Other source 1",
+          "Other source 2",
+          "Other source 3",
+          "Other source 4"
+        ],
+        forId: 'id3',
+        required: true
+      },
+    ],
+    combineMultipleProperties: [
+      {
+        id: 1,
+        title: 'Combination',
+        placeholder: 'Select targer property',
+        input_type: 'dropdown',
+        values: [
+          "Target 1",
+          "Target 2",
+          "Target 3",
+          "Target 4"
+        ],
+        forId: 'id1',
+        required: true
+      },
+      {
+        id: 2,
+        title: 'Combination',
+        placeholder: 'Define regex pattern',
+        input_type: 'text',
+        value: 'Regex pattern',
+        forId: 'id2',
+        required: true
+      },
+      {
+        id: 3,
+        title: 'Combination',
+        placeholder: 'Validate pattern',
+        input_type: 'dropdown',
+        values: [
+          "Source pattern 1",
+          "Source pattern 2",
+          "Source pattern 3",
+          "Source pattern 4"
+        ],
+        forId: 'id3',
+        required: true
+      },
+    ],
     fieldsInclusion: [
       {
         id: 1,
@@ -135,16 +215,25 @@ class FormDynamic extends Component {
         values: ["Exclusion 1", "Exclusion 2", "Exclusion 3", "Exclusion 4"],
         forId: "id4",
         required: true
-      }
+      },
+      {
+        id: 2,
+        title: 'Exclusion',
+        placeholder: 'Define regex pattern',
+        input_type: 'text',
+        value: 'Regex pattern',
+        forId: 'id2',
+        required: true
+      },
     ],
     fieldsLowercase: [
       {
         id: 1,
         title: "Lower Case",
-        placeholder: 'Select "Lowercase" in the list of operations',
+        placeholder: 'Select target property',
         input_type: "dropdown",
         values: ["Lowercase 1", "Lowercase 2", "Lowercase 3", "Lowercase 4"],
-        forId: "id5",
+        forId: "id1",
         required: true
       }
     ],
@@ -152,9 +241,9 @@ class FormDynamic extends Component {
       {
         id: 1,
         title: "Upper Case",
-        placeholder: 'Select "Lowercase" in the list of operations',
+        placeholder: 'Select target property',
         input_type: "dropdown",
-        values: ["Lowercase 1", "Lowercase 2", "Lowercase 3", "Lowercase 4"],
+        values: ["Uppercase 1", "Uppercase 2", "Uppercase 3", "Uppercase 4"],
         forId: "id5",
         required: true
       }
@@ -163,9 +252,9 @@ class FormDynamic extends Component {
       {
         id: 1,
         title: "Word Capitalizer",
-        placeholder: 'Select "Lowercase" in the list of operations',
+        placeholder: 'Select target property',
         input_type: "dropdown",
-        values: ["Lowercase 1", "Lowercase 2", "Lowercase 3", "Lowercase 4"],
+        values: ["Capitalize 1", "Capitalize 2", "Capitalize 3", "Capitalize 4"],
         forId: "id5",
         required: true
       }
@@ -174,25 +263,29 @@ class FormDynamic extends Component {
     tempActiveList: false
   };
 
-  handleChange = name => event => {
+  handleChange = targ => event => {
+    let { title }= this.state;
     let source = event.target.value;
     console.log(source);
     this.setState({
-      [name]: source,
-      activeSaveButton: true
+      targ: source,
+      activeSaveButton: true,
+      listTitle: `${title} => ${targ}`
     });
     return source
   };
 
-  activeForm = () => {
-    let text = this.state.fieldsInclusion[0].title;
-    let { name }= this.state;
+  activeModifierForm = (currentmodifier) => {
+    let { targ }= this.state;
+    let text = currentmodifier[0].title;
     let number = Math.floor(Math.random() * 10);
     this.setState({
-      activeForm: true,
-     name,
-      title: number + text + ' - ' + name
+      activeForm: currentmodifier,
+      targ,
+      title: `${text} id ${number}`
     });
+
+    console.log(currentmodifier)
   };
 
   activeSaveButton = () => {
@@ -202,16 +295,16 @@ class FormDynamic extends Component {
   };
 
   outputList = () => {
-    let { name }= this.state;
-    let text = this.state.fieldsInclusion[0].title;
+    let { name, modifiersList, title, fieldsInclusion }= this.state;
+    let text = fieldsInclusion[0].title;
     let number = Math.floor(Math.random() * 10);
-    let modifiersArr = this.state.modifiersList;
-    modifiersArr.push(this.state.title.toString());
+    let modifiersArr = modifiersList;
+    modifiersArr.push(title.toString());
     this.setState({
       name,
       tempActiveList: true,
       activePreviewButton: true,
-      activeForm: false,
+      activeForm: null,
       activeSaveButton: false,
       modifiersList: modifiersArr,
       title: number + text + ' - ' + name
@@ -236,14 +329,11 @@ class FormDynamic extends Component {
   };
 
   onEditModifier = (index) => {
-    // let { currentEdit } = this.state;
     this.setState({
       currentEdit: index,
     });
   };
   onCloseEditingForm = () => {
-    // console.log('reset state')
-    // let { currentEdit } = this.state;
     this.setState({
       currentEdit: null,
     });
@@ -251,15 +341,23 @@ class FormDynamic extends Component {
 
 
   render() {
-    const { classes  } = this.props;
+    const { classes, hideModal, ...rest } = this.props;
     const {
+      association,
+      combineMultipleProperties,
       fieldsInclusion,
+      fieldsExclusion,
+      fieldsLowercase,
+      fieldsUppercase,
+      fieldsCapitalize,
       activeForm,
       activeSaveButton,
       activePreviewButton,
       tempActiveList,
       modifiersList,
-      currentEdit
+      currentEdit,
+      title,
+      listTitle
     } = this.state;
 
     return (
@@ -268,36 +366,56 @@ class FormDynamic extends Component {
           <Chip
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
-            label={this.state.fieldsInclusion[0].title}
-            onClick={this.activeForm}
+            label={association[0].title}
+            onClick={() => this.activeModifierForm(association)}
           />
           <Chip
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
-            label={this.state.fieldsExclusion[0].title}
+            label={combineMultipleProperties[0].title}
+            onClick={() => this.activeModifierForm(combineMultipleProperties)}
+          />
+          </div>
+
+          <div>
+          <Chip
+            avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
+            className={classes.styledChip}
+            label={fieldsInclusion[0].title}
+            onClick={() => this.activeModifierForm(fieldsInclusion)}
           />
           <Chip
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
-            label={this.state.fieldsLowercase[0].title}
+            label={fieldsExclusion[0].title}
+            onClick={() => this.activeModifierForm(fieldsExclusion)}
+          />
+          <Chip
+            avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
+            className={classes.styledChip}
+            label={fieldsLowercase[0].title}
+            onClick={() => this.activeModifierForm(fieldsLowercase)}
           />
         </div>
         <div>
           <Chip
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
-            label={this.state.fieldsUppercase[0].title}
+            label={fieldsUppercase[0].title}
+            onClick={() => this.activeModifierForm(fieldsUppercase)}
           />
           <Chip
             avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
             className={classes.styledChip}
-            label={this.state.fieldsCapitalize[0].title}
+            label={fieldsCapitalize[0].title}
+            onClick={() => this.activeModifierForm(fieldsCapitalize)}
           />
         </div>
 
         {tempActiveList ? (
             <SortableComponent
               items={modifiersList}
+              value={listTitle}
               onSort={this.onSortModifier}
               onDelete={this.onDeleteModifier}
               editModifier={this.onEditModifier}
@@ -308,77 +426,16 @@ class FormDynamic extends Component {
         <form className={classes.formModifier} autoComplete="on">
 
           {activeForm && (
-            <FormControl variant="outlined" className={classes.formControl}>
-              <Typography variant="caption">
-                <h3>
-                  {`Veuillez selectionner les paramètres de votre : ${
-                    this.state.title
-                  } `}
-                </h3>
-              </Typography>
-
-              {fieldsInclusion.map(form => {
-                switch (form.input_type) {
-                case 'dropdown':
-                return (
-                  <div  key={form.id}>
-                      <InputLabel className={classes.selectLabel}
-                        ref={ref => {
-                          this.InputLabelRef = ref;
-                        }}
-                          htmlFor={form.forid}
-                          value={form.placeholder}
-                      >
-                        {form.placeholder}
-                      </InputLabel>
-                      <Select
-                        native
-                        className={`${classes.formControl} ${classes.inputForm}`}
-                        onChange={this.handleChange('value')}
-                        name={form.name}
-                        input={
-                          <OutlinedInput
-                            name="value"
-                            labelWidth={this.state.labelWidth}
-                            id={form.forid}
-                          />
-                        }
-                      >
-                        <option value="" />
-                        <option value={form.values[0]}>{form.values[0]}</option>
-                        <option value={form.values[1]}>{form.values[1]}</option>
-                        <option value={form.values[2]}>{form.values[2]}</option>
-                      </Select>
-                      </div>
-                      )
-                  break;
-                case 'text':
-                return (
-                  <div  key={form.id}>
-                      <TextField
-                        className={classes.inputCustom}
-                        id="outlined-email-input"
-                        label={form.value}
-                        type="text"
-                        name="text"
-                        autoComplete="text"
-                        margin="normal"
-                        variant="outlined"
-                      />
-                  </div>
-                  )
-                  break;
-                default:
-                return <p>No modifiers</p>
-              }
-              })}
-              <ContainedButtonPrimary
+          <React.Fragment>
+            <FormTemplateFields  data={activeForm} onChange={this.handleChange('value')} modifier={title}/>
+            <ContainedButtonPrimary
                 className={classes.btnCentreonBlue}
                 variant="contained"
                 label="Add this modifier"
                 onClick={this.outputList}
               />
-            </FormControl>
+          </React.Fragment>
+
           )}
           {!activeForm &&
             <div>
@@ -393,6 +450,8 @@ class FormDynamic extends Component {
                   className={classes.btnCentreonBlue}
                   variant="contained"
                   label="Save Modifiers"
+                  onClick={hideModal}
+                  {...rest}
                 />
               ) : (
                 <ContainedButtonPrimary

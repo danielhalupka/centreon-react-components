@@ -61,12 +61,8 @@ const CustomTableHead = ({checkboxColumn, onSelectAllClick, numSelected, numEnab
           />
         </TableCell>
       }
-          <TableCell classes={{ head: classes.head}} >Discovery Source</TableCell>
-          <TableCell classes={{ head: classes.head}} >Status</TableCell>
-          <TableCell classes={{ head: classes.head}} >Connexion parameters</TableCell>
-          <TableCell classes={{ head: classes.head}} >Start Time</TableCell>
-          <TableCell classes={{ head: classes.head}} >Duration</TableCell>
-          <TableCell classes={{ head: classes.head}} >Discovered Items</TableCell>
+          <TableCell classes={{ head: classes.head}} >Hosts</TableCell>
+          <TableCell classes={{ head: classes.head}} >Templates</TableCell>
     </TableRow>
   </TableHead>
 );

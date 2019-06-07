@@ -6,23 +6,26 @@ import {
 
 import { withStyles } from "@material-ui/core/styles";
 
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import TextField from '@material-ui/core/TextField'
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import FormTemplateFields from "../FormTemplate";
+
+
 
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Typography from "@material-ui/core/Typography";
-import ContainedButtonPrimary from "../Button/ButtonContained";
 
 import IconMove from "../Icon/IconMove";
 import IconEdit from "../Icon/IconEdit";
 import CloseEdit from "../Icon/CloseEdit";
+
+import FlipToFrontIcon from '@material-ui/icons/FlipToFront';
+import EditIcon from '@material-ui/icons/Edit';
+import DoneIcon from "@material-ui/icons/Done";
+
+
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -158,6 +161,7 @@ const styles = theme => ({
 class SortableComponent extends Component {
 
   state = {
+    title: "title",
     fieldsInclusion: [
       {
         id: 1,
@@ -196,7 +200,7 @@ class SortableComponent extends Component {
   };
 
   render() {
-    const { classes, items, onDelete, onSort, editModifier, activeIndex, closeEditingForm, ...rest } = this.props;
+    const { classes, items, onDelete, onSort, editModifier, activeIndex, closeEditingForm, modifier, ...rest } = this.props;
     const { fieldsInclusion} = this.state;
     const SortableItem = SortableElement(({ value, onDelete, editModifier,isEditing, closeEditingForm}) => (
 
@@ -204,16 +208,16 @@ class SortableComponent extends Component {
         <ListItemText  primary={value} className={classes.listText}/>
         <ListItemSecondaryAction className={classes.actionButtons}>
           <IconButton className={classes.moveBtn}>
-            <IconMove />
+            <FlipToFrontIcon />
           </IconButton>
 
           {isEditing ?
             <IconButton className={classes.indexLower}>
-              <CloseEdit />
+              <DoneIcon />
             </IconButton>
           :
           <IconButton className={classes.indexLower}>
-            <IconEdit />
+            <EditIcon />
           </IconButton>
           }
 
@@ -235,71 +239,7 @@ class SortableComponent extends Component {
 
         {isEditing ?
           <form className={classes.formEditing} autoComplete="on">
-            <FormControl variant="outlined" className={classes.formControl}>
-              <Typography variant="caption">
-                <h3>
-                  {`Veuillez editer les paramètres de votre : ${
-                    this.state.title
-                  } `}
-                </h3>
-              </Typography>
-
-              {fieldsInclusion.map(form => {
-                switch (form.input_type) {
-                case 'dropdown':
-                return (
-                  <div  key={form.id} >
-                      <InputLabel className={classes.selectLabel}
-                        ref={ref => {
-                          this.InputLabelRef = ref;
-                        }}
-                          htmlFor={form.forid}
-                          value={form.placeholder}
-                      >
-                        {form.placeholder}
-                      </InputLabel>
-                      <Select
-                        native
-                        className={`${classes.formControl} ${classes.inputForm}`}
-                        onChange={this.handleChange('value')}
-                        name={form.name}
-                        input={
-                          <OutlinedInput
-                            name="value"
-                            labelWidth={this.state.labelWidth}
-                            id={form.forid}
-                          />
-                        }
-                      >
-                        <option value="" />
-                        <option value={form.values[0]}>{form.values[0]}</option>
-                        <option value={form.values[1]}>{form.values[1]}</option>
-                        <option value={form.values[2]}>{form.values[2]}</option>
-                      </Select>
-                      </div>
-                      )
-                  break;
-                case 'text':
-                return (
-                  <div  key={form.id}>
-                      <TextField
-                        className={classes.inputCustom}
-                        id="outlined-email-input"
-                        label={form.value}
-                        type="text"
-                        name="text"
-                        autoComplete="text"
-                        margin="normal"
-                        variant="outlined"
-                      />
-                  </div>
-                  )
-                  break;
-                default:
-                return <p>No modifiers</p>
-              }
-              })}
-            </FormControl>
+            <FormTemplateFields  data={fieldsInclusion} onChange={this.handleChange('value')} modifier/>
           </form>
           : null
         }
