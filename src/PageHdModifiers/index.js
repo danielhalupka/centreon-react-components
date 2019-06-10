@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
+import Input from '@material-ui/core/Input';
+import Title  from "../Title";
+
 import Table from "@material-ui/core/Table";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,9 +16,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import Select from '../AsyncSelect';
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import CustomTablePagination from "../TablePagination/TablePagination";
 import IconModify from "../Icon/IconModify";
 import IconButton from '@material-ui/core/IconButton';
@@ -35,6 +41,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 
 import { HeaderContent, FormDynamic, ButtonAdd } from "../";
+import { relative } from "path";
 
 const styles = theme => ({
   '@global': {
@@ -47,13 +54,17 @@ const styles = theme => ({
   whiteIcon: {
     fill: "#FFFFFF",
     position: "relative",
-    top: "10px"
+    top: "2px"
   },
   tableRow: {
-    height: '36px'
+    height: '36px',
+    '&:nth-child(even) ': {
+      backgroundColor: 'rgba(0, 162, 220, .3)',
+    },
   },
   smallRow: {
-    width: "360px"
+    width: "336px",
+    textAlign: 'right',
   },
   head: {
     backgroundColor: '#009fdf',
@@ -62,11 +73,18 @@ const styles = theme => ({
     position: 'sticky',
     top: 0,
   },
+  headText: {
+    lineHeight: '28px',
+    verticalAlign: 'middle',
+  },
   checkboxColumn: {
     width: '60px'
   },
   checkboxRoot: {
     padding: '0px 12px',
+  },
+  checkboxChecked: {
+    color: '#FFFFFF!important',
   },
   sortLabel: {
     color: theme.palette.common.white,
@@ -128,6 +146,14 @@ const styles = theme => ({
   input: {
     display: "none"
   },
+  iconButton: {
+    padding: 10,
+  },
+  divider: {
+    width: 1,
+    height: 28,
+    margin: 4,
+  },
   styledChip: {
     margin : '5px',
     backgroundColor:  '#009fdf',
@@ -138,6 +164,19 @@ const styles = theme => ({
     },
     '&:focus':{
       backgroundColor: '#007AB8',
+      color: '#fff',
+    },
+  },
+  darkenBlueChip: {
+    margin : '5px',
+    backgroundColor:  '#007AB8',
+    color: '#fff',
+    '&:hover':{
+      backgroundColor: '#004c72',
+      color: '#fff',
+    },
+    '&:focus':{
+      backgroundColor: '#004c72',
       color: '#fff',
     },
   },
@@ -197,13 +236,28 @@ const styles = theme => ({
   marginLeft: {
     marginLeft: "10px",
     marginTop : "0px",
-  }
+  },
+  marginTop: {
+    marginTop : "10px!important",
+  },
+  specialTop: {
+    position: "relative",
+    top : "6px",
+  },
+  paddingSmall: {
+    padding: '2px',
+  },
+  footerButtons: {
+    marginTop: '10px'
+  },
+  saveButtons: {
+    textAlign: 'right',
+  },
 });
 class PageHdModifiers extends Component {
 
   state = {
     modalActive: false,
-    modifiersExist: false,
     labelWidth: 4,
     targ: null,
     source: null,
@@ -469,7 +523,6 @@ class PageHdModifiers extends Component {
     let modifiersArr = modifiersList;
     this.setState({
       modalActive: false,
-      modifiersExist: true,
       modifiersList: modifiersArr,
       confirm: false,
     });
@@ -477,6 +530,7 @@ class PageHdModifiers extends Component {
   confirmDelete = () => {
     this.setState({
       confirm: true,
+      
     });
   };
   dontDelete = () => {
@@ -494,7 +548,6 @@ class PageHdModifiers extends Component {
     const { classes, jobs, hideModal, ...rest } = this.props;
     const { 
       modalActive, 
-      modifiersExist,
       association,
       combineMultipleProperties,
       fieldsInclusion,
@@ -504,7 +557,6 @@ class PageHdModifiers extends Component {
       fieldsCapitalize,
       activeForm,
       activeSaveButton,
-      activePreviewButton,
       tempActiveList,
       modifiersList,
       currentEdit,
@@ -515,6 +567,7 @@ class PageHdModifiers extends Component {
       <React.Fragment>
         <Grid container spacing={24}>
           <Grid item xs>
+          <Title titleColor="host" label="Discovered Hosts with VM Virtual Machine" />
           <Paper className={classes.root}>
             <div className={classes.tableWrapper}>
               <Table
@@ -524,21 +577,47 @@ class PageHdModifiers extends Component {
               >
                   <TableHead>
                     <TableRow
-                      classes={{root: classes.tableRow}}
+                      className={classes.tableRow}
                     >
-                      <TableCell padding="checkbox" classes={{root: classes.checkboxColumn, head: classes.head}}>
+                      <TableCell padding="checkbox" className={`${classes.checkboxColumn} ${classes.head}`}>
                         <Checkbox
-                          classes={{ root: classes.checkboxRoot }}
+                          className={`${classes.checkboxRoot}  ${classes.checkboxChecked}`}
                           checked={2}
                         />
                       </TableCell>
 
-                        <TableCell classes={{ head: classes.head}} >Hosts</TableCell>
-                        <TableCell classes={{ head: classes.head}} >Templates</TableCell>
-                        <TableCell classes={{ head: classes.head, root: classes.smallRow }} >
+                        <TableCell className={classes.head} >
+                        <Grid container spacing={24}>
+                          <Grid item className={`${classes.headText} ${classes.paddingSmall}`} >Hosts</Grid>
+                          <Grid item xs className={classes.paddingSmall}>
+                            <Paper className={classes.root}>
+                              <InputBase
+                                className={classes.input}
+                                placeholder="Search Hosts"
+                                inputProps={{ 'aria-label': 'Search Hosts' }}
+                              />
+                              <IconButton className={`${classes.iconButton} ${classes.paddingSmall}`} aria-label="Search">
+                                <SearchIcon />
+                              </IconButton>
+                            </Paper>
+                          </Grid>
+                        </Grid>
+                        
+                     
+                        </TableCell>
+                        <TableCell className={classes.head} >Templates</TableCell>
+                        <TableCell className={`${classes.head} ${classes.smallRow}`} >
                         { !modalActive && <span>
-                          <IconModify className={classes.whiteIcon} /> {modifiersExist ? `Modify or add new` : `Add`} modifiers to discovered jobs
-                          <ButtonAdd className={`${classes.btnCentreonGreen} ${classes.marginLeft} `} onClick={this.showModal} />
+
+                          <Chip
+                            avatar={<Avatar className={classes.chipAvatarBlue} ><IconModify className={classes.whiteIcon} /> </Avatar>}
+                            className={`${classes.styledChip} ${classes.darkenBlueChip}`}
+                            label={`${modifiersList.length > 0 ? `Modify or add new` : `Add`} modifiers to discovered jobs`}
+                            onClick={this.showModal}
+                          />
+{/* 
+                          <IconModify className={classes.whiteIcon} /> {modifiersList.length > 0 ? `Modify or add new` : `Add`} modifiers to discovered jobs
+                          <ButtonAdd className={`${classes.btnCentreonGreen} ${classes.marginLeft} `} onClick={this.showModal} /> */}
                         </span>}
                         </TableCell>
                     </TableRow>
@@ -547,18 +626,18 @@ class PageHdModifiers extends Component {
                   {jobs.map(host => {
                       return (
                         <TableRow
-                          className={classes.row}
+                          className={classes.tableRow}
                           hover
                           role="checkbox"
                           tabIndex={-1}
                           key={host.id}
                         >
-                          <TableCell padding="checkbox">
+                          <TableCell padding="none">
                             <Checkbox
                               onClick={event => this.handleClick(event, host.id)}
+                              className={`${classes.checkboxRoot}`}
                               classes={{
-                                root: classes.checkboxRoot,
-                                checked: classes.checkboxChecked,
+                                // checked: classes.checkboxChecked,
                               }}
                             />
                           </TableCell>
@@ -568,15 +647,15 @@ class PageHdModifiers extends Component {
                           >
                             <div className={classes.infoIconContainer }>
                               <IconButton
-                                classes={{ root: classes.infoIconButtonRoot }}
+                                className={`${classes.infoIconButtonRoot} ${classes.paddingSmall}`}
                                 aria-label="Get host detailed information"
                               >
-                                <InfoIcon classes={{ root: classes.infoIconRoot }} />
+                                <InfoIcon className={classes.infoIconRoot} />
                               </IconButton>
                               {host.name}
                             </div>
                           </TableCell>
-                          <TableCell classes={{ root: classes.selectTemplateCell }} align="right">
+                          <TableCell className={classes.selectTemplateCell} align="right">
                               <Select
                                 native
                                 input={
@@ -610,27 +689,31 @@ class PageHdModifiers extends Component {
               onChangeRowsPerPage={this.handleChangeRowsPerPage}
             />
           </Paper>
-          <div className={classes.footerButtons}>
-            <div>
-              <Button onClick={this.handleBack} variant="contained" size="small">
+          <Grid container spacing={24} className={classes.footerButtons}>
+          
+          
+            <Grid item xs>
+            <Button onClick={this.handleBack} variant="contained" size="small">
                 BACK
               </Button>
-            </div>
-            <div className={classes.saveButtons}>
-              <Button onClick={() => this.handleSave(false)}  variant="contained" size="small" classes={{root: classes.saveButton}}>
+
+            </Grid>
+            <Grid item xs className={classes.saveButtons}>
+            <Button onClick={() => this.handleSave(false)}  variant="contained" size="small" className={classes.saveButton}>
                 SAVE
               </Button>
-              <Button onClick={() => this.handleSave(true)}  variant="contained" size="small" classes={{root: classes.saveButton}}>
+              <Button onClick={() => this.handleSave(true)}  variant="contained" size="small" className={`${classes.saveButton} ${classes.marginLeft}`}>
                 SAVE & MONITOR
               </Button>
-            </div>
-          </div>
+            </Grid>
+          </Grid>
+  
           </Grid>
 
           {modalActive ? (
             <Grid
               item
-              classes={{ root: classes.checkboxColumn, head: classes.head }}
+              // className={`${classes.checkboxColumn} ${classes.head}`}
             >
               <Paper>
                 <HeaderContent label="Modifiers edition" />
@@ -750,7 +833,7 @@ class PageHdModifiers extends Component {
                   {!activeForm &&
                     <>
                     <div>
-                      {activePreviewButton ? (
+                      {modifiersList.length > 0  ? (
                         <ContainedButtonPrimary
                           className={classes.btnCentreonBlue}
                           label="Preview"
@@ -762,7 +845,6 @@ class PageHdModifiers extends Component {
                           variant="contained"
                           label="Save Modifiers"
                           onClick={this.onHideModal}
-                          {...rest}
                         />
                       ) : (
                         <>
@@ -771,14 +853,12 @@ class PageHdModifiers extends Component {
                             variant="contained"
                             label="Cancel"
                             onClick={this.onHideModal}
-                            {...rest}
                           />
                           <ContainedButtonPrimary
-                            className={classes.btnCentreonGreen}
+                            className={`${classes.button} ${classes.specialTop}`}
                             variant="contained"
                             color="secondary"
                             disabled
-                            className={classes.button}
                             label="Save Modifiers"
                           />
                         </>

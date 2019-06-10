@@ -47,6 +47,8 @@ const styles = theme => ({
     listStyleType: 'none',
     paddingInlineStart: '20px',
     marginBottom: '0px',
+    maxHeight: '350px',
+    overflowY: 'auto',
     '& li': {
       listStyle: 'none',
     }
