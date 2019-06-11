@@ -20,7 +20,7 @@ const styles = theme => ({
     minWidth: "calc(100% - 15px)"
   },
   formModifier: {
-    maxWidth: '350px',
+    maxWidth: '400px',
     padding: '10px',
     border: "0px solid transparent"
   },
@@ -43,7 +43,10 @@ const styles = theme => ({
     left: "3px",
     top: "17px",
     marginTop: "0px",
-    display: "block"
+    display: "block",
+    '&:placeholder': {
+      fontSize: '9px'
+    }
   },
   button: {
     margin: '8px 0'
@@ -89,7 +92,7 @@ class FormTemplateFields extends Component {
   render() {
     const { classes, handleChange, data, modifier, ...rest  } = this.props;
     return (
-      <fieldset className={classes.formModifier} autoComplete="on" data modifier {...rest}>
+      <div className={classes.formModifier} autoComplete="on" data modifier {...rest}>
           <FormControl variant="outlined" className={classes.formControl}>
             <Typography variant="caption">
               <h3>
@@ -154,7 +157,7 @@ class FormTemplateFields extends Component {
             }
             })}
           </FormControl>
-      </fieldset>
+      </div>
     );
   }
 }

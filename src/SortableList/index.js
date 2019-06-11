@@ -8,17 +8,11 @@ import { withStyles } from "@material-ui/core/styles";
 
 import FormTemplateFields from "../FormTemplate";
 
-
-
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-
-import IconMove from "../Icon/IconMove";
-import IconEdit from "../Icon/IconEdit";
-import CloseEdit from "../Icon/CloseEdit";
 
 import FlipToFrontIcon from '@material-ui/icons/FlipToFront';
 import EditIcon from '@material-ui/icons/Edit';
@@ -45,8 +39,9 @@ const styles = theme => ({
   },
   listCustom: {
     listStyleType: 'none',
+    marginTop: '15px',
+    marginBottom: '15px',
     paddingInlineStart: '20px',
-    marginBottom: '0px',
     maxHeight: '350px',
     overflowY: 'auto',
     '& li': {
@@ -63,6 +58,9 @@ const styles = theme => ({
     top: '15px',
     paddingLeft: '0px',
     height: '30px',
+    '& span' : {
+      fontSize: '10px',
+    }
   },
   actionButtons: {
     top: '25px',
@@ -115,7 +113,7 @@ const styles = theme => ({
   },
   formEditing: {
     display: 'block',
-    maxWidth: '350px',
+    maxWidth: '400px',
     padding: '10px 0px',
     top: '12px',
     position: 'relative',
@@ -212,7 +210,6 @@ class SortableComponent extends Component {
           <IconButton className={classes.moveBtn}>
             <FlipToFrontIcon />
           </IconButton>
-
           {isEditing ?
             <IconButton className={classes.indexLower}>
               <DoneIcon />
@@ -234,7 +231,6 @@ class SortableComponent extends Component {
             <IconButton className={classes.editBtn} aria-label="Edit" onClick={editModifier} >
             </IconButton>
           }
-
           <IconButton className={classes.closeBtn} aria-label="Delete" onClick={onDelete} >
           </IconButton>
         </ListItemSecondaryAction>

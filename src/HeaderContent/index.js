@@ -9,8 +9,8 @@ const styles = theme => ({
   headercontent: {
     backgroundColor: '#009fdf',
     color: theme.palette.common.white,
-    padding: '30px',
-    minWidth: '350px',
+    padding: '20px',
+    minWidth: '400px',
     boxSizing: 'border-box',
   },
   whiteTitleText: {
@@ -22,10 +22,11 @@ const styles = theme => ({
 });
 
 
-const HeaderContent = ({ label, classes }) => (
+const HeaderContent = ({ label, classes, icon, close }) => (
   <div className={classes.headercontent}>
-
+          {close}
           <Typography variant="caption" className={classes.whiteTitleText}>
+            {icon}
             {label}
           </Typography>
     </div>

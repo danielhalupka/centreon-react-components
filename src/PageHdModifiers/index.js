@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
-import Input from '@material-ui/core/Input';
 import Title  from "../Title";
+import Typography from '@material-ui/core/Typography';
+import TitleCustom  from "../Title/TitleCustomMui";
 
 import Table from "@material-ui/core/Table";
 import TableCell from "@material-ui/core/TableCell";
@@ -27,7 +28,7 @@ import IconModify from "../Icon/IconModify";
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
 
-
+import IconCloseRight  from "../Icon/IconCloseRight/index";
 
 import { arrayMove } from "react-sortable-hoc";
 import SortableComponent from "../SortableList";
@@ -37,11 +38,8 @@ import ContainedButtonPrimary from "../Button/ButtonContained";
 import { Chip } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 
-
 import Grid from "@material-ui/core/Grid";
-
-import { HeaderContent, FormDynamic, ButtonAdd } from "../";
-import { relative } from "path";
+import { HeaderContent } from "../";
 
 const styles = theme => ({
   '@global': {
@@ -55,6 +53,11 @@ const styles = theme => ({
     fill: "#FFFFFF",
     position: "relative",
     top: "2px"
+  },
+  whiteIconSmall: {
+    fill: "#FFFFFF",
+    position: "relative",
+    top: "8px",
   },
   tableRow: {
     height: '36px',
@@ -116,7 +119,7 @@ const styles = theme => ({
     minWidth: "calc(100% - 15px)"
   },
   formModifier: {
-    maxWidth: '350px',
+    maxWidth: '400px',
     padding: '10px',
   },
   inputForm: {
@@ -156,14 +159,14 @@ const styles = theme => ({
   },
   styledChip: {
     margin : '5px',
-    backgroundColor:  '#009fdf',
-    color: '#fff',
+    backgroundColor:  'rgba(0, 162, 220, .3)',
+    color: 'rgba(0, 0, 0, 0.87)',
     '&:hover':{
-      backgroundColor: '#007AB8',
+      backgroundColor: '#009fdf',
       color: '#fff',
     },
     '&:focus':{
-      backgroundColor: '#007AB8',
+      backgroundColor: '#009fdf',
       color: '#fff',
     },
   },
@@ -181,7 +184,7 @@ const styles = theme => ({
     },
   },
   chipAvatarBlue: {
-    backgroundColor: '#007AB8',
+    backgroundColor: '#009fdf',
     color: '#fff',
     fontWeight: '600',
   },
@@ -191,7 +194,9 @@ const styles = theme => ({
   },
   btnCentreonBlue: {
     marginTop: '10px',
+    marginBottom: '10px',
     backgroundColor:  '#009fdf',
+    color: '#ffffff',
     marginRight: '10px',
     '&:hover': {
       backgroundColor: '#007AB8',
@@ -202,6 +207,7 @@ const styles = theme => ({
   },
   btnCentreonRed: {
     marginTop: '10px',
+    marginBottom: '10px',
     backgroundColor:  '#FD0A27',
     marginRight: '10px',
     '&:hover': {
@@ -213,6 +219,7 @@ const styles = theme => ({
   },
   btnCentreonGreen: {
     marginTop: '10px',
+    marginBottom: '10px',
     backgroundColor:  '#83B83B',
     marginRight: '10px',
     '&:hover': {
@@ -224,6 +231,7 @@ const styles = theme => ({
   },
   btnCentreonGrey: {
     marginTop: '10px',
+    marginBottom: '10px',
     backgroundColor:  '#CCCCCC',
     marginRight: '10px',
     '&:hover': {
@@ -240,12 +248,8 @@ const styles = theme => ({
   marginTop: {
     marginTop : "10px!important",
   },
-  specialTop: {
-    position: "relative",
-    top : "6px",
-  },
   paddingSmall: {
-    padding: '2px',
+    padding: '2px 10px',
   },
   footerButtons: {
     marginTop: '10px'
@@ -253,14 +257,16 @@ const styles = theme => ({
   saveButtons: {
     textAlign: 'right',
   },
+  headerContent: {
+    position: 'relative',
+  }
 });
 class PageHdModifiers extends Component {
-
   state = {
     modalActive: false,
     labelWidth: 4,
-    targ: null,
-    source: null,
+    targ: "target",
+    source: "source",
     otherSource: null,
     regex: null,
     currentEdit: null,
@@ -436,25 +442,28 @@ class PageHdModifiers extends Component {
   };
 
   handleChange = targ => event => {
-    let { title }= this.state;
-    let source = event.target.value;
-    console.log(source);
+    let { title, targ , source}= this.state;
+
+    let sourc = event.target.value;
+    console.log(sourc);
+  
     this.setState({
-      targ: source,
+      targ: sourc,
+      source: sourc,
       activeSaveButton: true,
-      listTitle: `${title} => ${targ}`
     });
-    return source
+
   };
 
   activeModifierForm = (currentmodifier) => {
-    let { targ }= this.state;
+    let { targ, source }= this.state;
     let text = currentmodifier[0].title;
-    let number = Math.floor(Math.random() * 10);
     this.setState({
       activeForm: currentmodifier,
       targ,
-      title: `${text} id ${number}`
+      source,
+      title: `${text} -> ${targ} -> ${source}`,
+      listTitle: text,
     });
 
     console.log(currentmodifier)
@@ -467,20 +476,16 @@ class PageHdModifiers extends Component {
   };
 
   outputList = () => {
-    let { name, modifiersList, title, fieldsInclusion }= this.state;
-    let text = fieldsInclusion[0].title;
-    let number = Math.floor(Math.random() * 10);
+    let {  modifiersList, title }= this.state;
     let modifiersArr = modifiersList;
     modifiersArr.push(title.toString());
     this.setState({
-      name,
       tempActiveList: true,
       activePreviewButton: true,
       activeForm: null,
       activeSaveButton: false,
       modifiersList: modifiersArr,
       confirm: false,
-      title: number + text + ' - ' + name
     });
     console.log(modifiersArr);
   };
@@ -506,18 +511,19 @@ class PageHdModifiers extends Component {
       currentEdit: index,
     });
   };
+
   onCloseEditingForm = () => {
     this.setState({
       currentEdit: null,
     });
   }
 
-
   showModal = () => {
     this.setState({
       modalActive: true
     });
   };
+
   onHideModal = () => {
     let { modifiersList }= this.state;
     let modifiersArr = modifiersList;
@@ -527,17 +533,19 @@ class PageHdModifiers extends Component {
       confirm: false,
     });
   };
+
   confirmDelete = () => {
     this.setState({
       confirm: true,
-      
     });
   };
+
   dontDelete = () => {
     this.setState({
       confirm: false,
     });
   };
+
   onDeleteModifiers = () => {
     this.setState({
       modifiersList: [],
@@ -546,8 +554,8 @@ class PageHdModifiers extends Component {
 
   render() {
     const { classes, jobs, hideModal, ...rest } = this.props;
-    const { 
-      modalActive, 
+    const {
+      modalActive,
       association,
       combineMultipleProperties,
       fieldsInclusion,
@@ -564,28 +572,43 @@ class PageHdModifiers extends Component {
       confirm,
       listTitle} = this.state;
     return (
-      <React.Fragment>
+      <>
         <Grid container spacing={24}>
           <Grid item xs>
-          <Title titleColor="host" label="Discovered Hosts with VM Virtual Machine" />
-          <Paper className={classes.root}>
-            <div className={classes.tableWrapper}>
-              <Table
-                className={classes.table}
-                aria-labelledby="tableTitle"
-                padding="dense"
-              >
-                  <TableHead>
-                    <TableRow
-                      className={classes.tableRow}
-                    >
-                      <TableCell padding="checkbox" className={`${classes.checkboxColumn} ${classes.head}`}>
-                        <Checkbox
-                          className={`${classes.checkboxRoot}  ${classes.checkboxChecked}`}
-                          checked={2}
-                        />
-                      </TableCell>
-
+            <Paper className={classes.root}>
+              <Grid container spacing={24} className={classes.footerButtons}>
+                <Grid item xs>
+                  <TitleCustom color="#009FDF" fsize="12" label="Discovered hosts with WMware Virtual Machine" />
+               </Grid>
+                <Grid item xs className={classes.saveButtons}>
+                { !modalActive && <span>
+                    <Button
+                      variant="contained"
+                      className={`${classes.btnCentreonBlue} ${classes.paddingSmall}`}
+                      onClick={this.showModal}
+                      >
+                      {`${modifiersList.length > 0 ? `Modify or add new` : `Add`} modifiers to discovered jobs  `}&nbsp;
+                      <IconModify className={classes.whiteIcon} />
+                    </Button>
+                </span>}
+                </Grid>
+              </Grid>
+              <div className={classes.tableWrapper}>
+                <Table
+                  className={classes.table}
+                  aria-labelledby="tableTitle"
+                  padding="dense"
+                >
+                    <TableHead>
+                      <TableRow
+                        className={classes.tableRow}
+                      >
+                        <TableCell padding="checkbox" className={`${classes.checkboxColumn} ${classes.head}`}>
+                          <Checkbox
+                            className={`${classes.checkboxRoot}  ${classes.checkboxChecked}`}
+                            checked={2}
+                          />
+                        </TableCell>
                         <TableCell className={classes.head} >
                         <Grid container spacing={24}>
                           <Grid item className={`${classes.headText} ${classes.paddingSmall}`} >Hosts</Grid>
@@ -602,122 +625,102 @@ class PageHdModifiers extends Component {
                             </Paper>
                           </Grid>
                         </Grid>
-                        
-                     
                         </TableCell>
                         <TableCell className={classes.head} >Templates</TableCell>
                         <TableCell className={`${classes.head} ${classes.smallRow}`} >
-                        { !modalActive && <span>
-
-                          <Chip
-                            avatar={<Avatar className={classes.chipAvatarBlue} ><IconModify className={classes.whiteIcon} /> </Avatar>}
-                            className={`${classes.styledChip} ${classes.darkenBlueChip}`}
-                            label={`${modifiersList.length > 0 ? `Modify or add new` : `Add`} modifiers to discovered jobs`}
-                            onClick={this.showModal}
-                          />
-{/* 
-                          <IconModify className={classes.whiteIcon} /> {modifiersList.length > 0 ? `Modify or add new` : `Add`} modifiers to discovered jobs
-                          <ButtonAdd className={`${classes.btnCentreonGreen} ${classes.marginLeft} `} onClick={this.showModal} /> */}
-                        </span>}
                         </TableCell>
-                    </TableRow>
-                  </TableHead>
-                <TableBody>
-                  {jobs.map(host => {
-                      return (
-                        <TableRow
-                          className={classes.tableRow}
-                          hover
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={host.id}
-                        >
-                          <TableCell padding="none">
-                            <Checkbox
-                              onClick={event => this.handleClick(event, host.id)}
-                              className={`${classes.checkboxRoot}`}
-                              classes={{
-                                // checked: classes.checkboxChecked,
-                              }}
-                            />
-                          </TableCell>
-                          <TableCell
-                            scope="row"
-                            padding="none"
+                      </TableRow>
+                    </TableHead>
+                  <TableBody>
+                    {jobs.map(host => {
+                        return (
+                          <TableRow
+                            className={classes.tableRow}
+                            hover
+                            role="checkbox"
+                            tabIndex={-1}
+                            key={host.id}
                           >
-                            <div className={classes.infoIconContainer }>
-                              <IconButton
-                                className={`${classes.infoIconButtonRoot} ${classes.paddingSmall}`}
-                                aria-label="Get host detailed information"
-                              >
-                                <InfoIcon className={classes.infoIconRoot} />
-                              </IconButton>
-                              {host.name}
-                            </div>
-                          </TableCell>
-                          <TableCell className={classes.selectTemplateCell} align="right">
-                              <Select
-                                native
-                                input={
-                                  <OutlinedInput
-                                    name="value"
-                                  />
-                                }
-                              >
-                                <option value="" />
-                                <option value={host.selectedTemplates[0]}>{host.selectedTemplates[0]}</option>
-                                <option value={host.selectedTemplates[1]}>{host.selectedTemplates[1]}</option>
-                                <option value={host.selectedTemplates[2]}>{host.selectedTemplates[2]}</option>
-                              </Select>
-                          </TableCell>
-                          <TableCell >
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </div>
-            <CustomTablePagination
-              component='div'
-              rowsPerPageOptions={2}
-              colSpan={3}
-              count={15}
-              rowsPerPage={2}
-              page={2}
-              onChangePage={this.handleChangePage}
-              onChangeRowsPerPage={this.handleChangeRowsPerPage}
-            />
-          </Paper>
-          <Grid container spacing={24} className={classes.footerButtons}>
-          
-          
-            <Grid item xs>
-            <Button onClick={this.handleBack} variant="contained" size="small">
-                BACK
-              </Button>
-
+                            <TableCell padding="none">
+                              <Checkbox
+                                onClick={event => this.handleClick(event, host.id)}
+                                className={`${classes.checkboxRoot}`}
+                              />
+                            </TableCell>
+                            <TableCell
+                              scope="row"
+                              padding="none"
+                            >
+                              <div className={classes.infoIconContainer }>
+                                <IconButton
+                                  className={`${classes.infoIconButtonRoot} ${classes.paddingSmall}`}
+                                  aria-label="Get host detailed information"
+                                >
+                                  <InfoIcon className={classes.infoIconRoot} />
+                                </IconButton>
+                                {host.name}
+                              </div>
+                            </TableCell>
+                            <TableCell className={classes.selectTemplateCell} align="right">
+                                <Select
+                                  native
+                                  input={
+                                    <OutlinedInput
+                                      name="value"
+                                    />
+                                  }
+                                >
+                                  <option value="" />
+                                  <option value={host.selectedTemplates[0]}>{host.selectedTemplates[0]}</option>
+                                  <option value={host.selectedTemplates[1]}>{host.selectedTemplates[1]}</option>
+                                  <option value={host.selectedTemplates[2]}>{host.selectedTemplates[2]}</option>
+                                </Select>
+                            </TableCell>
+                            <TableCell >
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </div>
+              <CustomTablePagination
+                component='div'
+                rowsPerPageOptions={2}
+                colSpan={3}
+                count={15}
+                rowsPerPage={2}
+                page={2}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+              />
+            </Paper>
+            <Grid container spacing={24} className={classes.footerButtons}>
+              <Grid item xs>
+                <Button onClick={this.handleBack} variant="contained" size="small">
+                  BACK
+                </Button>
+              </Grid>
+              <Grid item xs className={classes.saveButtons}>
+                <Button onClick={() => this.handleSave(false)}  variant="contained" size="small" className={classes.saveButton}>
+                  SAVE
+                </Button>
+                <Button onClick={() => this.handleSave(true)}  variant="contained" size="small" className={`${classes.saveButton} ${classes.marginLeft}`}>
+                  SAVE & MONITOR
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs className={classes.saveButtons}>
-            <Button onClick={() => this.handleSave(false)}  variant="contained" size="small" className={classes.saveButton}>
-                SAVE
-              </Button>
-              <Button onClick={() => this.handleSave(true)}  variant="contained" size="small" className={`${classes.saveButton} ${classes.marginLeft}`}>
-                SAVE & MONITOR
-              </Button>
-            </Grid>
-          </Grid>
-  
           </Grid>
 
           {modalActive ? (
-            <Grid
+           <Grid
               item
-              // className={`${classes.checkboxColumn} ${classes.head}`}
             >
-              <Paper>
-                <HeaderContent label="Modifiers edition" />
-                <div>
+             <Paper>
+                <HeaderContent  className={classes.headerContent}
+                  icon={ <IconModify className={classes.whiteIconSmall} />} label="Modifiers edition"
+                  close={<IconCloseRight onClick={this.onHideModal}/>} />
+                <div className={classes.marginTop}>
                   <Chip
                     avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
                     className={classes.styledChip}
@@ -730,9 +733,9 @@ class PageHdModifiers extends Component {
                     label={combineMultipleProperties[0].title}
                     onClick={() => this.activeModifierForm(combineMultipleProperties)}
                   />
-                  </div>
+                </div>
 
-                  <div>
+                <div>
                   <Chip
                     avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
                     className={classes.styledChip}
@@ -768,54 +771,16 @@ class PageHdModifiers extends Component {
                 </div>
 
                 <form className={classes.formModifier} autoComplete="on">
-                {modifiersList.length > 0  || activeSaveButton ? (
-                    <div>
-                        <ContainedButtonPrimary
-                            className={classes.btnCentreonGrey}
-                            variant="contained"
-                            label="Cancel"
-                            onClick={this.onHideModal}
-                            {...rest}
-                          />
-
-                          {confirm ? (
-                            <>
-                              <ContainedButtonPrimary
-                                className={classes.btnCentreonGrey}
-                                variant="contained"
-                                color="secondary"
-                                label="Don't delete"
-                                onClick={this.dontDelete}
-                              />
-                              <ContainedButtonPrimary
-                                className={classes.btnCentreonRed}
-                                variant="contained"
-                                color="secondary"
-                                label="Confirm delete"
-                                onClick={this.onDeleteModifiers}
-                              />
-                            </>
-                          ) : (
-                            <ContainedButtonPrimary
-                                className={classes.btnCentreonBlue}
-                                variant="contained"
-                                color="secondary"
-                                label="Delete all modifiers"
-                                onClick={this.confirmDelete}
-                              />
-                          )}
-                        </div>
-                        ) : null}
                   {activeForm && (
-                  <React.Fragment>
-                    <FormTemplateFields  data={activeForm} onChange={this.handleChange('value')} modifier={title}/>
+                  <>
+                    <FormTemplateFields  data={activeForm} onChange={this.handleChange('value')} modifier={listTitle}/>
                     <ContainedButtonPrimary
                         className={classes.btnCentreonBlue}
                         variant="contained"
                         label="Add this modifier"
                         onClick={this.outputList}
                       />
-                  </React.Fragment>
+                  </>
 
                   )}
 
@@ -849,13 +814,7 @@ class PageHdModifiers extends Component {
                       ) : (
                         <>
                           <ContainedButtonPrimary
-                            className={classes.btnCentreonGrey}
-                            variant="contained"
-                            label="Cancel"
-                            onClick={this.onHideModal}
-                          />
-                          <ContainedButtonPrimary
-                            className={`${classes.button} ${classes.specialTop}`}
+                            className={`${classes.button}`}
                             variant="contained"
                             color="secondary"
                             disabled
@@ -863,17 +822,49 @@ class PageHdModifiers extends Component {
                           />
                         </>
                       )}
+
+
+                      {modifiersList.length > 0  || activeSaveButton ? (
+                        <div>
+                          {confirm ? (
+                            <>
+                              <ContainedButtonPrimary
+                                className={classes.btnCentreonGrey}
+                                variant="contained"
+                                color="secondary"
+                                label="Don't delete"
+                                onClick={this.dontDelete}
+                              />
+                              <ContainedButtonPrimary
+                                className={classes.btnCentreonRed}
+                                variant="contained"
+                                color="secondary"
+                                label="Confirm delete"
+                                onClick={this.onDeleteModifiers}
+                              />
+                            </>
+                          ) : (
+                            <ContainedButtonPrimary
+                                className={classes.btnCentreonBlue}
+                                variant="contained"
+                                color="secondary"
+                                label="Delete all modifiers"
+                                onClick={this.confirmDelete}
+                              />
+                          )}
+                        </div>
+                      ) : null}
+
+
                     </div>
-                   
                     </>
                   }
                 </form>
-
               </Paper>
             </Grid>
           ) : null}
         </Grid>
-      </React.Fragment>
+      </>
     );
   }
 }

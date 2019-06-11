@@ -21,7 +21,7 @@ const styles = theme => ({
     minWidth: "calc(100% - 15px)"
   },
   formModifier: {
-    maxWidth: '350px',
+    maxWidth: '400px',
     padding: '10px',
   },
   inputForm: {
