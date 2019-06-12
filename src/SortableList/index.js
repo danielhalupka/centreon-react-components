@@ -113,7 +113,7 @@ const styles = theme => ({
   },
   formEditing: {
     display: 'block',
-    maxWidth: '400px',
+    maxWidth: '600px',
     padding: '10px 0px',
     top: '12px',
     position: 'relative',

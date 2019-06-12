@@ -90,9 +90,9 @@ const styles = theme => ({
 });
 class FormTemplateFields extends Component {
   render() {
-    const { classes, handleChange, data, modifier, ...rest  } = this.props;
+    const { classes, handleChange, data, modifier, currentVal, ...rest  } = this.props;
     return (
-      <div className={classes.formModifier} autoComplete="on" data modifier {...rest}>
+      <div className={classes.formModifier} autoComplete="on" data={data}  modifier {...rest}>
           <FormControl variant="outlined" className={classes.formControl}>
             <Typography variant="caption">
               <h3>
@@ -129,9 +129,13 @@ class FormTemplateFields extends Component {
                       }
                     >
                       <option value="" />
-                      <option value={form.values[0]}>{form.values[0]}</option>
-                      <option value={form.values[1]}>{form.values[1]}</option>
-                      <option value={form.values[2]}>{form.values[2]}</option>
+                      {form.values[0] && <option value={form.values[0]}>{form.values[0]}</option>}
+                      {form.values[1] && <option value={form.values[1]}>{form.values[1]}</option>}
+                      {form.values[2] && <option value={form.values[2]}>{form.values[2]}</option>}
+                      {form.values[3] && <option value={form.values[3]}>{form.values[3]}</option>}
+                      {form.values[4] && <option value={form.values[4]}>{form.values[4]}</option>}
+                      {form.values[5] && <option value={form.values[5]}>{form.values[5]}</option>}
+                      {form.values[6] && <option value={form.values[6]}>{form.values[6]}</option>}
                     </Select>
                     </div>
                     )
@@ -153,7 +157,7 @@ class FormTemplateFields extends Component {
                 )
                 break;
               default:
-              return <p>No modifiers</p>
+              return <p>No form</p>
             }
             })}
           </FormControl>

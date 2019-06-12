@@ -16,6 +16,7 @@ import TableHead from "@material-ui/core/TableHead";
 import Checkbox from '@material-ui/core/Checkbox';
 
 import Select from '../AsyncSelect';
+import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -119,7 +120,7 @@ const styles = theme => ({
     minWidth: "calc(100% - 15px)"
   },
   formModifier: {
-    maxWidth: '400px',
+    maxWidth: '600px',
     padding: '10px',
   },
   inputForm: {
@@ -276,6 +277,25 @@ class PageHdModifiers extends Component {
     listTitle: null,
     confirm: false,
     modifiersList: [],
+    initialForm: [
+      {
+        id: 1,
+        title: 'Modifier',
+        placeholder: 'Select target property',
+        input_type: 'dropdown',
+        values: [
+          "Association",
+          "Combination",
+          "Inclusion",
+          "Exclusion",
+          "Lower Case",
+          "Upper Case",
+          "Word Capitalizer",
+        ],
+        forId: 'id1',
+        required: true
+      }
+    ],
     association: [
       {
         id: 1,
@@ -443,10 +463,7 @@ class PageHdModifiers extends Component {
 
   handleChange = targ => event => {
     let { title, targ , source}= this.state;
-
-    let sourc = event.target.value;
-    console.log(sourc);
-  
+    let sourc = event.target.value;  
     this.setState({
       targ: sourc,
       source: sourc,
@@ -455,18 +472,34 @@ class PageHdModifiers extends Component {
 
   };
 
+  handleChangeForm = eventValue => event => {
+    let { activeForm}= this.state;
+    //defining form name string
+    let eventValue = event.target.value.toLowerCase();
+    let currentform = eventValue.replace(/\s/g, '');
+    console.log('form to show: ' + currentform);
+
+    this.setState({
+      //why da hack this currentform value doesn't apply to state?
+      activeForm: currentform,
+      // title: `${text} -> ${targ} -> ${source}`,
+      // listTitle: text,
+    });  
+  };
+
+
+
   activeModifierForm = (currentmodifier) => {
     let { targ, source }= this.state;
     let text = currentmodifier[0].title;
+    console.log(currentmodifier)
     this.setState({
-      activeForm: currentmodifier,
+      activeForm:currentmodifier,
       targ,
       source,
       title: `${text} -> ${targ} -> ${source}`,
       listTitle: text,
     });
-
-    console.log(currentmodifier)
   };
 
   activeSaveButton = () => {
@@ -487,7 +520,6 @@ class PageHdModifiers extends Component {
       modifiersList: modifiersArr,
       confirm: false,
     });
-    console.log(modifiersArr);
   };
 
   onSortModifier = ({ oldIndex, newIndex }) => {
@@ -564,6 +596,7 @@ class PageHdModifiers extends Component {
       fieldsUppercase,
       fieldsCapitalize,
       activeForm,
+      initialForm,
       activeSaveButton,
       tempActiveList,
       modifiersList,
@@ -587,8 +620,7 @@ class PageHdModifiers extends Component {
                       className={`${classes.btnCentreonBlue} ${classes.paddingSmall}`}
                       onClick={this.showModal}
                       >
-                      {`${modifiersList.length > 0 ? `Modify or add new` : `Add`} modifiers to discovered jobs  `}&nbsp;
-                      <IconModify className={classes.whiteIcon} />
+                      {`Edit modifiers`}
                     </Button>
                 </span>}
                 </Grid>
@@ -718,7 +750,7 @@ class PageHdModifiers extends Component {
             >
              <Paper>
                 <HeaderContent  className={classes.headerContent}
-                  icon={ <IconModify className={classes.whiteIconSmall} />} label="Modifiers edition"
+                  label="Modifiers edition"
                   close={<IconCloseRight onClick={this.onHideModal}/>} />
                 <div className={classes.marginTop}>
                   <Chip
@@ -771,6 +803,19 @@ class PageHdModifiers extends Component {
                 </div>
 
                 <form className={classes.formModifier} autoComplete="on">
+
+                <p>not working form with dynamic parameter => working when activeForm:form is commented</p>
+
+              <FormTemplateFields  data={initialForm} onChange={this.handleChangeForm('value')}  modifier={listTitle}/>
+
+              <p>not working form with dynamic parameter</p>
+
+              <FormTemplateFields  data={initialForm} onChange={(event) => this.handleChangeForm('value')}  modifier={listTitle}/>
+
+
+              <p>compared with working form with static parameter word capitalizer</p>
+              <FormTemplateFields  data={initialForm} onChange={() => this.activeModifierForm(fieldsCapitalize)}  modifier={listTitle}/>
+
                   {activeForm && (
                   <>
                     <FormTemplateFields  data={activeForm} onChange={this.handleChange('value')} modifier={listTitle}/>
