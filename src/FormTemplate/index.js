@@ -17,12 +17,7 @@ const styles = theme => ({
   },
   formControl: {
     margin: '0px',
-    minWidth: "calc(100% - 15px)"
-  },
-  formModifier: {
-    maxWidth: '400px',
-    padding: '10px',
-    border: "0px solid transparent"
+    width: '100%',
   },
   inputForm: {
     height: "2.5rem",
@@ -94,14 +89,6 @@ class FormTemplateFields extends Component {
     return (
       <div className={classes.formModifier} autoComplete="on" data={data}  modifier {...rest}>
           <FormControl variant="outlined" className={classes.formControl}>
-            <Typography variant="caption">
-              <h3>
-                {`Veuillez selectionner les paramètres de votre : ${
-                  modifier
-                } `}
-              </h3>
-            </Typography>
-
             {data.map(form => {
               switch (form.input_type) {
               case 'dropdown':
@@ -128,7 +115,7 @@ class FormTemplateFields extends Component {
                         />
                       }
                     >
-                      <option value="" />
+                       <option value=" "></option>
                       {form.values[0] && <option value={form.values[0]}>{form.values[0]}</option>}
                       {form.values[1] && <option value={form.values[1]}>{form.values[1]}</option>}
                       {form.values[2] && <option value={form.values[2]}>{form.values[2]}</option>}

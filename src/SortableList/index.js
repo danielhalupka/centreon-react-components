@@ -33,6 +33,7 @@ const styles = theme => ({
   },
   indexLower: {
     zIndex: "888",
+    padding: '12px',
   },
   maxWidth: {
     backgroundColor: "yellow"
@@ -41,11 +42,14 @@ const styles = theme => ({
     listStyleType: 'none',
     marginTop: '15px',
     marginBottom: '15px',
-    paddingInlineStart: '20px',
+    paddingInlineStart: '0px',
     maxHeight: '350px',
     overflowY: 'auto',
     '& li': {
       listStyle: 'none',
+      '&:nth-child(even)': {
+        backgroundColor: 'rgba(0, 162, 220, .1)',
+      },
     }
   },
   listItem: {
@@ -57,9 +61,13 @@ const styles = theme => ({
     position: 'absolute',
     top: '15px',
     paddingLeft: '0px',
-    height: '30px',
     '& span' : {
-      fontSize: '10px',
+      paddingLeft: '15px',
+      whiteSpace: 'nowrap',
+      fontSize: '14px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      maxWidth: '430px',
     }
   },
   actionButtons: {
@@ -69,8 +77,8 @@ const styles = theme => ({
   },
   closeBtn: {
     position: 'absolute',
-    width: '47px',
-    height: '47px',
+    width: '36px',
+    height: '36px',
     zIndex: '999',
     top: '1px',
     padding: '10px',
@@ -78,42 +86,29 @@ const styles = theme => ({
   },
   editBtn: {
     position: 'absolute',
-    width: '47px',
-    height: '47px',
+    width: '36px',
+    height: '36px',
     zIndex: '999',
     top: '1px',
     padding: '10px',
-    right: '50px',
+    right: '34px',
   },
   closeEditingForm: {
     position: 'absolute',
-    width: '47px',
-    height: '47px',
+    width: '36px',
+    height: '36px',
     zIndex: '999',
-    border: '1px solid red',
     right: '150px',
   },
+  paddingSmall: {
+   padding: '5px',
+  },
   moveBtn: {
-    height: '47px',
-  },
-  btnCentreonBlue: {
-    marginTop: '10px',
-    backgroundColor:  '#009fdf',
-    marginRight: '10px',
-    '&:hover': {
-      backgroundColor: '#007AB8',
-    },
-    '&:focus': {
-      backgroundColor: '#007AB8',
-    }
-  },
-  formControl: {
-    margin: '8px 0',
-    minWidth: "calc(100% - 15px)"
+    height: '36px',
   },
   formEditing: {
     display: 'block',
-    maxWidth: '600px',
+    width: '90%',
     padding: '10px 0px',
     top: '12px',
     position: 'relative',
@@ -207,31 +202,31 @@ class SortableComponent extends Component {
       <ListItem  {...rest} className={classes.listItem}>
         <ListItemText  primary={value} className={classes.listText}/>
         <ListItemSecondaryAction className={classes.actionButtons}>
-          <IconButton className={classes.moveBtn}>
-            <FlipToFrontIcon />
+          <IconButton className={`${classes.moveBtn} ${classes.paddingSmall}`}>
+            <FlipToFrontIcon className={classes.iconSmall}/>
           </IconButton>
           {isEditing ?
-            <IconButton className={classes.indexLower}>
+            <IconButton className={`${classes.indexLower} ${classes.paddingSmall}`}>
               <DoneIcon />
             </IconButton>
           :
-          <IconButton className={classes.indexLower}>
+          <IconButton className={`${classes.indexLower} ${classes.paddingSmall}`}>
             <EditIcon />
           </IconButton>
           }
 
-          <IconButton className={classes.indexLower}>
+          <IconButton className={`${classes.indexLower} ${classes.paddingSmall}`}>
             <DeleteIcon />
           </IconButton>
 
           {isEditing ?
-            <IconButton className={classes.editBtn} aria-label="Close edit" onClick={closeEditingForm} >
+            <IconButton className={`${classes.editBtn} ${classes.paddingSmall}`} aria-label="Close edit" onClick={closeEditingForm} >
             </IconButton>
           :
-            <IconButton className={classes.editBtn} aria-label="Edit" onClick={editModifier} >
+            <IconButton className={`${classes.editBtn} ${classes.paddingSmall}`} aria-label="Edit" onClick={editModifier} >
             </IconButton>
           }
-          <IconButton className={classes.closeBtn} aria-label="Delete" onClick={onDelete} >
+          <IconButton className={`${classes.closeBtn} ${classes.paddingSmall}`} aria-label="Delete" onClick={onDelete} >
           </IconButton>
         </ListItemSecondaryAction>
 

@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
-import Title  from "../Title";
 import Typography from '@material-ui/core/Typography';
 import TitleCustom  from "../Title/TitleCustomMui";
 
@@ -16,7 +15,6 @@ import TableHead from "@material-ui/core/TableHead";
 import Checkbox from '@material-ui/core/Checkbox';
 
 import Select from '../AsyncSelect';
-import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -25,44 +23,21 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import Button from "@material-ui/core/Button";
 import CustomTablePagination from "../TablePagination/TablePagination";
-import IconModify from "../Icon/IconModify";
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/InfoOutlined';
-
 import IconCloseRight  from "../Icon/IconCloseRight/index";
 
 import { arrayMove } from "react-sortable-hoc";
 import SortableComponent from "../SortableList";
 import FormTemplateFields from "../FormTemplate";
 import ContainedButtonPrimary from "../Button/ButtonContained";
-
-import { Chip } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-
 import Grid from "@material-ui/core/Grid";
 import { HeaderContent } from "../";
 
 const styles = theme => ({
-  '@global': {
-    body: {
-      li :{
-        listStyleType: 'none'
-      },
-    },
-  },
-  whiteIcon: {
-    fill: "#FFFFFF",
-    position: "relative",
-    top: "2px"
-  },
-  whiteIconSmall: {
-    fill: "#FFFFFF",
-    position: "relative",
-    top: "8px",
-  },
   tableRow: {
     height: '36px',
-    '&:nth-child(even) ': {
+    '&:nth-child(even)': {
       backgroundColor: 'rgba(0, 162, 220, .3)',
     },
   },
@@ -114,35 +89,9 @@ const styles = theme => ({
     position: "sticky",
     top: 0
   },
-
-  formControl: {
-    margin: '0px',
-    minWidth: "calc(100% - 15px)"
-  },
   formModifier: {
     maxWidth: '600px',
     padding: '10px',
-  },
-  inputForm: {
-    height: "2.5rem",
-    "&:focus": {
-      backgroundColor: "transparent"
-    }
-  },
-  inputCustom: {
-    '& input': {
-      padding: '9px',
-    }
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2
-  },
-  selectLabel: {
-    position: "relative",
-    left: "3px",
-    top: "17px",
-    marginTop: "0px",
-    display: "block"
   },
   button: {
     margin: '8px 0'
@@ -153,45 +102,8 @@ const styles = theme => ({
   iconButton: {
     padding: 10,
   },
-  divider: {
-    width: 1,
-    height: 28,
-    margin: 4,
-  },
-  styledChip: {
-    margin : '5px',
-    backgroundColor:  'rgba(0, 162, 220, .3)',
-    color: 'rgba(0, 0, 0, 0.87)',
-    '&:hover':{
-      backgroundColor: '#009fdf',
-      color: '#fff',
-    },
-    '&:focus':{
-      backgroundColor: '#009fdf',
-      color: '#fff',
-    },
-  },
-  darkenBlueChip: {
-    margin : '5px',
-    backgroundColor:  '#007AB8',
-    color: '#fff',
-    '&:hover':{
-      backgroundColor: '#004c72',
-      color: '#fff',
-    },
-    '&:focus':{
-      backgroundColor: '#004c72',
-      color: '#fff',
-    },
-  },
-  chipAvatarBlue: {
-    backgroundColor: '#009fdf',
-    color: '#fff',
-    fontWeight: '600',
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
+  btnCentreon: {
+    margin: '10px 10px 10px 0',
   },
   btnCentreonBlue: {
     marginTop: '10px',
@@ -266,10 +178,15 @@ class PageHdModifiers extends Component {
   state = {
     modalActive: false,
     labelWidth: 4,
-    targ: "target",
-    source: "source",
+    targ: null,
+    source: null,
     otherSource: null,
     regex: null,
+    validRegex: null,
+    exclusionVal: null,
+    uppercaseVal: null,
+    lowercaseVal: null,
+    wcapVal: null,
     currentEdit: null,
     activeForm: null,
     activePreviewButton: false,
@@ -340,7 +257,7 @@ class PageHdModifiers extends Component {
         required: true
       },
     ],
-    combineMultipleProperties: [
+    combination: [
       {
         id: 1,
         title: 'Combination',
@@ -379,7 +296,7 @@ class PageHdModifiers extends Component {
         required: true
       },
     ],
-    fieldsInclusion: [
+    inclusion: [
       {
         id: 1,
         title: 'Inclusion',
@@ -404,7 +321,7 @@ class PageHdModifiers extends Component {
         required: true
       },
     ],
-    fieldsExclusion: [
+    exclusion: [
       {
         id: 1,
         title: "Exclusion",
@@ -424,7 +341,7 @@ class PageHdModifiers extends Component {
         required: true
       },
     ],
-    fieldsLowercase: [
+    lowercase: [
       {
         id: 1,
         title: "Lower Case",
@@ -435,7 +352,7 @@ class PageHdModifiers extends Component {
         required: true
       }
     ],
-    fieldsUppercase: [
+    uppercase: [
       {
         id: 1,
         title: "Upper Case",
@@ -446,7 +363,7 @@ class PageHdModifiers extends Component {
         required: true
       }
     ],
-    fieldsCapitalize: [
+    wordcapitalizer: [
       {
         id: 1,
         title: "Word Capitalizer",
@@ -461,46 +378,93 @@ class PageHdModifiers extends Component {
     tempActiveList: false
   };
 
-  handleChange = targ => event => {
-    let { title, targ , source}= this.state;
-    let sourc = event.target.value;  
+  handleChange =  event => {
+    let selected = event.target.value;
+    switch (selected.substring(0, 3).toLowerCase()) {
+      case 'sou':
+        this.setState({
+          source: selected,
+        });
+        console.log(selected);
+        break;
+      case 'tar':
+        this.setState({
+          targ: selected,
+        });
+        console.log(selected);
+        break;
+      case 'oth':
+        this.setState({
+          otherSource: selected,
+        });
+        console.log(selected);
+        break;
+      case 'val':
+        this.setState({
+          validRegex: selected,
+        });
+        console.log(selected);
+        break;
+      case 'exc':
+        this.setState({
+          exclusionVal: selected,
+        });
+        console.log(selected);
+        break;
+      case 'upp':
+        this.setState({
+          uppercaseVal: selected,
+        });
+        console.log(selected);
+        break;
+      case 'low':
+        this.setState({
+          lowercaseVal: selected,
+        });
+        console.log(selected);
+        break;
+      case 'cap':
+        this.setState({
+          wcapVal: selected,
+        });
+        console.log(selected);
+        break;
+      default:
+        this.setState({
+          regex: selected,
+        });
+        console.log(selected);
+    }
     this.setState({
-      targ: sourc,
-      source: sourc,
       activeSaveButton: true,
     });
 
   };
 
-  handleChangeForm = eventValue => event => {
-    let { activeForm}= this.state;
-    //defining form name string
+  handleChangeForm = event => {
     let eventValue = event.target.value.toLowerCase();
     let currentform = eventValue.replace(/\s/g, '');
+
+    let text = currentform;
+    let textUpdated = text.charAt(0).toUpperCase() + text.slice(1)
+
     console.log('form to show: ' + currentform);
+    console.log('form to show: ' + this.state[currentform]);
 
     this.setState({
-      //why da hack this currentform value doesn't apply to state?
-      activeForm: currentform,
-      // title: `${text} -> ${targ} -> ${source}`,
-      // listTitle: text,
-    });  
-  };
-
-
-
-  activeModifierForm = (currentmodifier) => {
-    let { targ, source }= this.state;
-    let text = currentmodifier[0].title;
-    console.log(currentmodifier)
-    this.setState({
-      activeForm:currentmodifier,
-      targ,
-      source,
-      title: `${text} -> ${targ} -> ${source}`,
-      listTitle: text,
+      activeForm: this.state[currentform],
+      listTitle: textUpdated,
+      targ: null,
+      source: null,
+      otherSource: null,
+      regex: null,
+      validRegex: null,
+      uppercaseVal: null,
+      lowercaseVal: null,
+      wcapVal: null,
     });
   };
+
 
   activeSaveButton = () => {
     this.setState({
@@ -509,9 +473,11 @@ class PageHdModifiers extends Component {
   };
 
   outputList = () => {
-    let {  modifiersList, title }= this.state;
+    let {  modifiersList, listTitle, targ , source, otherSource, regex, validRegex, exclusionVal, uppercaseVal, lowercaseVal, wcapVal }= this.state;
+    let newtitle = (listTitle ? listTitle : '' ) + (targ ? ' -> ' + targ: '') + ( source ? ' -> ' + source: '') + ( otherSource ? ' -> ' + otherSource: '') + ( regex ? ' -> ' + regex: '')  + ( validRegex ?' -> ' + validRegex: '')  + (exclusionVal ? ' -> ' + exclusionVal : '') + (uppercaseVal ? ' -> ' + uppercaseVal : '') + (lowercaseVal ? ' -> ' + lowercaseVal : '') + (wcapVal ? ' -> ' + wcapVal : '');
+
     let modifiersArr = modifiersList;
-    modifiersArr.push(title.toString());
+    modifiersArr.push(newtitle.toString());
     this.setState({
       tempActiveList: true,
       activePreviewButton: true,
@@ -585,23 +551,15 @@ class PageHdModifiers extends Component {
   };
 
   render() {
-    const { classes, jobs, hideModal, ...rest } = this.props;
+    const { classes, jobs} = this.props;
     const {
       modalActive,
-      association,
-      combineMultipleProperties,
-      fieldsInclusion,
-      fieldsExclusion,
-      fieldsLowercase,
-      fieldsUppercase,
-      fieldsCapitalize,
       activeForm,
       initialForm,
       activeSaveButton,
       tempActiveList,
       modifiersList,
       currentEdit,
-      title,
       confirm,
       listTitle} = this.state;
     return (
@@ -752,94 +710,38 @@ class PageHdModifiers extends Component {
                 <HeaderContent  className={classes.headerContent}
                   label="Modifiers edition"
                   close={<IconCloseRight onClick={this.onHideModal}/>} />
-                <div className={classes.marginTop}>
-                  <Chip
-                    avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
-                    className={classes.styledChip}
-                    label={association[0].title}
-                    onClick={() => this.activeModifierForm(association)}
-                  />
-                  <Chip
-                    avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
-                    className={classes.styledChip}
-                    label={combineMultipleProperties[0].title}
-                    onClick={() => this.activeModifierForm(combineMultipleProperties)}
-                  />
-                </div>
-
-                <div>
-                  <Chip
-                    avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
-                    className={classes.styledChip}
-                    label={fieldsInclusion[0].title}
-                    onClick={() => this.activeModifierForm(fieldsInclusion)}
-                  />
-                  <Chip
-                    avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
-                    className={classes.styledChip}
-                    label={fieldsExclusion[0].title}
-                    onClick={() => this.activeModifierForm(fieldsExclusion)}
-                  />
-                  <Chip
-                    avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
-                    className={classes.styledChip}
-                    label={fieldsLowercase[0].title}
-                    onClick={() => this.activeModifierForm(fieldsLowercase)}
-                  />
-                </div>
-                <div>
-                  <Chip
-                    avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
-                    className={classes.styledChip}
-                    label={fieldsUppercase[0].title}
-                    onClick={() => this.activeModifierForm(fieldsUppercase)}
-                  />
-                  <Chip
-                    avatar={<Avatar className={classes.chipAvatarBlue} >+</Avatar>}
-                    className={classes.styledChip}
-                    label={fieldsCapitalize[0].title}
-                    onClick={() => this.activeModifierForm(fieldsCapitalize)}
-                  />
-                </div>
 
                 <form className={classes.formModifier} autoComplete="on">
-
-                <p>not working form with dynamic parameter => working when activeForm:form is commented</p>
-
-              <FormTemplateFields  data={initialForm} onChange={this.handleChangeForm('value')}  modifier={listTitle}/>
-
-              <p>not working form with dynamic parameter</p>
-
-              <FormTemplateFields  data={initialForm} onChange={(event) => this.handleChangeForm('value')}  modifier={listTitle}/>
-
-
-              <p>compared with working form with static parameter word capitalizer</p>
-              <FormTemplateFields  data={initialForm} onChange={() => this.activeModifierForm(fieldsCapitalize)}  modifier={listTitle}/>
-
+                  <FormTemplateFields  data={initialForm} onChange={this.handleChangeForm}  />
                   {activeForm && (
-                  <>
-                    <FormTemplateFields  data={activeForm} onChange={this.handleChange('value')} modifier={listTitle}/>
-                    <ContainedButtonPrimary
-                        className={classes.btnCentreonBlue}
-                        variant="contained"
-                        label="Add this modifier"
-                        onClick={this.outputList}
-                      />
-                  </>
-
+                    <>
+                      <Typography variant="caption">
+                          <h3>
+                            {`Veuillez selectionner les paramètres de votre modifier: `}
+                          </h3>
+                      </Typography>
+                      <FormTemplateFields  data={activeForm} onChange={this.handleChange}/>
+                      <ContainedButtonPrimary
+                          className={classes.btnCentreonBlue}
+                          variant="contained"
+                          label="Add this modifier"
+                          onClick={this.outputList}
+                        />
+                    </>
                   )}
 
                   {tempActiveList ? (
-                    <SortableComponent
-                      items={modifiersList}
-                      value={listTitle}
-                      onSort={this.onSortModifier}
-                      onDelete={this.onDeleteModifier}
-                      editModifier={this.onEditModifier}
-                      closeEditingForm={this.onCloseEditingForm}
-                      activeIndex={currentEdit}
-                    />
-                ) : null}
+                      <SortableComponent
+                        items={modifiersList}
+                        value={listTitle}
+                        onSort={this.onSortModifier}
+                        onDelete={this.onDeleteModifier}
+                        editModifier={this.onEditModifier}
+                        closeEditingForm={this.onCloseEditingForm}
+                        activeIndex={currentEdit}
+                      />
+                  ) : null}
+
                   {!activeForm &&
                     <>
                     <div>
@@ -857,17 +759,14 @@ class PageHdModifiers extends Component {
                           onClick={this.onHideModal}
                         />
                       ) : (
-                        <>
                           <ContainedButtonPrimary
-                            className={`${classes.button}`}
+                            className={classes.btnCentreon}
                             variant="contained"
                             color="secondary"
                             disabled
                             label="Save Modifiers"
                           />
-                        </>
                       )}
-
 
                       {modifiersList.length > 0  || activeSaveButton ? (
                         <div>
@@ -890,17 +789,15 @@ class PageHdModifiers extends Component {
                             </>
                           ) : (
                             <ContainedButtonPrimary
-                                className={classes.btnCentreonBlue}
-                                variant="contained"
-                                color="secondary"
-                                label="Delete all modifiers"
-                                onClick={this.confirmDelete}
-                              />
+                              className={classes.btnCentreonBlue}
+                              variant="contained"
+                              color="secondary"
+                              label="Delete all modifiers"
+                              onClick={this.confirmDelete}
+                            />
                           )}
                         </div>
                       ) : null}
-
-
                     </div>
                     </>
                   }
