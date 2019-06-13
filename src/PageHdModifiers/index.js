@@ -161,6 +161,9 @@ const styles = theme => ({
   marginTop: {
     marginTop : "10px!important",
   },
+  marginTop30: {
+    marginTop : "30px",
+  },
   paddingSmall: {
     padding: '2px 10px',
   },
@@ -710,12 +713,14 @@ class PageHdModifiers extends Component {
                 <HeaderContent  className={classes.headerContent}
                   label="Modifiers edition"
                   close={<IconCloseRight onClick={this.onHideModal}/>} />
-
                 <form className={classes.formModifier} autoComplete="on">
+                  <Typography variant="caption">
+                      <h3>Add modifier:</h3>
+                  </Typography>
                   <FormTemplateFields  data={initialForm} onChange={this.handleChangeForm}  />
                   {activeForm && (
                     <>
-                      <Typography variant="caption">
+                      <Typography variant="caption" className={classes.marginTop30}>
                           <h3>
                             {`Veuillez selectionner les paramètres de votre modifier: `}
                           </h3>
