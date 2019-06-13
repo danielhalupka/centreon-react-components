@@ -1,5 +1,5 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 import {
   IconAction,
   IconClose,
@@ -10,159 +10,161 @@ import {
   IconRound,
   IconToggleSubmenu,
   IconLegend
-} from "../src";
+} from '../src';
 
-storiesOf("Icon", module).add(
-  "Icon - action",
-() => {
-  return (
-  <React.Fragment>
-    <IconAction iconActionType="update" />
-    <IconAction iconActionType="clock" />
-    <IconAction iconActionType="check" />
-    <IconAction iconActionType="warning" />
-    <IconAction iconActionType="arrow-right" />
-  </React.Fragment>)},
-  { notes: "A very simple component" }
+storiesOf('Icon', module).add(
+  'Icon - action',
+  () => {
+    return (
+      <>
+        <IconAction iconActionType="update" />
+        <IconAction iconActionType="clock" />
+        <IconAction iconActionType="check" />
+        <IconAction iconActionType="warning" />
+        <IconAction iconActionType="arrow-right" />
+      </>
+    );
+  },
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - close small",
+storiesOf('Icon', module).add(
+  'Icon - close small',
   () => <IconClose iconType="small" />,
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - close middle",
+storiesOf('Icon', module).add(
+  'Icon - close middle',
   () => <IconClose iconType="middle" />,
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - close big",
+storiesOf('Icon', module).add(
+  'Icon - close big',
   () => <IconClose iconType="big" />,
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - content",
+storiesOf('Icon', module).add(
+  'Icon - content',
   () => <IconContent iconContentType="add" iconContentColor="green" />,
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - header",
+storiesOf('Icon', module).add(
+  'Icon - header',
   () => {
     return (
       <div
         style={{
-          backgroundColor: "#232f39",
-          padding: "10px"
+          backgroundColor: '#232f39',
+          padding: '10px'
         }}
       >
         <IconHeader
           iconType="poller"
           style={{
-            display: "inline-block"
+            display: 'inline-block'
           }}
         />
         <IconHeader
           iconType="hosts"
           style={{
-            display: "inline-block"
+            display: 'inline-block'
           }}
         />
         <IconHeader
           iconType="services"
           style={{
-            display: "inline-block"
+            display: 'inline-block'
           }}
         />
         <IconHeader
           iconType="user"
           style={{
-            display: "inline-block"
+            display: 'inline-block'
           }}
         />
         <IconHeader
           iconType="top-counter"
           style={{
-            display: "inline-block"
+            display: 'inline-block'
           }}
         />
       </div>
     );
   },
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - info",
+storiesOf('Icon', module).add(
+  'Icon - info',
   () => {
     return (
-      <React.Fragment>
+      <>
         <IconInfo iconName="state" />
         <IconInfo iconName="question" />
-    </React.Fragment>
-  )
-},
-  { notes: "A very simple component" }
+      </>
+    );
+  },
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - info with text",
+storiesOf('Icon', module).add(
+  'Icon - info with text',
   () => {
     return (
-      <React.Fragment>
+      <>
         <IconInfo iconName="question" iconText="Test" />
-    </React.Fragment>
-  )
-},
-  { notes: "A very simple component" }
+      </>
+    );
+  },
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - number bordered",
+storiesOf('Icon', module).add(
+  'Icon - number bordered',
   () => {
     return (
       <div
         style={{
-          backgroundColor: "#232f39",
-          padding: "10px"
+          backgroundColor: '#232f39',
+          padding: '10px'
         }}
       >
         <IconNumber iconType="bordered" iconColor="red" iconNumber="3" />
       </div>
     );
   },
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - number colored",
+storiesOf('Icon', module).add(
+  'Icon - number colored',
   () => {
     return (
       <div
         style={{
-          backgroundColor: "#232f39",
-          padding: "10px"
+          backgroundColor: '#232f39',
+          padding: '10px'
         }}
       >
         <IconNumber iconType="colored" iconColor="green" iconNumber="10" />
       </div>
     );
   },
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - round colored",
+storiesOf('Icon', module).add(
+  'Icon - round colored',
   () => {
     return (
       <div
         style={{
-          backgroundColor: "#232f39",
-          padding: "10px"
+          backgroundColor: '#232f39',
+          padding: '10px'
         }}
       >
         <IconRound
@@ -180,31 +182,31 @@ storiesOf("Icon", module).add(
       </div>
     );
   },
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - toggle",
+storiesOf('Icon', module).add(
+  'Icon - toggle',
   () => {
     return (
       <div
         style={{
-          backgroundColor: "#232f39",
-          padding: "10px"
+          backgroundColor: '#232f39',
+          padding: '10px'
         }}
       >
         <IconToggleSubmenu iconType="arrow" />
       </div>
     );
   },
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - legend",
+storiesOf('Icon', module).add(
+  'Icon - legend',
   () => {
     return (
-      <React.Fragment>
+      <>
         <IconLegend
           iconColor="gray"
           buttonActionType="clock"
@@ -220,17 +222,17 @@ storiesOf("Icon", module).add(
           buttonActionType="check"
           buttonIconType="check"
         />
-      </React.Fragment>
+      </>
     );
   },
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
 
-storiesOf("Icon", module).add(
-  "Icon - legend with title",
+storiesOf('Icon', module).add(
+  'Icon - legend with title',
   () => {
     return (
-      <React.Fragment>
+      <>
         <IconLegend
           iconColor="gray"
           buttonActionType="clock"
@@ -252,9 +254,8 @@ storiesOf("Icon", module).add(
           title="finished"
           legendType="title"
         />
-      </React.Fragment>
+      </>
     );
   },
-  { notes: "A very simple component" }
+  { notes: 'A very simple component' }
 );
-
