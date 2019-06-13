@@ -115,14 +115,13 @@ class FormTemplateFields extends Component {
                         />
                       }
                     >
-                       <option value=" "></option>
-                      {form.values[0] && <option value={form.values[0]}>{form.values[0]}</option>}
-                      {form.values[1] && <option value={form.values[1]}>{form.values[1]}</option>}
-                      {form.values[2] && <option value={form.values[2]}>{form.values[2]}</option>}
-                      {form.values[3] && <option value={form.values[3]}>{form.values[3]}</option>}
-                      {form.values[4] && <option value={form.values[4]}>{form.values[4]}</option>}
-                      {form.values[5] && <option value={form.values[5]}>{form.values[5]}</option>}
-                      {form.values[6] && <option value={form.values[6]}>{form.values[6]}</option>}
+                      <option value=" "></option>
+                      {form.values.map(options => {
+                        console.log(options)
+                        return (
+                         <option value={options}>{options}</option>
+                        )
+                      })}
                     </Select>
                     </div>
                     )
