@@ -117,7 +117,6 @@ class FormTemplateFields extends Component {
                     >
                       <option value=" "></option>
                       {form.values.map(options => {
-                        console.log(options)
                         return (
                          <option value={options}>{options}</option>
                         )
