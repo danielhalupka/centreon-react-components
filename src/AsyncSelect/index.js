@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import AsyncPaginate from 'react-select-async-paginate';
-//import Select from 'react-select/lib/Async';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -10,7 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   menuPortal: base => ({ ...base, zIndex: 9999 }),

@@ -1,7 +1,5 @@
 import React from "react";
 import { withStyles } from '@material-ui/core/styles';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Input from '@material-ui/core/Input';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';

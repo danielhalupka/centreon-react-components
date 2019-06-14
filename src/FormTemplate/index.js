@@ -8,7 +8,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   root: {
@@ -88,64 +87,64 @@ class FormTemplateFields extends Component {
     const { classes, handleChange, data, modifier, currentVal, ...rest  } = this.props;
     return (
       <div className={classes.formModifier} autoComplete="on" data={data}  modifier {...rest}>
-          <FormControl variant="outlined" className={classes.formControl}>
-            {data.map(form => {
-              switch (form.input_type) {
-              case 'dropdown':
-              return (
-                <div  key={form.id}>
-                    <InputLabel className={classes.selectLabel}
-                      ref={ref => {
-                        this.InputLabelRef = ref;
-                      }}
-                        htmlFor={form.forid}
-                        value={form.placeholder}
-                    >
-                      {form.placeholder}
-                    </InputLabel>
-                    <Select
-                      native
-                      className={`${classes.formControl} ${classes.inputForm}`}
-                      onChange={handleChange}
-                      name={form.name}
-                      input={
-                        <OutlinedInput
-                          name="value"
-                          id={form.forid}
-                        />
-                      }
-                    >
-                      <option value=" "></option>
-                      {form.values.map(options => {
-                        return (
-                         <option value={options}>{options}</option>
-                        )
-                      })}
-                    </Select>
-                    </div>
-                    )
-                break;
-              case 'text':
-              return (
-                <div  key={form.id}>
-                    <TextField
-                      className={classes.inputCustom}
-                      id="outlined-email-input"
-                      label={form.value}
-                      type="text"
-                      name="text"
-                      autoComplete="text"
-                      margin="normal"
-                      variant="outlined"
-                    />
-                </div>
-                )
-                break;
-              default:
-              return <p>No form</p>
-            }
-            })}
-          </FormControl>
+        <FormControl variant="outlined" className={classes.formControl}>
+          {data.map(form => {
+            switch (form.input_type) {
+            case 'dropdown':
+            return (
+              <div  key={form.id}>
+                  <InputLabel className={classes.selectLabel}
+                    ref={ref => {
+                      this.InputLabelRef = ref;
+                    }}
+                    htmlFor={form.forid}
+                    value={form.placeholder}
+                  >
+                    {form.placeholder}
+                  </InputLabel>
+                  <Select
+                    native
+                    className={`${classes.formControl} ${classes.inputForm}`}
+                    onChange={handleChange}
+                    name={form.name}
+                    input={
+                      <OutlinedInput
+                        name="value"
+                        id={form.forid}
+                      />
+                    }
+                  >
+                    <option value=" "></option>
+                    {form.values.map(options => {
+                      return (
+                        <option value={options}>{options}</option>
+                      )
+                    })}
+                  </Select>
+                  </div>
+                  )
+              break;
+            case 'text':
+            return (
+              <div  key={form.id}>
+                  <TextField
+                    className={classes.inputCustom}
+                    id="outlined-email-input"
+                    label={form.value}
+                    type="text"
+                    name="text"
+                    autoComplete="text"
+                    margin="normal"
+                    variant="outlined"
+                  />
+              </div>
+              )
+              break;
+            default:
+            return <p>No form</p>
+          }
+          })}
+        </FormControl>
       </div>
     );
   }

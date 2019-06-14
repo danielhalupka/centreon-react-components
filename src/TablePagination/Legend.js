@@ -55,27 +55,27 @@ const styles = theme => ({
 
 const CustomLegend = ({ classes }) => (
   <div className={classes.topButtons}>
-      <Paper className={classes.legend}>
-        <div className={classes.legendContent}>
-          <AccessTimeIcon className={classnames(classes.legendIcon, classes.accessTimeIcon)}/>
-          <Typography variant="caption" className={classes.legendText}>
-            running
-          </Typography>
-        </div>
-        <div className={classes.legendContent}>
-          <ReportProblemIcon className={classnames(classes.legendIcon, classes.reportProblemIcon)}/>
-          <Typography variant="caption" className={classes.legendText}>
-            failed
-          </Typography>
-        </div>
-        <div className={classes.legendContent}>
-          <DoneIcon className={classnames(classes.legendIcon, classes.doneIcon)}/>
-          <Typography variant="caption" className={classes.legendText}>
-            finished
-          </Typography>
-        </div>
-      </Paper>
-    </div>
+    <Paper className={classes.legend}>
+      <div className={classes.legendContent}>
+        <AccessTimeIcon className={classnames(classes.legendIcon, classes.accessTimeIcon)}/>
+        <Typography variant="caption" className={classes.legendText}>
+          running
+        </Typography>
+      </div>
+      <div className={classes.legendContent}>
+        <ReportProblemIcon className={classnames(classes.legendIcon, classes.reportProblemIcon)}/>
+        <Typography variant="caption" className={classes.legendText}>
+          failed
+        </Typography>
+      </div>
+      <div className={classes.legendContent}>
+        <DoneIcon className={classnames(classes.legendIcon, classes.doneIcon)}/>
+        <Typography variant="caption" className={classes.legendText}>
+          finished
+        </Typography>
+      </div>
+    </Paper>
+  </div>
 );
 
 export default withStyles(styles)(CustomLegend);

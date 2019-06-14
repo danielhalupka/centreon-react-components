@@ -1,13 +1,7 @@
 import React, { Component } from "react";
-import {
-  SortableContainer,
-  SortableElement
-} from "react-sortable-hoc";
-
 import { withStyles } from "@material-ui/core/styles";
 
 import FormTemplateFields from "../FormTemplate";
-
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -18,6 +12,10 @@ import FlipToFrontIcon from '@material-ui/icons/FlipToFront';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from "@material-ui/icons/Done";
 
+import {
+  SortableContainer,
+  SortableElement
+} from "react-sortable-hoc";
 
 
 const styles = theme => ({

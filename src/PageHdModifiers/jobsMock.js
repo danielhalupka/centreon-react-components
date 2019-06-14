@@ -10,7 +10,7 @@ export default [
 	  generate_date: "05/06/2019",
 	  duration: "3sec",
 	  items_discovered: 5,
-	  selectedTemplates: [
+		selectedTemplates: [
 			"Template 1",
 			"Template 2",
 			"Template 3",
@@ -27,7 +27,7 @@ export default [
 	  generate_date: "05/06/2019",
 	  duration: "3sec",
 	  items_discovered: 5,
-	  selectedTemplates: [
+		selectedTemplates: [
 			"Template 1",
 			"Template 2",
 			"Template 3",
@@ -44,7 +44,7 @@ export default [
 	  generate_date: "05/06/2019",
 	  duration: "3sec",
 	  items_discovered: 5,
-	  selectedTemplates: [
+		selectedTemplates: [
 			"Template 1",
 			"Template 2",
 			"Template 3",

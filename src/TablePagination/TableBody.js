@@ -52,10 +52,7 @@ const jobs = [
     duration: '3sec',
     items_discovered: 5
   }
-
 ]
-
-
 
 const styles = theme => ({
   tableRow: {
@@ -100,15 +97,7 @@ class CustomTableBody extends React.Component {
     modal: false,
   };
 
-  componentDidMount() {
-    console.log('did moount');
-    this.setState({
-      // labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-    });
-  }
-
   showModal = ()  => {
-    console.log('active modal');
     this.setState({
       modal: true,
      });
@@ -116,7 +105,6 @@ class CustomTableBody extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { modal } = this.state;
 
     return (
       <React.Fragment>
