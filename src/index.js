@@ -14,7 +14,6 @@ export { default as CustomRow } from "./Custom/CustomRow";
 export { default as CustomStyles } from "./Custom/CustomStyles";
 export { default as Description } from "./Description";
 export { default as FileUpload } from "./FileUpload";
-export { default as FormDynamic } from "./FormDynamic";
 export {
   default as HorizontalLine
 } from "./HorizontalLines/HorizontalLineRegular";
