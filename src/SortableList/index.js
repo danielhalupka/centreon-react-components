@@ -126,7 +126,7 @@ const styles = theme => ({
   formEditing: {
     display: 'block',
     width: '90%',
-    padding: '10px 0px',
+    padding: '10px 0 10px 15px',
     top: '12px',
     position: 'relative',
     marginBottom: '29px',
