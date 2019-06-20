@@ -17,7 +17,7 @@ class Sidebar extends Component {
     };
   }
 
-  toggleNavigation() {
+  toggleNavigation = () => {
     const { active } = this.state;
     this.setState({
       active: !active,

@@ -192,6 +192,13 @@ class Navigation extends Component {
                           ? `active`
                           : ''
                       ]]: true,
+                      [styles[
+                        secondLevel.toggled ||
+                        (!isNaN(pageId) &&
+                          String(pageId).substring(0, 3) === secondLevel.page)
+                          ? `active-${firstLevel.color}`
+                          : ""
+                      ]]: true
                     })}
                     onClick={() => {
                       if (secondLevel.groups.length < 1) {
