@@ -46,7 +46,7 @@ import FormTemplateFields from '../FormTemplate';
 import ContainedButtonPrimary from '../Button/ButtonContained';
 import Select from '../AsyncSelect';
 import TitleCustom  from '../Title/TitleCustomMui';
-import { HeaderContent } from '../';
+import HeaderContent from '../HeaderContent';
 
 const styles = (theme) => ({
   tableRow: {
