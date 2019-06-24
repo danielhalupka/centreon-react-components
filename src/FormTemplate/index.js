@@ -20,12 +20,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
 import { withStyles } from '@material-ui/core/styles';
 import InputTemplate from './input'
+import SelectTemplate from './select'
 
 const styles = (theme) => ({
   root: {
@@ -123,27 +122,16 @@ class FormTemplateFields extends Component {
             switch (form.input_type) {
               case 'dropdown':
                 return (
-                  <div key={form.id}>
-                    <InputLabel
-                      className={classes.selectLabel}
-                      htmlFor={form.forid}
-                      value={form.placeholder}
-                    >
-                      {form.placeholder}
-                    </InputLabel>
-                    <Select
-                      native
-                      className={`${classes.formControl} ${classes.inputForm}`}
-                      onChange={handleChange}
-                      name={form.name}
-                      input={<OutlinedInput name="value" id={form.forid} />}
-                    >
-                      <option value=" " />
-                      {form.values.map(options => {
-                        return <option value={options}>{options}</option>;
-                      })}
-                    </Select>
-                  </div>
+                  <SelectTemplate
+                    key={form.id}
+                    forid={form.forid}
+                    value={form.placeholder}
+                    placeholder={form.placeholder}
+                    name={form.name}
+                    input={<OutlinedInput name="value" id={form.forid} />}
+                    onChange={handleChange}
+                    optionsmap={form.values}
+                  />
                 );
                 break;
               case 'text':
