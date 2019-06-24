@@ -195,8 +195,7 @@ class SortableComponent extends Component {
   }
 
   handleChange = name => event => {
-    let source = event.target.value;
-    console.log(source);
+    const source = event.target.value;
     this.setState({
       [name]: source,
       activeSaveButton: true
