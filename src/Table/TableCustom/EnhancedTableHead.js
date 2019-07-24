@@ -42,7 +42,7 @@ class EnhancedTableHead extends Component {
           {headRows.map((row) => (
             <StyledTableCell
               key={row.id}
-              align={row.numeric ? 'left' : ''}
+              align={row.numeric ? 'left' : 'inherit'}
               padding={row.disablePadding ? 'none' : 'default'}
               sortDirection={orderBy === row.id ? order : false}
             >
@@ -51,7 +51,7 @@ class EnhancedTableHead extends Component {
               ) : (
                 <StyledTableSortLabel
                   active={orderBy === row.id}
-                  direction={order}
+                  direction={order || 'desc'}
                   onClick={this.createSortHandler(row.id)}
                   icon={{ color: 'red' }}
                 >

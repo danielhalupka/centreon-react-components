@@ -18,9 +18,8 @@ class TooltipMaterial extends React.Component {
   render() {
     const { label, classes, children, onClick, customStyle } = this.props;
     return (
-      <Tooltip title={label} className={classes.tooltipStyle}>
+      <Tooltip title={label} className={classes.tooltipStyle} onClick={onClick}>
         <IconButton
-          onClick={onClick}
           style={customStyle}
           aria-label={label}
           className={classes.iconButtonStyle}
