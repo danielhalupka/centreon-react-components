@@ -1,8 +1,5 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -274,7 +271,7 @@ class TableCustom extends Component {
                               >
                                 {column.columns.map((subColumn) => (
                                   <React.Fragment>
-                                    {subColumn.label} {row[subColumn.id]}
+                                    {`${subColumn.label} ${row[subColumn.id]}`}
                                     {subColumn.type === 'percentage'
                                       ? '%'
                                       : null}
@@ -373,8 +370,35 @@ class TableCustom extends Component {
   }
 }
 
+TableCustom.defaultProps = {
+  enabledColumn: '',
+  onRowClick: () => {},
+};
+
+const anyObject = PropTypes.objectOf(
+  PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.number]),
+);
+const anyArray = PropTypes.arrayOf(anyObject);
+
 TableCustom.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: anyObject.isRequired,
+  onSort: PropTypes.func.isRequired,
+  onTableSelectionChanged: PropTypes.func.isRequired,
+  columnConfiguration: anyArray.isRequired,
+  tableData: anyArray.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onPaginate: PropTypes.func.isRequired,
+  onDuplicate: PropTypes.func.isRequired,
+  onPaginationLimitChanged: PropTypes.func.isRequired,
+  limit: PropTypes.number.isRequired,
+  checkable: PropTypes.bool.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  totalRows: PropTypes.number.isRequired,
+  onEnable: PropTypes.func.isRequired,
+  onDisable: PropTypes.func.isRequired,
+  onRowClick: PropTypes.func,
+  selected: anyArray.isRequired,
+  enabledColumn: PropTypes.string,
 };
 
 export default withStyles(styles, { withTheme: true })(TableCustom);

@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 
 import React, { Component } from 'react';
 import TableHead from '@material-ui/core/TableHead';
@@ -73,6 +72,12 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
+  headRows: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.number]),
+    ),
+  ).isRequired,
+  checkable: PropTypes.bool.isRequired,
 };
 
 export default EnhancedTableHead;
