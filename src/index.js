@@ -147,3 +147,4 @@ export { default as IconVisible } from './MaterialComponents/Icons/IconVisible';
 export {
   default as IconInvisible,
 } from './MaterialComponents/Icons/IconInvisible';
+export { default as IconError } from './MaterialComponents/Icons/IconError';
