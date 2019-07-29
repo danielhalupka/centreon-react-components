@@ -19,14 +19,14 @@ const RedErrorIcon = styled(IconError)(() => ({
   marginRight: 10,
 }));
 
-function ErrorDialog({ open, title, errorText, confirmLabel, onClose }) {
+function ErrorDialog({ open, title, text, confirmLabel, onClose }) {
   return (
     <Dialog transitionDuration={0} open={open} aria-labelledby="error-dialog">
       <DialogTitle id="error-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           <RedErrorIcon />
-          {errorText}
+          {text}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -41,7 +41,7 @@ function ErrorDialog({ open, title, errorText, confirmLabel, onClose }) {
 ErrorDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  errorText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   confirmLabel: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };

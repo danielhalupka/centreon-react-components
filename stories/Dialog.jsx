@@ -9,7 +9,7 @@ storiesOf('Dialog', module).add('Error', () => (
   <ErrorDialog
     open
     title="Error"
-    errorText="Something unexpected happened..."
+    text="Something unexpected happened..."
     confirmLabel="Close"
     onClose={() => alert("I've been closed")}
   />

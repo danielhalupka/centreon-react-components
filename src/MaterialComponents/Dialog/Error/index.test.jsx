@@ -10,7 +10,7 @@ describe('ErrorDialog', () => {
       <ErrorDialog
         open
         title="Error"
-        errorText="Something unexpected happened..."
+        text="Something unexpected happened..."
         confirmLabel="Close"
         onClose={() => {}}
       />,
