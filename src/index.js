@@ -148,3 +148,4 @@ export {
   default as IconInvisible,
 } from './MaterialComponents/Icons/IconInvisible';
 export { default as IconError } from './MaterialComponents/Icons/IconError';
+export { default as ErrorDialog } from './MaterialComponents/Dialog/Error';
