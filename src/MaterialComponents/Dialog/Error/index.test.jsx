@@ -5,8 +5,8 @@ import { render } from '@testing-library/react';
 import ErrorDialog from '.';
 
 describe('ErrorDialog', () => {
-  it('renders', () => {
-    const { container } = render(
+  it('renders', async () => {
+    const { container, findByText } = render(
       <ErrorDialog
         open
         title="Error"
@@ -16,6 +16,9 @@ describe('ErrorDialog', () => {
       />,
     );
 
+    await findByText('Error');
+
+    // TODO this provides an empty Snapshot. This is probably due to the Fade animation not handled by react-testing-library.
     expect(container.firstChild).toMatchSnapshot();
   });
 });
