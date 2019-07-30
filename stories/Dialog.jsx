@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ErrorDialog, PromptDialog } from '../src';
+import { ConfirmationDialog, ErrorDialog, PromptDialog } from '../src';
 
 storiesOf('Dialog', module)
   .add('Error', () => (
@@ -16,4 +16,7 @@ storiesOf('Dialog', module)
   ))
   .add('Prompt', () => (
     <PromptDialog active title="Prompt" info="Please enter a number" />
+  ))
+  .add('Confirmation', () => (
+    <ConfirmationDialog active title="Confirm" info="Are you sure?" />
   ));
