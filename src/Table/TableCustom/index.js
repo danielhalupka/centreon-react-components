@@ -124,6 +124,7 @@ class TableCustom extends Component {
       onDuplicate,
       onPaginationLimitChanged,
       labelDisplayedRows,
+      labelRowsPerPage,
       limit,
       checkable,
       currentPage,
@@ -365,6 +366,7 @@ class TableCustom extends Component {
             onChangeRowsPerPage={onPaginationLimitChanged}
             ActionsComponent={TablePaginationActions}
             labelDisplayedRows={labelDisplayedRows}
+            labelRowsPerPage={labelRowsPerPage}
           />
         </Paper>
       </div>
@@ -376,6 +378,7 @@ TableCustom.defaultProps = {
   enabledColumn: '',
   onRowClick: () => {},
   labelDisplayedRows: ({ from, to, count }) => `${from}-${to} of ${count}`,
+  labelRowsPerPage: 'Rows per page',
 };
 
 const anyObject = PropTypes.objectOf(
@@ -394,6 +397,7 @@ TableCustom.propTypes = {
   onDuplicate: PropTypes.func.isRequired,
   onPaginationLimitChanged: PropTypes.func.isRequired,
   labelDisplayedRows: PropTypes.func,
+  labelRowsPerPage: PropTypes.string,
   limit: PropTypes.number.isRequired,
   checkable: PropTypes.bool.isRequired,
   currentPage: PropTypes.number.isRequired,
