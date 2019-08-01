@@ -6,16 +6,17 @@ import MuiDialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
 
-function Dialog({ active, onClose, title, info, body, actions }) {
+function Dialog({ active, onClose, title, info, body, actions, ...rest }) {
   return (
-    <MuiDialog open={active} onClose={onClose} aria-labelledby="dialog">
+    <MuiDialog
+      open={active}
+      onClose={onClose}
+      aria-labelledby="dialog"
+      {...rest}
+    >
       <DialogTitle id="dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{info}</DialogContentText>
-        {body}
-      </DialogContent>
+      <DialogContent>{body}</DialogContent>
       <DialogActions>{actions}</DialogActions>
     </MuiDialog>
   );
