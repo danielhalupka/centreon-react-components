@@ -10,7 +10,8 @@
     "bundle": "babel ./src --out-dir ./lib --copy-files",
     "start:dev": "npm run bundle -- --watch --source-maps",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./dynamic/compiled-components/components",
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "jest --coverage -i --config jest.config.ci.js"
   },
   "repository": {
     "type": "git",
@@ -98,6 +99,8 @@
     "jest": "^24.8.0",
     "jest-emotion": "^10.0.14",
     "jest-enzyme": "^7.0.2",
+    "jest-junit": "^7.0.0",
+    "jest-silent-reporter": "^0.1.2",
     "node-sass": "^4.10.0",
     "prettier": "^1.18.2",
     "react-testing-library": "^8.0.1",

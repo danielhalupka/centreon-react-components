@@ -22,4 +22,6 @@ jobs:
           command: npm run eslint
       - run:
           name: Run Tests
-          command: npm test
+          command: npm run test:ci
+      - store_test_results:
+          path: reports/junit
