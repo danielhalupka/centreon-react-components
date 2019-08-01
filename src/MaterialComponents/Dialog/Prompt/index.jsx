@@ -1,48 +1,43 @@
-import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
 
 import PropTypes from 'prop-types';
+
+import Button from '@material-ui/core/Button';
 import Dialog from '..';
 
-function PromptDialog({ onYesClicked, ...rest }) {
-  const [value, setValue] = useState(1);
-
-  const confirm = () => {
-    onYesClicked(value);
-  };
-
-  const changeValue = ({ target }) => {
-    setValue(target.value);
-  };
-
-  return (
-    <div>
-      <Dialog onYesClicked={confirm} {...rest}>
-        <TextField
-          autoFocus
-          onChange={changeValue}
-          margin="dense"
-          id="prompt-dialog-count"
-          type="number"
-          defaultValue={1}
-          inputProps={{ min: 1 }}
-          fullWidth
-        />
-      </Dialog>
-    </div>
+function PromptDialog({
+  confirmLabel,
+  cancelLabel,
+  onNoClicked,
+  onYesClicked,
+  children,
+  ...rest
+}) {
+  const Actions = (
+    <>
+      <Button variant="contained" onClick={onYesClicked} color="primary">
+        {confirmLabel}
+      </Button>
+      <Button variant="outlined" onClick={onNoClicked} color="primary">
+        {cancelLabel}
+      </Button>
+    </>
   );
+  return <Dialog body={children} actions={Actions} {...rest} />;
 }
 
 PromptDialog.defaultProps = {
-  confirmLabel: 'OK',
-  cancelLabel: 'Cancel',
+  confirmLabel: 'YES',
+  cancelLabel: 'NO',
+  children: null,
 };
 
 PromptDialog.propTypes = {
-  onYesClicked: PropTypes.func.isRequired,
-  onNoClicked: PropTypes.func.isRequired,
   confirmLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
+  children: PropTypes.node,
+  onYesClicked: PropTypes.func.isRequired,
+  onNoClicked: PropTypes.func.isRequired,
 };
 
 export default PromptDialog;
