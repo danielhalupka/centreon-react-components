@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, number } from '@storybook/addon-knobs';
 import {
   IconAction,
   IconClose,
@@ -25,7 +26,10 @@ import {
   IconInvisible,
 } from '../src';
 
-storiesOf('Icon', module).add(
+const stories = storiesOf('Icon', module);
+stories.addDecorator(withKnobs);
+
+stories.add(
   'Icon - action',
   () => {
     return (
@@ -41,31 +45,31 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - close small',
   () => <IconClose iconType="small" />,
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - close middle',
   () => <IconClose iconType="middle" />,
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - close big',
   () => <IconClose iconType="big" />,
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - content',
   () => <IconContent iconContentType="add" iconContentColor="green" />,
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - header',
   () => {
     return (
@@ -111,7 +115,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - info',
   () => {
     return (
@@ -124,7 +128,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - info with text',
   () => {
     return (
@@ -136,7 +140,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - number bordered',
   () => {
     return (
@@ -153,7 +157,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - number colored',
   () => {
     return (
@@ -170,7 +174,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - round colored',
   () => {
     return (
@@ -198,7 +202,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - toggle',
   () => {
     return (
@@ -215,7 +219,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - legend',
   () => {
     return (
@@ -241,7 +245,7 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add(
+stories.add(
   'Icon - legend with title',
   () => {
     return (
@@ -273,7 +277,8 @@ storiesOf('Icon', module).add(
   { notes: 'A very simple component' },
 );
 
-storiesOf('Icon', module).add('Icon - Material', () => {
+stories.add('Icon - Material', () => {
+  const size = number('Age', 89);
   return (
     <>
       <IconDelete />
@@ -284,7 +289,7 @@ storiesOf('Icon', module).add('Icon - Material', () => {
       <IconPowerSettingsDisable />
       <IconAttach />
       <IconInsertChart />
-      <IconVisible />
+      <IconVisible size={size} />
       <IconInvisible />
     </>
   );

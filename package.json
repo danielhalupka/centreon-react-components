@@ -75,6 +75,7 @@
     "@babel/preset-react": "^7.0.0",
     "@centreon/eslint-config-centreon": "^1.0.1",
     "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-knobs": "^5.1.10",
     "@storybook/addon-notes": "^5.1.9",
     "@storybook/react": "^5.1.9",
     "@svgr/cli": "^2.1.0",
