@@ -5,9 +5,9 @@ function RoundedInvertedIcon(Icon) {
     color: '#fff',
     backgroundColor: '#707070',
     borderRadius: '50%',
-    '-moz-box-sizing': 'border-box',
-    '-webkit-box-sizing': 'border-box',
-    'box-sizing': 'border-box',
+    MozBoxSizing: 'border-box',
+    WebkitBoxSizing: 'border-box',
+    boxSizing: 'border-box',
     padding: 3,
   }));
 }
