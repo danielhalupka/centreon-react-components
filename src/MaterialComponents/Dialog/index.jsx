@@ -7,7 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function Dialog({ active, onClose, title, info, body, actions, ...rest }) {
+function Dialog({ active, onClose, title, body, actions, ...rest }) {
   return (
     <MuiDialog
       open={active}
@@ -31,7 +31,6 @@ Dialog.propTypes = {
   active: PropTypes.bool.isRequired,
   actions: PropTypes.node.isRequired,
   body: PropTypes.node.isRequired,
-  info: PropTypes.string.isRequired,
   onClose: PropTypes.func,
   title: PropTypes.string,
 };
