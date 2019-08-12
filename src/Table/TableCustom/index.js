@@ -182,6 +182,9 @@ class TableCustom extends Component {
                         'className',
                         classes,
                       )}
+                      onClick={() => {
+                        onRowClick(row.id);
+                      }}
                     >
                       {checkable ? (
                         <StyledTableCell2
@@ -222,7 +225,9 @@ class TableCustom extends Component {
                                       width: 31,
                                       height: 31,
                                     }}
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
                                       onDisable([row.id]);
                                     }}
                                   >
@@ -246,7 +251,9 @@ class TableCustom extends Component {
                                       width: 31,
                                       height: 31,
                                     }}
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
                                       onEnable([row.id]);
                                     }}
                                   >
