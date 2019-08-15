@@ -1,36 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, styled } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import IconClose from '../Icons/IconClose';
+import Box from '@material-ui/core/Box';
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
 
+import IconClose from '../Icons/IconClose';
 import ExpandableSection from './ExpandableSection';
 
 const PANEL_WIDTH = 560;
 
-const Header = styled('div')(() => ({
+const Header = styled(Box)({
   paddingRight: 140,
   paddingLeft: 20,
   boxShadow: '0px 3px 4px 0px rgba(0,0,0,0.15)',
   WebkitBoxShadow: '0px 3px 4px 0px rgba(0,0,0,0.15)',
   MozBoxShadow: '0px 3px 4px 0px rgba(0,0,0,0.15)',
-  width: PANEL_WIDTH,
-}));
-
-const HeaderTitle = styled(Typography)({
-  display: 'inline-block',
-  verticalAlign: 'middle',
-  margin: 0,
-  marginLeft: 7,
-  fontSize: 20,
-  lineHeight: '49px',
-  fontWeight: 600,
+  width: '100%',
+  height: 49,
 });
 
-const useStyles = makeStyles({
+const useDrawerStyles = makeStyles({
   modal: {
     pointerEvents: 'none',
   },
@@ -40,17 +33,59 @@ const useStyles = makeStyles({
   paper: {
     top: 52,
     right: 0,
-    bottom: 30,
     backgroundColor: '#ededed',
     minWidth: PANEL_WIDTH,
-    width: PANEL_WIDTH,
     position: 'absolute',
     pointerEvents: 'all',
+    height: '100%',
   },
 });
 
-const RightPanel = ({ active, sections, onClose }) => {
-  const { modal, backdrop, paper } = useStyles();
+const Body = styled(Box)({
+  height: '100%',
+});
+
+const MainPanel = styled(Box)({
+  width: 540,
+});
+
+const SecondaryPanelBar = styled(Box)({
+  border: '1px solid #D6D6D8',
+  width: 20,
+  height: '100%',
+  cursor: 'pointer',
+});
+
+const SecondaryPanel = styled('div')({
+  width: ({ active }) => (active ? 500 : 0),
+  transition: '.3s ease-in-out',
+  overflow: 'hidden',
+  backgroundColor: '#c7c8c9',
+});
+
+const ToggleSecondaryPanelIcon = (Icon) =>
+  styled(Icon)({
+    width: 15,
+    margin: 'auto',
+  });
+
+const OpenSecondaryPanelIcon = ToggleSecondaryPanelIcon(ArrowBackIos);
+
+const CloseSecondaryPanelIcon = ToggleSecondaryPanelIcon(ArrowForwardIos);
+
+const RightPanel = ({
+  active,
+  headerComponent,
+  secondaryPanelComponent,
+  sections,
+  onClose,
+}) => {
+  const [secondaryPanelActive, setSecondaryPanelActive] = useState(false);
+  const { modal, backdrop, paper } = useDrawerStyles();
+
+  const toggleSecondaryPanel = () => {
+    setSecondaryPanelActive(!secondaryPanelActive);
+  };
 
   return (
     <Drawer
@@ -60,19 +95,40 @@ const RightPanel = ({ active, sections, onClose }) => {
       open={active}
       anchor="right"
     >
-      <Header>
-        <HeaderTitle variant="h3">Africa office availability</HeaderTitle>
-        <IconClose onClick={onClose} />
+      <Header display="flex" flexDirection="row">
+        <Box flexGrow={1}>{headerComponent}</Box>
+        <Box>
+          <IconClose onClick={onClose} />
+        </Box>
       </Header>
-      <List>
-        {sections.map(({ title, component, expandable }) =>
-          expandable ? (
-            <ExpandableSection title={title}>{component}</ExpandableSection>
+      <Body display="flex" flexDirection="row" flexGrow={1}>
+        <MainPanel flexGrow={1}>
+          <List>
+            {sections.map(({ title, component, expandable }) =>
+              expandable ? (
+                <ExpandableSection title={title}>{component}</ExpandableSection>
+              ) : (
+                <ListItem>{component}</ListItem>
+              ),
+            )}
+          </List>
+        </MainPanel>
+        <SecondaryPanelBar
+          display="flex"
+          alignItems="center"
+          alignContent="center"
+          onClick={toggleSecondaryPanel}
+        >
+          {secondaryPanelActive ? (
+            <CloseSecondaryPanelIcon />
           ) : (
-            <ListItem>{component}</ListItem>
-          ),
-        )}
-      </List>
+            <OpenSecondaryPanelIcon />
+          )}
+        </SecondaryPanelBar>
+        <SecondaryPanel active={secondaryPanelActive}>
+          {secondaryPanelComponent}
+        </SecondaryPanel>
+      </Body>
     </Drawer>
   );
 };
@@ -83,7 +139,9 @@ RightPanel.defaultProps = {
 
 RightPanel.propTypes = {
   active: PropTypes.bool.isRequired,
-  sections: PropTypes.arrayOf().isRequired,
+  headerComponent: PropTypes.node.isRequired,
+  secondaryPanelComponent: PropTypes.node.isRequired,
+  sections: PropTypes.arrayOf.isRequired,
   onClose: PropTypes.func,
 };
 
