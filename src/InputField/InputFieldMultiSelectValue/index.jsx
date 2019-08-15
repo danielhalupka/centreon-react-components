@@ -42,6 +42,4 @@ class InputFieldMultiSelectValue extends Component {
   }
 }
 
-export { InputFieldMultiSelectValue };
-
 export default InputFieldMultiSelectValue;
