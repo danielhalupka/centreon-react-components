@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -61,6 +61,7 @@ const SecondaryPanel = styled('div')({
   transition: '.3s ease-in-out',
   overflow: 'hidden',
   backgroundColor: '#c7c8c9',
+  padding: ({ active }) => (active ? 15 : 0),
 });
 
 const ToggleSecondaryPanelIcon = (Icon) =>
@@ -77,15 +78,29 @@ const RightPanel = ({
   active,
   headerComponent,
   secondaryPanelComponent,
+  onSecondaryPanelClose,
   sections,
   onClose,
 }) => {
   const [secondaryPanelActive, setSecondaryPanelActive] = useState(false);
   const { modal, backdrop, paper } = useDrawerStyles();
 
+  useEffect(() => {
+    setSecondaryPanelActive(secondaryPanelComponent !== undefined);
+  }, [secondaryPanelComponent])
+
   const toggleSecondaryPanel = () => {
+    if (!secondaryPanelComponent) {
+      return;
+    }
     setSecondaryPanelActive(!secondaryPanelActive);
   };
+
+  const onAnimationEnd = () => {
+    if (!secondaryPanelActive) {
+      onSecondaryPanelClose();
+    }
+  }
 
   return (
     <Drawer
@@ -125,7 +140,7 @@ const RightPanel = ({
             <OpenSecondaryPanelIcon />
           )}
         </SecondaryPanelBar>
-        <SecondaryPanel active={secondaryPanelActive}>
+        <SecondaryPanel active={secondaryPanelActive} onAnimationEnd={onAnimationEnd}>
           {secondaryPanelComponent}
         </SecondaryPanel>
       </Body>
