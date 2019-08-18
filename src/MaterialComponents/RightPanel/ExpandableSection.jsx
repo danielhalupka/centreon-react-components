@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Typography } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
+import PropTypes from 'prop-types';
 
 const Title = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.pxToRem(15),
@@ -35,4 +36,15 @@ const ExpandableSection = ({ title, children }) => {
   );
 };
 
+ExpandableSection.defaultProps = {
+  title: '',
+}
+
+ExpandableSection.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired,
+}
+
 export default ExpandableSection;
+
+
