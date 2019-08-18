@@ -22,8 +22,12 @@ const useStyles = makeStyles(
   }),
 );
 
-const InputSearch = ({ placeholder, onChange }) => {
+const InputSearch = ({ placeholder, onSearch }) => {
   const classes = useStyles();
+
+  const onChange = (event) => {
+    onSearch(event.target.value);
+  }
 
   return (
     <Paper className={classes.root}>
