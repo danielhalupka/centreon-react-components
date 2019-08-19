@@ -87,7 +87,7 @@ const RightPanel = ({
 
   useEffect(() => {
     setSecondaryPanelActive(secondaryPanelComponent !== undefined);
-  }, [secondaryPanelComponent])
+  }, [secondaryPanelComponent]);
 
   const toggleSecondaryPanel = () => {
     if (!secondaryPanelComponent) {
@@ -100,7 +100,7 @@ const RightPanel = ({
     if (!secondaryPanelActive) {
       onSecondaryPanelClose();
     }
-  }
+  };
 
   return (
     <Drawer
@@ -140,7 +140,10 @@ const RightPanel = ({
             <OpenSecondaryPanelIcon />
           )}
         </SecondaryPanelBar>
-        <SecondaryPanel active={secondaryPanelActive} onAnimationEnd={onAnimationEnd}>
+        <SecondaryPanel
+          active={secondaryPanelActive}
+          onAnimationEnd={onAnimationEnd}
+        >
           {secondaryPanelComponent}
         </SecondaryPanel>
       </Body>
@@ -150,6 +153,7 @@ const RightPanel = ({
 
 RightPanel.defaultProps = {
   onClose: () => {},
+  onSecondaryPanelClose: () => {},
 };
 
 RightPanel.propTypes = {
@@ -158,6 +162,7 @@ RightPanel.propTypes = {
   secondaryPanelComponent: PropTypes.node.isRequired,
   sections: PropTypes.arrayOf.isRequired,
   onClose: PropTypes.func,
+  onSecondaryPanelClose: PropTypes.func,
 };
 
 export default RightPanel;

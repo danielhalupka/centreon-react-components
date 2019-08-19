@@ -38,13 +38,11 @@ const ExpandableSection = ({ title, children }) => {
 
 ExpandableSection.defaultProps = {
   title: '',
-}
+};
 
 ExpandableSection.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
-}
+};
 
 export default ExpandableSection;
-
-
