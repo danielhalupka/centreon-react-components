@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(
   createStyles({
@@ -27,7 +28,7 @@ const InputSearch = ({ placeholder, onSearch }) => {
 
   const onChange = (event) => {
     onSearch(event.target.value);
-  }
+  };
 
   return (
     <Paper className={classes.root}>
@@ -42,6 +43,16 @@ const InputSearch = ({ placeholder, onSearch }) => {
       />
     </Paper>
   );
+};
+
+InputSearch.defaultProps = {
+  placeholder: '',
+  onSearch: () => {},
+};
+
+InputSearch.propTypes = {
+  placeholder: PropTypes.string,
+  onSearch: PropTypes.func,
 };
 
 export default InputSearch;
