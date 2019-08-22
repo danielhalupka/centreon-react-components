@@ -66,14 +66,6 @@ const useSecondaryPanelStyles = makeStyles({
   },
 });
 
-// const SecondaryPanel = styled('div')({
-//   width: ({ active }) => (active === undefined ? 0 : 500),
-//   transition: '.3s ease-in-out',
-//   overflow: 'hidden',
-//   backgroundColor: '#c7c8c9',
-//   padding: ({ active }) => (active === undefined ? 0 : 15),
-// });
-
 const ToggleSecondaryPanelIcon = (Icon) =>
   styled(Icon)({
     width: 15,
