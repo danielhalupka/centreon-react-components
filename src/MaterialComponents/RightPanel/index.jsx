@@ -56,13 +56,23 @@ const SecondaryPanelBar = styled(Box)({
   cursor: 'pointer',
 });
 
-const SecondaryPanel = styled('div')({
-  width: ({ active }) => (active ? 500 : 0),
-  transition: '.3s ease-in-out',
-  overflow: 'hidden',
-  backgroundColor: '#c7c8c9',
-  padding: ({ active }) => (active ? 15 : 0),
+const useSecondaryPanelStyles = makeStyles({
+  secondaryPanel: {
+    width: ({ active }) => (active ? 500 : 0),
+    transition: '.3s ease-in-out',
+    overflow: 'hidden',
+    backgroundColor: '#c7c8c9',
+    padding: ({ active }) => (active ? 15 : 0),
+  },
 });
+
+// const SecondaryPanel = styled('div')({
+//   width: ({ active }) => (active === undefined ? 0 : 500),
+//   transition: '.3s ease-in-out',
+//   overflow: 'hidden',
+//   backgroundColor: '#c7c8c9',
+//   padding: ({ active }) => (active === undefined ? 0 : 15),
+// });
 
 const ToggleSecondaryPanelIcon = (Icon) =>
   styled(Icon)({
@@ -84,6 +94,9 @@ const RightPanel = ({
 }) => {
   const [secondaryPanelActive, setSecondaryPanelActive] = useState(false);
   const { modal, backdrop, paper } = useDrawerStyles();
+  const { secondaryPanel } = useSecondaryPanelStyles({
+    active: secondaryPanelActive,
+  });
 
   useEffect(() => {
     setSecondaryPanelActive(secondaryPanelComponent !== undefined);
@@ -119,11 +132,13 @@ const RightPanel = ({
       <Body display="flex" flexDirection="row" flexGrow={1}>
         <MainPanel flexGrow={1}>
           <List>
-            {sections.map(({ title, component, expandable }) =>
+            {sections.map(({ id, title, component, expandable }) =>
               expandable ? (
-                <ExpandableSection title={title}>{component}</ExpandableSection>
+                <ExpandableSection key={id} title={title}>
+                  {component}
+                </ExpandableSection>
               ) : (
-                <ListItem>{component}</ListItem>
+                <ListItem key={id}>{component}</ListItem>
               ),
             )}
           </List>
@@ -140,12 +155,9 @@ const RightPanel = ({
             <OpenSecondaryPanelIcon />
           )}
         </SecondaryPanelBar>
-        <SecondaryPanel
-          active={secondaryPanelActive}
-          onAnimationEnd={onAnimationEnd}
-        >
+        <div className={secondaryPanel} onAnimationEnd={onAnimationEnd}>
           {secondaryPanelComponent}
-        </SecondaryPanel>
+        </div>
       </Body>
     </Drawer>
   );
@@ -154,13 +166,14 @@ const RightPanel = ({
 RightPanel.defaultProps = {
   onClose: () => {},
   onSecondaryPanelClose: () => {},
+  secondaryPanelComponent: undefined,
 };
 
 RightPanel.propTypes = {
   active: PropTypes.bool.isRequired,
   headerComponent: PropTypes.node.isRequired,
-  secondaryPanelComponent: PropTypes.node.isRequired,
-  sections: PropTypes.arrayOf.isRequired,
+  secondaryPanelComponent: PropTypes.node,
+  sections: PropTypes.arrayOf(PropTypes.shape).isRequired,
   onClose: PropTypes.func,
   onSecondaryPanelClose: PropTypes.func,
 };
