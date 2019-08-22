@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import PropTypes from 'prop-types';
+
 import MultiSelectHolder from '.';
 import CustomRow from '../Custom/CustomRow';
 import CustomColumn from '../Custom/CustomColumn';
@@ -51,5 +54,14 @@ class MultiSelectContainer extends Component {
     );
   }
 }
+
+MultiSelectContainer.propTypes = {
+  label: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
+  values: PropTypes.arrayOf().isRequired,
+  error: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  emptyInfo: PropTypes.string.isRequired,
+};
 
 export default MultiSelectContainer;
