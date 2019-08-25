@@ -63,10 +63,15 @@ class TableCustom extends Component {
   };
 
   handleSelectAllClick = (event) => {
-    const { onTableSelectionChanged, tableData } = this.props;
+    const {
+      onTableSelectionChanged,
+      tableData,
+      onEntitiesSelected,
+    } = this.props;
     if (event.target.checked) {
       const newSelecteds = tableData.map((n) => n.id);
       onTableSelectionChanged(newSelecteds);
+      onEntitiesSelected(tableData);
       return;
     }
 
@@ -76,7 +81,12 @@ class TableCustom extends Component {
   handleClick = (event, name) => {
     event.preventDefault();
     event.stopPropagation();
-    const { onTableSelectionChanged, selected } = this.props;
+    const {
+      onEntitiesSelected,
+      onTableSelectionChanged,
+      selected,
+      tableData,
+    } = this.props;
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -93,6 +103,9 @@ class TableCustom extends Component {
       );
     }
     onTableSelectionChanged(newSelected);
+    onEntitiesSelected(
+      tableData.filter((entity) => newSelected.includes(entity.id)),
+    );
   };
 
   rowHovered = (id, value) => {
@@ -386,6 +399,8 @@ TableCustom.defaultProps = {
   onRowClick: () => {},
   labelDisplayedRows: ({ from, to, count }) => `${from}-${to} of ${count}`,
   labelRowsPerPage: 'Rows per page',
+  onEntitiesSelected: () => {},
+  onTableSelectionChanged: () => {},
 };
 
 const anyObject = PropTypes.objectOf(
@@ -396,7 +411,8 @@ const anyArray = PropTypes.arrayOf(anyObject);
 TableCustom.propTypes = {
   classes: anyObject.isRequired,
   onSort: PropTypes.func.isRequired,
-  onTableSelectionChanged: PropTypes.func.isRequired,
+  onTableSelectionChanged: PropTypes.func,
+  onEntitiesSelected: PropTypes.func,
   columnConfiguration: anyArray.isRequired,
   tableData: anyArray.isRequired,
   onDelete: PropTypes.func.isRequired,
