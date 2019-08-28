@@ -107,6 +107,11 @@ const RightPanel = ({
     }
   };
 
+  const close = () => {
+    setSecondaryPanelActive(false);
+    onClose();
+  };
+
   return (
     <Drawer
       ModalProps={{ className: modal }}
@@ -118,7 +123,7 @@ const RightPanel = ({
       <Header display="flex" flexDirection="row">
         <Box flexGrow={1}>{headerComponent}</Box>
         <Box>
-          <IconClose onClick={onClose} />
+          <IconClose onClick={close} />
         </Box>
       </Header>
       <Body display="flex" flexDirection="row" flexGrow={1}>
