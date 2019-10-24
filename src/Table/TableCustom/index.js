@@ -107,74 +107,26 @@ class TableCustom extends Component {
     );
   };
 
-  handleSelectAllClick = (event) => {
-    const {
-      onEntitiesSelected,
-      onTableSelectionChanged,
-      tableData,
-      nameIdPaired,
-      indicatorsEditor,
-    } = this.props;
+  selectAllRows = (event) => {
+    const { onSelectRows, tableData } = this.props;
     if (event.target.checked) {
-      const newSelecteds = indicatorsEditor
-        ? tableData
-        : nameIdPaired
-        ? tableData.map((n) => `${n.id}:${n.name}`)
-        : tableData.map((n) => n.id);
-      onTableSelectionChanged(newSelecteds);
-      onEntitiesSelected(tableData);
+      onSelectRows(tableData);
       return;
     }
 
-    onTableSelectionChanged([]);
+    onSelectRows([]);
   };
 
-  handleClick = (event, row, editing) => {
+  selectRow = (event, row) => {
     event.preventDefault();
     event.stopPropagation();
-    const {
-      onEntitiesSelected,
-      onTableSelectionChanged,
-      selected,
-      nameIdPaired,
-      indicatorsEditor,
-      tableData,
-    } = this.props;
-    const value = indicatorsEditor
-      ? row
-      : nameIdPaired
-      ? `${row.id}:${row.name}`
-      : row.id;
-    const selectedIndex = indicatorsEditor
-      ? selected
-          .map(({ object, type }) => {
-            return `${object.id + type}Typed`;
-          })
-          .indexOf(`${value.object.id + value.type}Typed`)
-      : selected.indexOf(value);
-    let newSelected = [];
+    const { onSelectRows, selectedRows } = this.props;
 
-    if (editing) {
-      newSelected = selected;
-      newSelected[selectedIndex] = indicatorsEditor ? row : value;
-    } else if (selectedIndex === -1) {
-      newSelected = newSelected.concat(
-        selected,
-        indicatorsEditor ? row : value,
-      );
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
+    if (selectedRows.includes(row)) {
+      onSelectRows(selectedRows.filter((entity) => entity !== row));
+      return;
     }
-
-    onEntitiesSelected(tableData.filter(({ id }) => newSelected.includes(id)));
-    onTableSelectionChanged(newSelected);
+    onSelectRows([...selectedRows, row]);
   };
 
   rowHovered = (id, value) => {
@@ -215,9 +167,8 @@ class TableCustom extends Component {
       onEnable,
       onDisable,
       onRowClick = () => {},
-      selected,
+      selectedRows,
       enabledColumn,
-      nameIdPaired,
       indicatorsEditor,
       emptyDataMessage,
       loadingDataMessage,
@@ -229,28 +180,7 @@ class TableCustom extends Component {
     const { order, orderBy, hovered } = this.state;
 
     const isSelected = (value) => {
-      for (let i = 0; i < selected.length; i++) {
-        if (indicatorsEditor) {
-          if (
-            selected[i].object.id === value.object.id &&
-            selected[i].type === value.type
-          ) {
-            return {
-              bool: true,
-              obj: selected[i],
-            };
-          }
-        } else if (selected[i] === value) {
-          return {
-            bool: true,
-            obj: selected[i],
-          };
-        }
-      }
-      return {
-        bool: false,
-        obj: null,
-      };
+      return selectedRows.includes(value);
     };
 
     const emptyRows = limit - Math.min(limit, totalRows - currentPage * limit);
@@ -309,11 +239,11 @@ class TableCustom extends Component {
               }
             >
               <EnhancedTableHead
-                numSelected={selected ? selected.length : 0}
+                numSelected={selectedRows.length}
                 order={order}
                 checkable={checkable}
                 orderBy={orderBy}
-                onSelectAllClick={this.handleSelectAllClick}
+                onSelectAllClick={this.selectAllRows}
                 onRequestSort={this.handleRequestSort}
                 rowCount={limit - emptyRows}
                 headRows={columnConfiguration}
@@ -328,13 +258,8 @@ class TableCustom extends Component {
                 }}
               >
                 {tableData.map((row, index) => {
-                  const isItemSelected = isSelected(
-                    indicatorsEditor
-                      ? row
-                      : nameIdPaired
-                      ? `${row.id}:${row.name}`
-                      : row.id,
-                  );
+                  const isRowSelected = isSelected(row);
+
                   return (
                     <StyledTableRow
                       hover
@@ -355,11 +280,11 @@ class TableCustom extends Component {
                       {checkable ? (
                         <BodyTableCell
                           align="left"
-                          onClick={(event) => this.handleClick(event, row)}
+                          onClick={(event) => this.selectRow(event, row)}
                           padding="checkbox"
                         >
                           <StyledCheckbox
-                            checked={isItemSelected.bool}
+                            checked={isRowSelected}
                             color="primary"
                           />
                         </BodyTableCell>
@@ -522,7 +447,7 @@ class TableCustom extends Component {
                               <BodyTableCell
                                 key={column.id}
                                 align="left"
-                                colSpan={isItemSelected.bool ? 1 : 5}
+                                colSpan={isRowSelected ? 1 : 5}
                                 style={{
                                   maxWidth: '145px',
                                   textOverflow: 'ellipsis',
@@ -633,8 +558,8 @@ class TableCustom extends Component {
                           row={row}
                           index={index}
                           impacts={impacts}
-                          selected={isItemSelected}
-                          onImpactEdit={this.handleClick}
+                          selected={isRowSelected}
+                          onImpactEdit={this.selectRow}
                         />
                       ) : null}
                     </StyledTableRow>
@@ -663,15 +588,14 @@ TableCustom.defaultProps = {
   onRowClick: () => {},
   labelDisplayedRows: ({ from, to, count }) => `${from}-${to} of ${count}`,
   labelRowsPerPage: 'Rows per page',
-  onEntitiesSelected: () => {},
-  onTableSelectionChanged: () => {},
-  nameIdPaired: false,
+  onSelectRows: () => {},
   indicatorsEditor: false,
   emptyDataMessage: 'No results found',
   loadingDataMessage: 'Loading data',
   loading: false,
   paginated: true,
   impacts: [],
+  selectedRows: [],
 };
 
 const anyObject = PropTypes.objectOf(
@@ -684,8 +608,7 @@ TableCustom.propTypes = {
   classes: anyObject.isRequired,
   dense: PropTypes.bool,
   onSort: PropTypes.func.isRequired,
-  onEntitiesSelected: PropTypes.func,
-  onTableSelectionChanged: PropTypes.func,
+  onSelectRows: PropTypes.func,
   columnConfiguration: anyArray.isRequired,
   tableData: anyArray.isRequired,
   onDelete: PropTypes.func.isRequired,
@@ -701,9 +624,8 @@ TableCustom.propTypes = {
   onEnable: PropTypes.func.isRequired,
   onDisable: PropTypes.func.isRequired,
   onRowClick: PropTypes.func,
-  selected: anyArray.isRequired,
+  selectedRows: anyArray,
   enabledColumn: PropTypes.string,
-  nameIdPaired: PropTypes.bool,
   indicatorsEditor: PropTypes.bool,
   emptyDataMessage: PropTypes.string,
   loadingDataMessage: PropTypes.string,
