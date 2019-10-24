@@ -21,7 +21,7 @@ class IndicatorsEditorRow extends Component {
     const { onImpactEdit, selected } = this.props;
     const rowObject = selected.obj;
     rowObject.impact[key] = value;
-    onImpactEdit(event, rowObject);
+    onImpactEdit(event, rowObject, true);
   };
 
   render() {
