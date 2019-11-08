@@ -3,8 +3,8 @@ import { render, fireEvent } from '@testing-library/react';
 import Alert from './Alert';
 
 describe('Alert', () => {
-  it('renders correctly', () => {
-    const { container, getByText } = render(
+  it('overrides icons', () => {
+    const { getByText } = render(
       <Alert
         open
         labelTitle="title"
@@ -20,8 +20,6 @@ describe('Alert', () => {
     expect(getByText('message')).toBeInTheDocument();
     expect(getByText('cancel')).toBeInTheDocument();
     expect(getByText('confirm')).toBeInTheDocument();
-
-    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('confirms', () => {

@@ -4,28 +4,18 @@ import Typography from '@material-ui/core/Typography';
 import Wizard, { Page } from '.';
 
 describe('Wizard', () => {
-  it('renders correctly', () => {
-    const { container } = render(
+  it('displays step labels', () => {
+    const { getByText } = render(
       <Wizard open>
-        <Page label="step 1">
-          <Typography variant="h5" align="center">
-            Step 1
-          </Typography>
-        </Page>
-        <Page label="step 2">
-          <Typography variant="h5" align="center">
-            Step 2
-          </Typography>
-        </Page>
-        <Page label="step3">
-          <Typography variant="h5" align="center">
-            Step 3
-          </Typography>
-        </Page>
+        <Page label="step label 1"><div>Step 1</div></Page>
+        <Page label="step label 2"><div>Step 2</div></Page>
+        <Page label="step label 3"><div>Step 3</div></Page>
       </Wizard>,
     );
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(getByText('step label 1')).toBeInTheDocument();
+    expect(getByText('step label 2')).toBeInTheDocument();
+    expect(getByText('step label 3')).toBeInTheDocument();
   });
 
   it('goes to next and previous steps', async () => {
