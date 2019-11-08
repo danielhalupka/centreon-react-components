@@ -36,3 +36,4 @@ import './TableCounter';
 import './Title';
 import './Tooltip';
 import './TopFilters';
+import './Wizard';
