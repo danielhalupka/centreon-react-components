@@ -10,7 +10,11 @@ import ActionBar from './ActionBar';
 import Alert from './Alert';
 
 function isReactElement(element) {
-  if (element && element.type && typeof element.type === 'object') {
+  if (
+    element &&
+    element.type &&
+    ['object', 'function', 'symbol'].includes(typeof element.type)
+  ) {
     return true;
   }
 
@@ -19,6 +23,9 @@ function isReactElement(element) {
 
 function cloneElement(element, props) {
   const forwardedProps = isReactElement(element) ? props : {};
+
+  console.log(isReactElement(element))
+  console.log(React.isValidElement(element))
 
   return React.cloneElement(element, { ...forwardedProps });
 }
@@ -129,15 +136,13 @@ function Wizard(props) {
               submitForm,
             }) => (
               <form className={classes.form} onSubmit={handleFormSubmit}>
-                {React.cloneElement(activePage, () =>
-                  isReactElement(activePage, {
-                    previousAction: previous,
-                    nextAction: next,
-                    values,
-                    setFieldValueAction: setFieldValue,
-                    submitFormAction: submitForm,
-                  }),
-                )}
+                {cloneElement(activePage, {
+                  onPrevious: previous,
+                  onNext: next,
+                  values,
+                  setFieldValueAction: setFieldValue,
+                  submitFormAction: submitForm,
+                })}
                 {!activePage.props.noActionBar && (
                   <ActionBar
                     page={page}
