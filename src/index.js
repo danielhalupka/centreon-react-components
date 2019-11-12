@@ -36,8 +36,6 @@ export { default as IconLegend } from './Icon/IconLegend';
 export { default as IconNumber } from './Icon/IconNumber';
 export { default as IconRound } from './Icon/IconRound';
 export { default as IconToggleSubmenu } from './Icon/IconToggleSubmenu';
-export { default as InfoTooltip } from './Info/InfoTooltip';
-export { default as InfoLoading } from './Info/InfoLoading';
 export { default as InputField } from './InputField';
 export { default as InputFieldSelect } from './InputField/InputFieldSelect';
 export { default as InputFieldTextarea } from './InputField/InputFieldTextarea';
@@ -57,23 +55,17 @@ export {
 export {
   default as InputFieldTableCell,
 } from './InputField/InputFieldTableCell';
-export { default as ListSortable } from './List/ListSortable';
 export { default as LoaderContent } from './LoaderContent';
 export { default as Logo } from './Logo';
 export { default as LogoMini } from './Logo/LogoMini';
-export { default as MessageError } from './Message/MessageError';
-export { default as MessageInfo } from './Message/MessageInfo';
-export { default as MessageStatus } from './Message/MessageStatus';
 export { default as MultiSelectHolder } from './MultiSelectHolder';
 export { default as Navigation } from './Navigation';
 export { default as Pagination } from './Pagination';
 export { default as Popup } from './Popup';
-export { default as PopupNew } from './Popup/PopupNew';
 export { default as ProgressBar } from './ProgressBar/ProgressBarSteps';
 export {
   default as ProgressBarItem,
 } from './ProgressBar/ProgressBarSteps/ProgressBarItem';
-export { default as RadioButton } from './RadioButton';
 export { default as ScrollBar } from './ScrollBar';
 export { default as SearchLive } from './Search/SearchLive';
 export { default as SearchWithArrow } from './Search/SearchWithArrow';
@@ -89,8 +81,6 @@ export {
   default as SwitcherInvertedInputField,
 } from './Switcher/SwitcherInputField/inverted';
 export { default as SwitcherMode } from './Switcher/SwitcherMode';
-export { default as Tabs } from './Tab';
-export { default as Tab } from './Tab/Tab';
 export { default as Table } from './Table';
 export { default as TableCustom } from './Table/TableCustom';
 export { default as TableDefault } from './Table/TableDefault';
@@ -150,7 +140,6 @@ export {
 export {
   default as MassiveChangeDialog,
 } from './MaterialComponents/Dialog/MassiveChange/Numbers';
-export { default as Dialog } from './Dialog';
 export { default as IconVisible } from './MaterialComponents/Icons/IconVisible';
 export {
   default as IconInvisible,
